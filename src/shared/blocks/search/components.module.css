@@ -1,0 +1,132 @@
+.search{
+    border: none;
+    position:relative;
+    outline: none;
+    width: max(70%,35vw);
+    height: 100%;
+    width: 100%;
+    font-size: 1.6rem;
+    padding-left: 1rem;
+    border: solid var(--bg-card) 3px;
+    background: var(--bg-card);
+    color: var(--primary);
+}
+
+.search:focus{
+    border-bottom: solid var(--border) 1px;
+}
+
+.SearchDropList{
+    background: var(--bg-card);
+    height: fit-content;
+    position: absolute;
+    top: 110%;
+    border-radius: 0rem 0rem .5rem .5rem;
+    padding: 1rem;
+    z-index: 1500;
+    width: 100%;
+    border: solid var(--border) 1px;
+    transition: .2s ease;
+}
+
+
+@media (max-width: 564px) {
+    .searchIcon{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+.searchIcon{
+    background-color: var(--foreground);
+    border: none;
+    padding: .3rem;
+    aspect-ratio: 1;
+    width: 39px;height: 39px;
+    cursor: pointer;
+}
+
+
+.dropList{
+    text-align: start;
+    position: absolute;
+    top: 160%;
+    left: 0;
+    background: var(--background);
+    border: var(--standart-border);
+    width: 500%;
+    border-radius: 1rem;
+    padding: 1rem;
+    z-index: 10;
+    color: var(--foreground);
+}
+
+.dropList ul{
+    margin: 0px .5rem;
+    text-align: start;
+}
+
+
+.ProductInfo{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-rows: 60px auto;
+    width: 100%;
+    min-height: 500px;
+    flex-wrap: wrap;
+    gap: 1%;
+    height: fit-content;
+}
+
+.ProductPagesList{
+    grid-column: 1 / -1;
+}
+
+
+.InfoPlace{
+    grid-row: span 2;
+    padding: 1rem;
+    border: solid var(--secondary) 3px;
+    width: 100%;
+    height: fit-content;
+    overflow-y: auto;
+    max-height: 200px;  
+    margin-top: 1rem;
+    border-radius: 1rem;
+}
+
+.MarketPlace{
+    grid-row: span 2;
+    width: 100%;
+    height: fit-content;
+    padding: 1rem;
+    border: solid var(--secondary) 3px;
+    border-radius: 1rem;
+}
+
+.InfoCards:nth-child(1) {
+    margin-bottom: 1%;
+    height: 49%;
+}
+
+
+.form{
+    min-height: 80px;
+    width: 100%;
+    border-radius: 1rem;
+    padding: 1rem;
+    height: fit-content;
+    position: relative;
+    gap: 1%;
+    margin-top: 1rem;
+    background: var(--bg-card);
+}
+
+
+@media (max-width: 564px) {
+    .dropList{
+        left: -125%;
+        width: 250%;
+    }
+}

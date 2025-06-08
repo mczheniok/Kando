@@ -1,0 +1,70 @@
+.ImageSection{
+    position:relative;
+    height: 100%;
+    min-height: 320px;
+    grid-column: 1 / 2;
+    width: 100%;
+}
+
+.ImageLength{
+    height: 10%;
+    width: 100%;
+    z-index: 100;
+}
+
+.LengthBlock{
+    width: 60px;
+    height: 60px;
+    border: solid var(--secodary) 2px;  
+    border-radius: 1rem;
+}
+
+.active{
+    border: solid var(--orange) 2px;
+}
+
+
+.ProductImage{
+    mix-blend-mode: multiply;
+    object-fit: contain;
+}
+
+.ReviewsLogo{
+    padding: .5rem;
+    border: none;
+    box-sizing: content-box;
+}
+
+
+.userInfo{
+    flex-wrap: none;
+    width: 100%;
+    padding: 2rem;
+}
+
+.circleImage{
+    background: #e5e4e2;
+    border:none;
+    box-sizing: content-box;
+}
+
+@media (max-width: 564px) {
+    .LengthBlock{
+        width: 50px;
+        height: 50px;
+    }
+    .circleImage{
+        width: 70px;
+        height: 70px;
+    }
+}
+
+
+@media (max-width: 764px) {
+    .userInfo{
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}
+
+

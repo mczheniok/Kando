@@ -1,0 +1,54 @@
+.animated {
+    transition: .3s;
+    animation: rotate 3s infinite linear;
+    z-index: 3;
+    transform-style: preserve-3d;
+}   
+
+.AnimatedBlock {
+    width: 100%;
+    height: fit-content;
+}  
+
+@keyframes rotate {
+    0% {
+        transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+    }
+    100% {
+        transform: perspective(800px) rotateY(360deg) rotateX(0deg);
+    }
+}
+
+
+.AnimatedRowContainer {
+    overflow: hidden; /* Скрытие содержимого за пределами контейнера */
+    position: relative;
+    width: 100%; /* Контейнер занимает всю ширину */
+}
+
+.AnimatedRow {
+    display: flex; /* Элементы располагаются горизонтально */
+    width: calc(200% + 3rem); /* Ширина равна двум наборам элементов плюс gap */
+    gap: 3rem; /* Расстояние между элементами */
+    animation: row infinite 15s linear; /* Бесконечная анимация */
+}
+
+.AnimatedRow:hover{
+    animation-play-state: paused;
+}
+
+.RowLogos {
+    cursor: pointer;
+    flex-shrink: 0; /* Логотипы не сжимаются */
+}
+
+
+@keyframes row {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%); /* Прокрутка на половину ширины (один набор элементов) */
+    }
+}
+

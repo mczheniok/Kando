@@ -1,0 +1,355 @@
+.GridAccount{
+    padding: 0rem;
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-template-rows: 800px 1fr;
+    grid-template-areas: 
+    "aside main"
+    "aside main"
+    ;
+}
+
+.html[data-theme="dark"] body{
+    background: var(--bg-primary);
+    background-image: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+    background-attachment: fixed;
+}
+
+
+.buttonRed{
+    color: red;
+    border: solid var(--border) 2px;
+    transition: .2s;
+    flex-grow: 1;
+    padding: 0.2rem 1rem;
+    max-width: 150px;
+}
+
+.buttonRed:hover{
+    border: solid red 2px;
+    cursor: pointer;
+}
+
+
+.Open{
+    display: none;
+}
+
+.aside{
+    height: 100%;
+    grid-area: aside;
+    background: var(--bg-glass);
+    border: solid var(--border) 1px;
+    border-bottom: none;
+    transition: transform 0.3s linear, visibility 0.3s linear;
+}
+
+.main{
+    padding: 0rem 0rem;
+    grid-area: main;
+    display: grid;
+    grid-template-columns: minmax(270px,1fr);
+    grid-template-rows: auto auto minmax(400px,auto);
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+}
+
+
+.cardsContainer {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.active{
+    color: var(--orange);
+}
+
+.asideList {
+    transition: .3s;
+    gap: .8rem; 
+    display: flex;
+    padding: .4rem 1rem;
+}
+
+.asideList li{
+    height: 2rem;
+    width: 100%;
+    text-align: start;
+    cursor: pointer;
+    text-align: center;
+    line-height: 0rem;
+}
+
+.asideList button{
+    width: 100%;
+}
+
+.card{
+    width: 200px;
+    height: 200px;
+}
+
+.productsContainer{
+    height: fit-content;
+}
+
+.ButtonAcaunt{
+    width: 100%;
+    gap: .7rem;
+    padding: .8rem 1rem;
+    border-radius: 1rem;
+    position: relative;
+    background: var(--bg-glass);
+    border: solid var(--border) 1px;
+}
+
+.ButtonAcaunt div h5{
+    color: var(--primary); 
+    opacity: 70%;
+    overflow: hidden;
+    position: relative;
+}
+
+.more{
+    visibility:hidden;
+    width: 100%;
+    position: absolute;
+    height: fit-content;
+    top: 110%;
+    left: 0;  
+    border-radius: 1rem;
+    border: solid var(--border) 2px;
+    background: var(--secondary);
+    border-radius: 0rem 0rem 1rem 1rem;
+    transition: .1s linear;
+    scale: 0;
+    text-align: center;
+    gap: 0px;
+}
+
+
+.more li:last-child{
+    border-radius: 0rem 0rem .8rem .8rem;
+    border-bottom: none;
+}
+
+.moreVisible{
+    scale: 1;
+    display: flex;
+    visibility: visible;
+}
+
+
+.buttonDropList{
+    padding: 1rem;
+    width: 100%;
+    height: fit-content;
+    cursor: pointer;
+    border-bottom: solid var(--secondary) 2px;
+}
+
+.buttondropList{
+    border-radius: 0rem 0rem 1rem 1rem;
+    background: black;
+}
+
+.buttonDropList:hover{
+    background: var(--overlay);
+    color: var(--orange);
+}
+
+
+.Statistica{
+    width: 100%;
+    height: 100%;
+}
+
+.Statistica,.ShopBanner{
+    border: dotted var(--orange) 2px;
+    background: var(--orange-transparent);
+    border-radius: 1rem;
+}
+
+.ShopBanner{
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.banner{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.input{
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    border: solid var(--secondary);
+    border-radius: 1rem;
+}
+
+
+.infoBlock{
+    border-radius: 1rem;
+    border: solid var(--secondary) 3px;
+    padding:1rem;
+    overflow-y: auto;
+    max-height: 365px;
+}
+
+.buttonCategory{
+    border: none;
+    height: fit-content;
+    padding: .5rem 1rem;
+    width: 100%;
+}
+
+
+.textareaContainer{
+    border: solid var(--secondary) 3px;
+    min-height: 200px;
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+}
+
+.textarea{
+    border: solid var(--border) 1px;
+    padding: 1rem;
+    border-radius: 1rem;
+    outline: none;
+    height: auto;
+    font-size: 1.5rem;
+    overflow-y: hidden;
+}
+
+.textarea:focus{
+    outline: none;
+    border: solid var(--orange) 1px;
+}
+
+
+.ProductImagesInput{
+    border: solid var(--secondary) 3px;
+    padding: .5rem;
+    border-radius: 1rem;
+    min-width: 175px;
+    flex-grow: 1;
+}
+
+.ProductImagesInput:hover{
+    cursor: pointer;
+    border: solid red 3px;
+}
+
+
+.AccountInput{
+    border: solid var(--border) 1px;
+    border-radius: .5rem;
+    padding: 1.1rem 1rem;
+    font-size: 1.3rem;
+    flex-grow: 1;
+    background: rgba(249, 250, 251, 1);
+    color: var(--secondary-text);
+}
+
+.AccountInput::placeholder{
+    font-size: 1.3rem;
+}
+
+.AccountInput:focus{
+    color: var(--secondary-text);
+    border: solid var(--orange) 1px;
+}
+
+.AccountInputContainer{
+    width: calc(50% - 2rem);    
+}
+
+.AccountInputButton{
+    border-radius:.5rem;
+    background: var(--background);
+    border: solid var(--border) 1px; 
+    color: var(--secondary-text);
+    font-size: clamp(1rem,calc(.5vw + 1rem),1.5rem);
+}
+
+
+.DescriptionData{
+    gap: 1rem 4rem;
+}
+
+
+.PlatformBackground{
+    border-radius: 50%;
+    aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+@media (max-width: 564px) {
+    .aside {
+        visibility: hidden;
+        transform: translateX(-100%);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 101;
+        padding: 1rem;
+    }
+ 
+    .visible {
+        visibility: visible;
+        transform: translateX(0%);
+    }
+
+    .asideList{
+        gap: 2rem;
+    }
+
+    
+    .asideList li h3{
+        font-size: 2rem;
+    }
+
+    .Open{
+        display: block;
+        position: fixed;
+        z-index: 150;
+        bottom: 2%;
+        left: 5%;
+        width: 44px;
+        height: 44px;
+    }
+
+    .GridAccount{
+        grid-template-columns: auto 1fr;
+    }
+
+    .headInfoContainer{
+        flex-wrap: wrap;
+    }
+
+    .textareaContainer{
+        padding: 1rem 1rem;
+        gap: .5rem;
+    }
+
+    .DescriptionData{
+        gap: .5rem 2rem;
+    }
+
+    .SessionCard div{
+        flex-direction: column;
+    }    
+}

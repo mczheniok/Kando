@@ -1,0 +1,32 @@
+{
+  "name": "vse",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -H 127.0.0.1",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "knip": "knip"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "@svgr/webpack": "^8.1.0",
+    "leaflet": "^1.9.4",
+    "next": "^15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-leaflet": "^5.0.0",
+    "react-toastify": "^11.0.5",
+    "recharts": "^2.15.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^22.14.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.7",
+    "knip": "^5.50.5",
+    "typescript": "^5.8.3"
+  }
+}

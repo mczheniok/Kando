@@ -1,0 +1,16 @@
+.InfoContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-rows: auto;
+    width: 100%;
+    min-height: 400px;
+    flex-wrap: wrap;
+    gap: 1%;
+    height: fit-content;
+}
+
+@media (max-width: 564px) {
+    .InfoContainer{
+        grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    }
+}

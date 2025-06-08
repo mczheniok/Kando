@@ -1,0 +1,50 @@
+.header{
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    min-height: 100px;
+    width: 100%;
+    border-bottom: solid var(--border) 1px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-text{
+    color: var(--foreground);
+}
+
+.logo{
+    font-size: clamp(1.5rem,calc(1vw + 1rem),2.5rem);
+    color: var(--orange);
+}
+
+#footer{
+    border-top: solid var(--border) 1px;
+    height: fit-content;
+}
+
+.PaginationPages{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    border: solid var(--background) 3px;
+}
+
+
+.PaginationPages:hover{
+    cursor: pointer;
+    border: solid var(--orange) 3px;
+}
+
+
+.PaginationPages.select{
+    color: var(--orange);
+    border: solid var(--foreground) 2px;
+}
+
+.navContainer{
+    gap: min(4vw,1rem);
+}

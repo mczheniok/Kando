@@ -1,0 +1,85 @@
+.SliderContainer{
+    animation: left 10s infinite linear;
+}
+
+.SliderInfo{
+    width: 40vw;
+    height: 100%;
+    padding: 1rem;
+}
+
+.SliderBlock{
+    margin-bottom: 2rem;
+    border: solid var(--secondary) 3px;
+    border-radius:1rem ;
+}
+
+
+.SliderContainer:hover{
+    animation-play-state:paused;
+}
+
+.InfoCardsContainer{
+  margin-top: 2rem;
+}
+
+.CategoryCircleHref:hover p{
+  color: var(--orange);
+}
+
+
+.CategoryCircleHref{
+  width: 100%;
+  height: 100%;
+}
+
+
+.CategoryImage{
+  width: 100%;
+  height: 100%;
+  border-radius: .5rem;
+  padding: 1.5rem 0rem;
+  gap: 0rem;
+  border: solid #e0e0e0 1px;
+  object-fit: center;
+  background: var(--background);
+}
+
+.Categorycontainer {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0.60);
+  transition: all 0.4s ease;
+  transform-origin: top;
+}
+
+.CategorycontainerVisible {
+  max-height: fit-content; /* достаточно для содержимого */
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+
+
+@media (max-width: 564px) {
+    .SliderBlock img{
+        width: 100px;
+        height: 100px;
+    }
+
+
+  .InfoCardsContainer{
+    flex-wrap:wrap;
+  }
+
+}
+
+@keyframes left {
+    from{
+        transform: translateX(0%);
+    }
+    to{
+        transform: translateX(-200%);
+    }
+}

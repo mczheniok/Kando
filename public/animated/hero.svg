@@ -1,0 +1,120 @@
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  
+  <rect width="800" height="400" fill="#f8f9fa"/>
+  
+  
+  <path d="M0,350 C200,310 400,390 800,340 L800,400 L0,400 Z" fill="#e9ecef"/>
+  
+  
+  <g transform="translate(600, 200)">
+    <path d="M0,0 L40,0 L50,60 L-10,60 Z" fill="#4dabf7" stroke="#1864ab" stroke-width="2">
+      <animate attributeName="opacity" values="1;0.7;1" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M5,0 L5,-20 A15,15 0 0 1 35,-20 L35,0" fill="none" stroke="#1864ab" stroke-width="3"/>
+  </g>
+  
+  
+  <g transform="translate(500, 280)">
+    
+    <circle cx="0" cy="-50" r="20" fill="#339af0"/>
+    <path d="M0,-30 L0,10" stroke="#339af0" stroke-width="10"/>
+    
+    <path d="M0,-15 L-20,0" stroke="#339af0" stroke-width="5"/>
+    <path d="M0,-15 L20,0" stroke="#339af0" stroke-width="5"/>
+    
+    <path d="M0,10 L-10,40" stroke="#339af0" stroke-width="5"/>
+    <path d="M0,10 L10,40" stroke="#339af0" stroke-width="5">
+      <animateTransform attributeName="transform" type="rotate" from="0 0 10" to="10 0 10" dur="1s" repeatCount="indefinite" additive="sum" begin="0.5s"/>
+    </path>
+    
+    <rect x="12" y="-5" width="15" height="20" fill="#ff6b6b" stroke="#c92a2a" stroke-width="1">
+      <animate attributeName="y" values="-5;-8;-5" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  
+  <g transform="translate(200, 250)">
+    
+    <circle cx="0" cy="-50" r="20" fill="#20c997"/>
+    <path d="M0,-30 L0,10" stroke="#20c997" stroke-width="10"/>
+    
+    <path d="M0,-15 L-20,0" stroke="#20c997" stroke-width="5"/>
+    <path d="M0,-15 L25,-5" stroke="#20c997" stroke-width="5">
+      <animateTransform attributeName="transform" type="rotate" from="0 0 -15" to="-10 0 -15" dur="2s" repeatCount="indefinite" additive="sum"/>
+    </path>
+    
+    <path d="M0,10 L-10,40" stroke="#20c997" stroke-width="5"/>
+    <path d="M0,10 L10,40" stroke="#20c997" stroke-width="5"/>
+    
+    <rect x="30" y="-10" width="25" height="15" fill="#ffe066" stroke="#f59f00" stroke-width="1">
+      <animate attributeName="y" values="-10;-15;-10" dur="2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+ 
+  <g>
+    
+    <g transform="translate(300, 100)">
+      <rect x="0" y="0" width="30" height="30" rx="5" fill="#fd7e14" stroke="#e67700" stroke-width="1"/>
+      <rect x="5" y="5" width="20" height="5" fill="#fff"/>
+      <rect x="5" y="15" width="20" height="5" fill="#fff"/>
+      <animateTransform attributeName="transform" type="translate" from="300 100" to="300 120" dur="2s" repeatCount="indefinite" additive="replace" begin="0.3s"/>
+    </g>
+    
+    
+    <g transform="translate(400, 150)">
+      <circle cx="15" cy="15" r="15" fill="#7950f2" stroke="#5f3dc4" stroke-width="1"/>
+      <path d="M7,15 L13,21 L23,10" stroke="#fff" stroke-width="2" fill="none"/>
+      <animateTransform attributeName="transform" type="translate" from="400 150" to="400 170" dur="1.5s" repeatCount="indefinite" additive="replace" begin="0.1s"/>
+    </g>
+    
+    
+    <g transform="translate(350, 70)">
+      <polygon points="0,0 30,0 20,30 10,30" fill="#12b886" stroke="#087f5b" stroke-width="1"/>
+      <path d="M10,10 L20,10 M15,5 L15,15" stroke="#fff" stroke-width="2"/>
+      <animateTransform attributeName="transform" type="translate" from="350 70" to="350 90" dur="2.5s" repeatCount="indefinite" additive="replace" begin="0.7s"/>
+    </g>
+  </g>
+  
+    <g transform="translate(100, 120)">
+
+    <path d="M10,0 L13,7 L20,8 L15,13 L16,20 L10,17 L4,20 L5,13 L0,8 L7,7 Z" fill="#ffd43b">
+      <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite"/>
+    </path>
+
+    <path d="M35,0 L38,7 L45,8 L40,13 L41,20 L35,17 L29,20 L30,13 L25,8 L32,7 Z" fill="#ffd43b">
+      <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
+
+    <path d="M60,0 L63,7 L70,8 L65,13 L66,20 L60,17 L54,20 L55,13 L50,8 L57,7 Z" fill="#ffd43b">
+      <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite" begin="1s"/>
+    </path>
+
+    <path d="M85,0 L88,7 L95,8 L90,13 L91,20 L85,17 L79,20 L80,13 L75,8 L82,7 Z" fill="#ffd43b">
+      <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+    </path>
+    <path d="M110,0 L113,7 L120,8 L115,13 L116,20 L110,17 L104,20 L105,13 L100,8 L107,7 Z" fill="#ffd43b">
+      <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite" begin="2s"/>
+    </path>
+  </g>
+  
+  <circle cx="100" cy="300" r="20" fill="#4dabf7" opacity="0.3">
+    <animate attributeName="cy" from="300" to="280" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="150" cy="280" r="15" fill="#4dabf7" opacity="0.3">
+    <animate attributeName="cy" from="280" to="260" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="600" cy="100" r="25" fill="#4dabf7" opacity="0.3">
+    <animate attributeName="cy" from="100" to="80" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="650" cy="150" r="10" fill="#4dabf7" opacity="0.3">
+    <animate attributeName="cy" from="150" to="130" dur="6s" repeatCount="indefinite"/>
+  </circle>
+
+  <path d="M230,250 C300,190 400,220 500,280" stroke="#868e96" stroke-width="2" stroke-dasharray="5,5" fill="none">
+    <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M330,100 C400,150 450,130 600,200" stroke="#868e96" stroke-width="2" stroke-dasharray="5,5" fill="none">
+    <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+  </path>
+</svg>

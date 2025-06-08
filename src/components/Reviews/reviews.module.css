@@ -1,0 +1,12 @@
+.dropList{
+    position: absolute;
+    top: 160%;
+    left: 0;
+    background-color: var(--secondary);
+    min-width: 100%;
+    width: fit-content;
+    border-radius: 1rem;
+    padding: 1rem;
+    z-index: 10;
+    color: var(--foreground);
+}

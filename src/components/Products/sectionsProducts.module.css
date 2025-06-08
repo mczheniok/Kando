@@ -1,0 +1,50 @@
+.Reviews{
+    display: grid;
+    grid-template-columns: 70px 1fr;
+}
+
+.Reviews ul li{
+    margin-bottom: 0.5rem;
+}
+
+
+.ReviewsList{
+    border: solid var(--secondary) 3px;
+    border-radius: 1rem;
+    padding: .5rem;
+}
+
+.SellerInfo{
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.InfoBlock{
+    grid-row: span 2;
+    padding: 1rem;
+    border: solid var(--secondary) 3px;
+    width: 100%;
+    height: fit-content;
+    overflow-y: auto;
+    max-height: 220px;  
+    margin-top: 1rem;
+    border-radius: 1rem;
+}
+
+
+.SectionVideo{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+}
+
+.VideoBlock{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}

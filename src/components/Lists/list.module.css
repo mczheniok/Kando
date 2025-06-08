@@ -1,0 +1,8 @@
+.CategoryElement{
+    padding: .5rem 1rem;
+    flex-grow: 1;
+    text-align: center;
+    background: var(--bg-card);
+    border-radius: 1rem; 
+    color: var(--primary);
+}

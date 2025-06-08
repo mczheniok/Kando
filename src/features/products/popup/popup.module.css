@@ -1,0 +1,25 @@
+.popup{
+    opacity: 0;
+    position: fixed;
+    z-index: 1001;
+    width: 30%;
+    height: fit-content;
+    border-radius: .5rem;
+    border: solid var(--border) 2px;
+    background: var(--background);
+    padding: 1rem;
+    transform: scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    top: 20%;
+    left: 34%;
+}
+
+.show{
+    transform: scale(1);
+    opacity: 100%;
+}
+
+.none{
+    transform: scale(0);
+    opacity: 0%;
+}

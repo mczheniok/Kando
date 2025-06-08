@@ -1,0 +1,172 @@
+.Card{
+    background: var(--bg-glass);
+    border: solid var(--border) 1px;
+    border-radius: .3rem .3rem 1rem 1rem;
+    flex-grow: 1;
+    height: 100%;
+    padding: 1rem;
+    transition: .3s;
+    cursor: pointer;
+    border-top: solid var(--orange) 4px;
+}
+
+.Card:hover{
+    background-color: var(--orange);
+    color: var(--background);
+    scale: 1.1;
+}
+
+.Product{
+    gap: 0rem;
+    width: 100%;
+    max-height: 450px;
+}
+
+
+.RowProduct {
+    gap: 0rem;
+    border-radius: .5rem .5rem 0rem 0rem;   
+    width: 330px; /* Можно уменьшить или сделать min-width */
+    flex: 0 0 330px; /* Не растягивать, не сжимать, базовая ширина */
+    height: 400px;
+    background: none;
+}
+
+
+.CardHead{
+    background: var(--secondary);
+    position: relative;
+    height: 200px;
+    width: 100%;
+    border-radius: 1rem 1rem 0rem 0rem ;
+}
+
+.ProductPreviewImage{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    max-width: 100%;
+    border-radius: 1rem 1rem 0rem 0rem;
+}
+
+
+.CardHeadImportant{
+    position:absolute;
+    opacity: 70%;
+    padding:.2rem 1rem;
+    color: var(--background);
+    border-radius: .5rem;
+    background: var(--orange);
+    left: .5rem;
+    top: .5rem;
+    transition: .3s;
+}
+
+.CardFooter{
+    border: solid #e0e0e0 1px;
+    border-top: none;
+    border-radius: 0rem 0rem .5rem .5rem;
+    gap: .4rem;
+    padding: .7rem;
+    max-height: 250px;
+    background: var(--bg-card);
+}
+
+.CardCategoryText{
+    color: var(--secondary-text);
+    font-weight: 500;   
+}
+
+.CardInfo{
+    gap: .5rem;
+}
+
+.horyzontalCard{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.Product:hover .Product:last-child{
+    border-bottom: solid var(--orange) 3px;
+}
+
+.Product:hover .CardHeadImportant{
+    opacity: 100%;
+}
+
+.CardRow{
+    height: 150px;
+    gap: 0rem;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.CardRowImage{
+    width: 20%;
+}
+
+.CardRowDescription{
+    width: 50%;
+    padding: .5rem;
+    border-bottom: solid var(--secondary) 3px;
+    border-top: solid var(--secondary) 3px;
+}
+
+.CardRowPrice{
+    width: 30%;
+    padding: .5rem;
+    border-top: solid var(--secondary) 3px;
+    border-bottom: solid var(--secondary) 3px;
+    border-right: solid var(--secondary) 3px;
+    border-radius: 0rem 1rem 1rem 0rem;
+}
+
+
+@media (max-width: 564px) {
+    .Product{
+        max-width: 100%;
+    }
+
+    .CardRow{
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+    }
+
+
+    .CardRowImage{
+        width:100%;
+    }
+
+    .CardRowImage img{
+        width: 100%;
+    }
+
+    .CardRowDescription{
+        width: 100%;
+        flex-direction: column;
+        gap:.5rem;
+        border:none;
+        border-right: solid var(--border) 3px;
+        border-left: solid var(--border) 3px;
+    }
+
+
+    .CardRowPrice{
+        width: 100%;
+        flex-direction: row-reverse;
+        border: none;
+        border-radius: 0rem 0rem 1rem 1rem;
+        border-bottom: solid var(--border) 3px;
+        border-right: solid var(--border) 3px;
+        border-left: solid var(--border) 3px;   
+    }
+}
+
+
+
+

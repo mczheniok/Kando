@@ -1,0 +1,8 @@
+.horyzontalCard{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}

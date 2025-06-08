@@ -1,0 +1,27 @@
+.SelectList{
+    display: grid;
+    border-radius: 1rem;
+    padding: 1rem 1rem;
+    width: 100%;
+    overflow: auto;
+    grid-template-columns: repeat(auto-fill,minmax(50px,1fr));
+    max-height: 250px;
+    grid-template-rows: 1fr;
+    gap: 10px;
+}
+
+
+.ImageInPick{
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    object-position: center;
+    cursor: pointer;
+    border-radius: .5rem;
+    border: solid var(--secondary) 3px;
+}
+
+
+.ImageInPick:hover{
+    border: solid var(--orange) 3px;
+}

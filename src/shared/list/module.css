@@ -1,0 +1,9 @@
+.AccountInput{
+    border: solid var(--border) 1px;
+    border-radius: .5rem;
+    padding: 1.1rem 1rem;
+    font-size: 1.3rem;
+    flex-grow: 1;
+    background: rgba(249, 250, 251, 1);
+    color: var(--secondary-text);
+}

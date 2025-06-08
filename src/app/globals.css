@@ -1,0 +1,364 @@
+/* Светлая тема (по умолчанию) */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --block: #BFBFBD;
+  --block-down-bottom: #fdf8f8;
+  --orange: #FF7F00;
+  --yellow: yellow;
+  --platinum: #e5e4e2;
+  --dark-orange: #E06000;
+  --light-orange: #FFAA5A;
+  --gray: #888888;
+  --border: #D8D8D8;
+  --primary: #333333;
+  --overlay: rgba(0, 0, 0, 0.5);
+  --orange-transparent: rgba(255, 127, 0, 0.1);
+  --secondary: #f3f3f3;
+  --secondary-text: #2B2B2B;
+  --tw-secondary-text: #666;
+  --bg-card: #ffffff;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --standart-border: solid var(--border) 2px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+
+  --transition: all 0.2s ease;
+}
+
+/* Темная тема */
+:root[data-theme="dark"], 
+[data-theme="dark"] {
+  --background: #0a0a0f;
+  --foreground: #f9fafb;
+  --block: #374151;
+  --block-down-bottom: #1f2937;
+  --orange: #FF7F00; /* оранжевый остается тем же */
+  --yellow: #fbbf24; /* немного приглушенный желтый */
+  --platinum: #374151;
+  --dark-orange: #E06000;
+  --light-orange: #FFAA5A;
+  --gray: #9ca3af;
+  --border: rgba(255, 255, 255, 0.1);
+  --primary: #f9fafb;
+  --overlay: rgba(0, 0, 0, 0.7);
+  --orange-transparent: rgba(255, 127, 0, 0.15);
+  --secondary: #111827;
+  --secondary-text: #d1d5db;
+  --tw-secondary-text: #9ca3af;
+  --accent-secondary: #8b5cf6;
+  --bg-glass: rgba(31, 41, 55, 0.3);
+  --bg-primary: #0a0a0f;
+  --bg-card: #1f2937;
+  --hd-vr: rgba(10, 10, 15, 0.8);
+
+  /* Тени для темной темы */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+/* Автоматическое определение темы на основе системных настроек */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0a0a0f;
+    --foreground: #f9fafb;
+    --block: #374151;
+    --block-down-bottom: #1f2937;
+    --orange: #FF7F00;
+    --yellow: #fbbf24;
+    --platinum: #374151;
+    --dark-orange: #E06000;
+    --light-orange: #FFAA5A;
+    --gray: #9ca3af;
+    --border: rgba(255, 255, 255, 0.1);
+    --primary: #f9fafb;
+    --overlay: rgba(0, 0, 0, 0.7);
+    --orange-transparent: rgba(255, 127, 0, 0.15);
+    --secondary: #111827;
+    --secondary-text: #d1d5db;
+    --tw-secondary-text: #9ca3af;
+  
+
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+  }
+}
+
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+  min-width: 100%;
+  background: var(--secondary);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html[data-theme="dark"] body {
+  background: var(--bg-primary);
+  background-image: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+  radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.15) 0%, transparent 50%),
+  radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body{
+  overflow-y: auto;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+} 
+
+
+/* Уменьшаем размер полосы прокрутки */
+::-webkit-scrollbar {
+  width: 5px; /* Уменьшаем ширину вертикальной полосы прокрутки */
+  height: 5px; /* Уменьшаем высоту горизонтальной полосы прокрутки */
+}
+
+/* Стилизация фона полосы прокрутки */
+::-webkit-scrollbar-track {
+  background: var(--block); /* Цвет фона */
+  border-radius: 10px;
+}
+
+/* Стилизация ползунка полосы прокрутки */
+::-webkit-scrollbar-thumb {
+  background: var(--orange); /* Цвет ползунка */
+  border-radius: 10px;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+a:hover,.ackent-hover:hover {
+  color: var(--orange);
+  cursor: pointer;
+}
+
+
+input::placeholder {
+  font-size: clamp(1rem,calc(1vw + .5rem),1.5rem);
+  color: var(--block);
+  font-weight: 800;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Desktop (>= 1200px) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1440px;
+  }
+}
+
+/* Laptop (>= 992px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Tablet (>= 768px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+
+.circle{
+  border-radius: 50%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+}
+
+.flex{display: flex; gap: 1rem;} 
+.flex-row{flex-direction: row} 
+.flex-col{flex-direction: column;}
+.flex-wrap{flex-wrap: wrap;}
+.flex-grow{flex-grow: 1;}
+.align-center{align-items: center;}
+.align-start{align-items: start;}
+.align-end{align-items:end}
+.align-baseline{align-items: baseline;}
+.justify-between{justify-content: space-between;}
+.justify-around{justify-content: space-around;}
+.justify-center{justify-content: center;}
+.justify-evenly{justify-content: space-evenly;}
+.row-reverse{flex-direction: row-reverse;}
+
+h1 , .h1-text { 
+  font-size: clamp(1rem,calc(1vw + .5rem),2rem);
+}
+
+h2 {
+  font-size: clamp(1rem,calc(1vw + .5rem),1.5rem);
+}
+
+h3 , .h3-text {
+  font-size: clamp(.8rem,calc(1vw + .5rem),1.3rem);
+  color: var(--secondary-text);
+}
+
+.secondary-text {
+  color: #666;
+  font-weight: 300;
+}
+
+.tw-secondary-text{
+  color: var(--secondary-text);
+  font-weight: 500;
+}
+
+h4 , li ,.h4-text{
+  font-size: clamp(.7rem,calc(.3vw + .6rem),1.3rem);
+  color: var(--secondary-text);
+  font-weight: 700;
+}
+
+p {
+  font-size: clamp(.4rem,calc(.6vw + .4rem),1.1rem);
+  color: black;
+  font-weight:550;
+}
+
+.ackent-text{
+  color: #FF7F00;
+}
+
+ul{
+  list-style: none;
+}
+
+.href-a{
+  color: var(--orange);
+}
+
+.href-a:hover{
+  text-decoration: underline;
+}
+
+
+.def-btn{
+  padding: .5rem 2.5rem;
+  font-size: clamp(.8rem,calc(1vw + .5rem),1.3rem);
+  background-color: var(--background);
+  color: var(--primary);
+  border-radius: .5rem;
+  border: none;
+  transition: .3s;
+  border: solid var(--background) 2px;
+}
+
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#ffa516);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13{ 
+  100%{transform: rotate(1turn)}
+}
+
+.none{
+  display: none;
+}
+
+.date-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.date-wrapper input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 10px 40px 10px 12px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+}
+
+.date-wrapper::after {
+  content: "\1F4C5"; /* 📅 Unicode для календаря */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 20px;
+  color: #777;
+}
+
+.divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  color: #999;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}

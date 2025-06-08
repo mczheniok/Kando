@@ -1,0 +1,105 @@
+.HeaderSubText{
+    width: 80%;
+    text-align: center;
+    color: var(--primary);
+    font-weight: 100;
+}
+
+.Circle{
+    border-radius: 50%;
+    aspect-ratio: 1;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+    background: var(--overlay);
+}
+
+.Form{
+    width: 50%;
+    height: 80%;
+    gap: 0px;
+}
+
+.Form div{
+    width: 50%;
+    height: 100%;
+}
+
+.Form div:nth-child(1) {
+    border-radius: 2rem 0rem 0rem 2rem;
+}
+
+.Form div:nth-child(2) {
+    border-radius: 0rem 2rem 2rem 0rem;
+}
+
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+@media (max-width: 564px) {
+    .Grid{
+        grid-template-columns: 1fr;
+        grid-template-rows: 40% 1fr;
+    }
+
+    .Form{
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .Form div{
+        width: 100%;
+        border-radius: 0rem;
+        height: fit-content;
+    }
+
+    .Image{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .LoginForm{
+        width: 100%;
+        height: 100%;
+        box-shadow: none;
+    }
+
+    .LoginForm div{
+        width: 80%;
+        height: 50%;
+        padding: 1rem;
+        align-items: center;
+        
+    }
+
+    .LoginContainer{
+        gap: .5rem;
+        padding: 0rem;
+    }
+
+    .Input{
+        width: 80%;
+    }
+
+    .LoginWithProviders{
+        width: 100%;
+        padding: .5rem;
+    }
+
+}
+
+
+

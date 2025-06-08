@@ -1,0 +1,9 @@
+.RowBlock{
+    min-height: 80px;
+    border: solid var(--border) 1px;
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    gap: 1%;
+    background: var(--bg-glass);
+}

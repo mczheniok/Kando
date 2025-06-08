@@ -1,0 +1,66 @@
+.grid2{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr minmax(200px,20%);
+    flex-wrap: wrap; 
+    gap: 1rem;
+}
+
+.BlockIn{
+    border-radius: 1rem;
+    border: solid var(--border) 2px;
+    width: 100%;
+    height: fit-content;
+    min-height: 200px;
+}
+
+.BlockIn:first-child{
+    padding: 2rem  2.5rem;
+}
+
+.BlockIn:nth-child(2) {
+    height: 100%;
+}
+
+.HeroTitle{
+    font-size: clamp(2vw,calc(1vw + 1.5rem),4rem);
+}
+
+
+
+.HeroSecondaryText{
+    white-space: normal;
+    font-size: 1.3rem;
+    font-weight: 500;
+    max-width: 100%;
+    color: var(--secondary-text);
+}
+
+
+
+@media (max-width: 564px) {
+    .grid2{
+        grid-template-columns: 1fr;
+    }
+    .HeroContainer{
+        flex-wrap: wrap;
+    }
+
+    .HeroContainer img{
+        width: 77px;
+        height: 77px;        
+    }
+
+    .BlockIn:first-child{
+        padding: 1rem  1rem;
+    }
+    
+    .BlockIn{
+        gap: .3rem;
+    }
+
+    .HeroSecondaryText{
+        font-size: 1rem;
+        max-width: fit-content;
+    }
+}
