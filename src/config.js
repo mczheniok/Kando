@@ -2,6 +2,11 @@
 //*************************** CONFIG FILE FOR CONST VARIABLES ************************************/
 //************************************************************************************************/
 
+import { configDotenv } from "dotenv";
+configDotenv();
+
+export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL_URL;
+
 export const categoryCONST = {
     realestate: "нерухомість",
     cloth: "одяг",
@@ -44,6 +49,11 @@ export const categoryList = {
             text: "Тип угоди",
             name: "typeagreement",
             placeholder: ["Оренда","Продаж","Подобова Аренда"]
+        },
+        {
+            text: "Відео огляд",
+            name: "reviewvideo",
+            placeholder: "https://www.youtube.com/"
         }
     ],
     "одежа": [
@@ -51,6 +61,11 @@ export const categoryList = {
             text: "Розмір одягу",
             name: "size",
             placeholder: ["XSS","XS","S","M","L","XL","XXL"]
+        },
+        {
+            text: "Відео огляд",
+            name: "reviewvideo",
+            placeholder: "https://www.youtube.com/"
         }
     ]
 }

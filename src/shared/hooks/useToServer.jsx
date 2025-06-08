@@ -1,6 +1,8 @@
 import { SendNotify } from "@/components/Notifications/notification";
 import { useState , useEffect } from "react";
 import { getFromCache, setToCache } from "../db/indexedDB";
+import { BACKEND_URL } from "@/config";
+
 
 export function useToServer(url,params={},n=true,t=true) { // n = with nofification
     const [loading,setLoading] = useState(false);
@@ -21,7 +23,7 @@ export function useToServer(url,params={},n=true,t=true) { // n = with nofificat
             try {
                 if(n) SendNotify("Обробка...","info");
 
-                const res = await fetch(`http://localhost:4000${url}`, params);                
+                const res = await fetch(`${BACKEND_URL}${url}`, params);                
                 const resData = await res.json();
                 const { status , err } = resData; 
 

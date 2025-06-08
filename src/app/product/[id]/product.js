@@ -1,21 +1,17 @@
   "use client"
   import usePageRender from "@/shared/hooks/usePageRender";
-  import { useRef, useState } from "react";
+  import { useRef } from "react";
   import { InfoContainer } from "@/components/Containers/container";
   import ProductNavigation from "@/components/Navigation/ProductNavigation";
   import { ProductImageSection } from "@/components/Image/Image";
   import { ProductInfoSection } from "@/components/Products/info";
   import { ProductSellerInfo } from "./sellerInfo";
   import { LazyVideoSection } from "@/components/lazy";
-  import { LazySpecifications } from "@/components/lazy";
-  import { LazyReviewsSection } from "@/components/lazy";
   import { useEffect } from "react";
 
 
     const listInfoPages = [
         {title: "головна",id: "#main"},
-        {title: "Характеристики",id: "#specifications"},
-        {title: "Відгуки",id: "#reviews"},
         {title: "Відео Огляд",id: "#video"},
         {title: "Опис",id: "#description"}
   ]
@@ -61,19 +57,17 @@
   ]
 
   export function InfoPagination({obj}) {
-    const Reviews = "4000"
-    const { image_array, name , price , last_price , category , location  , subcategory, creator_id , id} = obj
+    const { image_array, name , price , last_price , category , location  , subcategory, creator_id , id, views } = obj
     
     const infoRef = useRef(null);
     const [activePage,setPage] = usePageRender(infoRef);
     const type = JSON.parse(location).length === 2;
-    console.log(subcategory);
-    
+
     const main = () => {
       return (
         <InfoContainer>
           <ProductImageSection list={image_array}></ProductImageSection>
-            <ProductInfoSection subcategory={subcategory} categories={category} list={image_array} type={type} title={name} Price={price} LastPrice={last_price} Reviews={Reviews} Images={image_array}></ProductInfoSection>
+            <ProductInfoSection subcategory={subcategory} categories={category} list={image_array} type={type} title={name} Price={price} LastPrice={last_price} Reviews={views} Images={image_array}></ProductInfoSection>
           <ProductSellerInfo anoncement={{subcategory,show: false}} product_id={id} type={type} userId={creator_id} categories={category} position={JSON.parse(location)}></ProductSellerInfo>
         </InfoContainer>
       );
@@ -81,21 +75,9 @@
 
   const videoPage = () => <LazyVideoSection VideoId={"jE7bMW_JPJs"}></LazyVideoSection>
 
-  const reviewsSection = () => <LazyReviewsSection Ratings={Ratings}></LazyReviewsSection>
-  const specificationsSection = () => {
-    return (
-      <section className="flex flex-col" id="specifications">
-        <h1>Характеристики</h1>
-        <LazySpecifications TableList={TableList}></LazySpecifications>
-      </section>
-    );
-  }
-
   const pages = [
     main,
     videoPage,
-    reviewsSection,
-    specificationsSection
   ];
     
   const CurrentPage = () => {
@@ -109,7 +91,6 @@
         let data =  Array.isArray (lastcheck) ? lastcheck : [];
     
         data = data.filter(id => id !== obj.id);
-      
     
         const lastCheckArr = [obj.id,...data].slice(0,20);
     

@@ -32,7 +32,7 @@ import { Chat, MessagesPage } from "./messages/messages";
 
 
 
-import ReviewsIcon from "@/icons/reviews.svg"
+import MessagesIcon from "@/icons/messages.svg"
 import HistoryIcon from "@/icons/history.svg"
 import NewIcon from "@/icons/new.svg"
 import AddIcon from "@/icons/add.svg";
@@ -47,7 +47,7 @@ import UnknownIcon from "@/icons/linux.svg";
 const UserHeaderInfo = lazy(() => import("@/components/Image/Image").then(module => ({ default: module.UserHeaderInfo })));   
 
 const Cardsarray = [
-    {title: "Нові Відгуки",icon: ReviewsIcon,to: 3},
+    {title: "Повідомлення",icon: MessagesIcon,to: 3},
     {title: "Історія",icon: HistoryIcon,to: 4},
     {title: "Нове оголошення",icon: NewIcon,to: 5}
 ]
@@ -434,7 +434,7 @@ const Page7 = () => {
                 <h3 style={{flexGrow: '1'}}>Фото</h3>
                 <h3 style={{flexGrow: '1'}}>Деталі</h3>
             </RowBlock> 
-            <form onSubmit={handleSubmit} className="flex flex-col" style={{width: "100%",marginTop: "2rem"}}>
+            <form onSubmit={handleSubmit} className="flex flex-col" style={{width: "100%",padding: '1rem',marginTop: "2rem"}}>
                 <SectionContainer headerText={"Основна Інформація"}>
                     <DescriptionData state={[category,setCategory]} ref={anoncement.current} set={handleInput}></DescriptionData>
                     <DescriptionSection></DescriptionSection>

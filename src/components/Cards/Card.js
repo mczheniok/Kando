@@ -105,7 +105,7 @@ export function CardRow({obj,t=false}) {
     return( 
         <article className={`${styles.CardRow} flex flex-row `} data-product-id={id}>
             <section className={styles.CardRowImage}>
-                <Image src={`/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={200} height={200}  style={{objectFit:"cover",width: "100%",height: "100%"}}></Image>
+                <Image src={`/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={200} height={200}  style={{borderRadius: ".5rem 0rem 0rem .5rem",objectFit:"cover",width: "100%",height: "100%"}}></Image>
             </section>
             <section style={{height: "100%"}} className={`${styles.CardRowDescription} flex flex-col justify-between`}>
                 <div className="flex flex-row">

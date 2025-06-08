@@ -1,4 +1,6 @@
 import { SendNotify } from "@/components/Notifications/notification";
+import { BACKEND_URL } from "@/config";
+
 
 export function share({title,url,text}) {
     if(navigator.share){
@@ -15,7 +17,7 @@ export function share({title,url,text}) {
 
 export async function toServer(url,params={},n=true) { // n = with nofification
     try {
-        const res = await fetch(`http://localhost:4000${url}`, params);
+        const res = await fetch(`${BACKEND_URL}${url}`, params);
         console.log("requesting");
         if(n) SendNotify("Обробка","info");
 

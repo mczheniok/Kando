@@ -34,7 +34,6 @@ export function MessagesPage({set}) {
 
     return (
         <> 
-          <h1>Статус: <span className="ackent-text">{connected?"Підключено":"Відключено"}</span></h1>
           <ColumnMessages set={set} load={!connected} list={chats} type={true}></ColumnMessages>
         </>
     )

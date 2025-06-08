@@ -4,8 +4,8 @@
 }
 
 .shimmer {
-    background: #f6f7f8;
-    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 50%, #f6f7f8 100%);
+    background: var(--backoground);
+    background-image: linear-gradient(to right, var(--border) 0%, var(--secondary) 50%, var(--border) 100%);
     background-size: 400px 100%;
     animation: shimmer 1.2s infinite;
     min-width: 100px;

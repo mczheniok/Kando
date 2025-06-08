@@ -5,7 +5,7 @@ import Loading from "../loader"
 
 export function Column({load,list,type=false}) {
     return (
-        <section className="flex flex-col" style={{width: "100%",height: "fit-content",background: "var(--background)",marginBottom: "5rem"}}>
+        <section className="flex flex-col" style={{width: "100%",margin: "1rem",height: "fit-content",marginBottom: "5rem"}}>
             {load?<Loading time={200}/>:list?.length === 0 && !load?<None />:list?.map((el,ind) => {
                 return (
                     <CardRow t={type} key={`column-el-ind-${ind}`} obj={el}></CardRow>
@@ -30,7 +30,7 @@ export function ColumnReviews({list,img = null}) {
 
 export function ColumnMessages({load,list,set=() => {}}) {
     return (
-        <section className="flex flex-col" style={{width: "100%",height: "fit-content",background: "var(--background)",gap: "0rem",marginBottom: "5rem"}}>
+        <section className="flex flex-col" style={{width: "100%",padding: "1rem",height: "fit-content",background: "var(--background)",gap: "0rem",marginBottom: "5rem"}}>
             {load?<Loading time={200}/>:list?.length === 0 && !load?<None />:list?.map((el,ind) => {
                 return (
                     <Message set={set} obj={el} key={`message-el-${ind}`}></Message>
