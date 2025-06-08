@@ -1,5 +1,8 @@
 # Kando Official Repository
 
+
+![Превью сайта](./public/logos/kando.webp)
+
 Welcome to the **Kando** official repository!
 
 **Kando** is an innovative platform that combines the best features of popular marketplaces like OLX, AliExpress, Amazon, Temu, and eBay. Our mission is to create a seamless and user-friendly marketplace for both buyers and sellers. Whether you’re looking for the latest products, unique finds, or incredible deals, **Kando** brings everything together in one place.
