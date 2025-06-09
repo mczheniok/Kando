@@ -28,7 +28,7 @@ export default function NotFound() {
               flexDirection: "column", 
               alignItems: "flex-start" 
             }}>
-              <Logo type={true} size={"logo"} />
+              <Logo type={true} size={"h1-text"} />
               <div style={{ 
                 display: "flex", 
                 marginTop: "1.5rem",

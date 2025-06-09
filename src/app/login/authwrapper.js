@@ -78,7 +78,7 @@ export default function AuthWrapper() {
         <div className="flex flex-row align-center justify-center" style={{width: '100%',height: "100%",backgroundImage: "url('/assets/login.jpg')",background: "cover",backgroundRepeat: 'no-repeat'}}>
             <form onSubmit={handleSubmit} className={`${styles.Form} flex flex-row`}>
                 <div className="flex flex-col align-center justify-center" style={{background: "var(--orange-transparent)"}}>
-                    <Logo type={true} size={"h1-text ackent-text"}></Logo>
+                    <Logo type={true} size={"h1-text accent-text"}></Logo>
                     <h3 style={{fontSize: "1.3rem"}} className={styles.HeaderSubText}>Відкрийте для себе чесні відгуки та робіть покупки з впевненістю</h3>
                 
                     <div className="flex flex-col align-start" style={{width: '80%',height :"fit-content",marginTop: "2rem"}}>
@@ -145,7 +145,7 @@ export default function AuthWrapper() {
         //     </section>
         //     <form onSubmit={handleSubmit} className={`${styles.LoginForm} flex flex-col justify-center align-center`}>
         //     <div className={`${styles.LoginContainer} flex flex-col`} style={{border: "solid var(--orange-transparent) 2px",background: "var(--orange-transparent)",borderRadius: '1rem'}}>
-        //         <h1 className="ackent-text">USER LOGIN</h1>
+        //         <h1 className="accent-text">USER LOGIN</h1>
         //         <Input name={"email"} handler={handlerInput} placeholder={"email"} type="email"></Input>
         //         <Input name={"password"} handler={handlerInput} placeholder={"password"} type="password"></Input>
         //             <div className="flex flex-row justify-between flex-wrap">

@@ -28,7 +28,7 @@ function PriceBlock({Price,LastPrice}) {
       <div className="flex flex-row flex-wrap align-baseline">
           <h1>{Price}</h1>
           <h3 className="through-text">{LastPrice}</h3>
-          <h3 className="ackent-text">-84%</h3>
+          <h3 className="accent-text">-84%</h3>
       </div>
     </div>
   )
@@ -69,10 +69,10 @@ export function ProductInfoSection({title,Price,LastPrice,categories,list,Review
       </div>
       <PriceBlock Price={Price} LastPrice={LastPrice}></PriceBlock>
         <div className="flex flex-row align-center flex-wrap">
-            <h4>⭐</h4>
-            <h4>{4.5}</h4>
-            <h4>{Reviews} Відгуків</h4>
-            <h4 className="sels">10,000+ продажів</h4>
+            <h4 className="small-text">⭐</h4>
+            <h4 className="small-text">{4.5}</h4>
+            <h4 className="small-text">{Reviews} Відгуків</h4>
+            <h4 className="small-text">10,000+ продажів</h4>
         </div>
         {<article className={`${styles.InfoBlock}`} style={{overflowY: "auto",maxHeight: 'auto',border: "none",padding: "0rem"}}>
           {type?

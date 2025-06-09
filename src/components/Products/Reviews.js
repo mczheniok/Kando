@@ -20,7 +20,7 @@ function Review({obj,children}) {
           <p>{obj.text}</p>
         </li>
         <li>
-          <h4>{obj.date}</h4>
+          <h4 className="small-text">{obj.date}</h4>
         </li>
       </ul>
     </article>

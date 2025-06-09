@@ -10,12 +10,17 @@ import { subCategoryObject } from "@/config"
 import SearchIcon from "@/icons/search.svg";
 import FilterIcon from "@/icons/filter.svg";
 import CategoryIcon from "@/icons/category.svg";
+import { categoryCONST, searchParams } from "../../../config";
+import { InputContainer , Input  , SelectList } from "../../input/input";
+import { useInputHandler } from "../../hooks/useInputHandler"
 
 
 export default function Search({placeholder,set=() => {}}) {
     const {language} = useContext(LanguageContenxt);
     const [visible,setVisible] = useState({status: false,data: [],search: ""});
-
+    const [paramsSearchRef,handler] = useInputHandler();
+    const [visibleList,setVisibleList] = useState(false);
+    const [selectedCategory,setSelectedCategory] = useState(categoryCONST.realestate);
 
     const CategoryesList = [
         {title: "Техника",list: [
@@ -39,14 +44,6 @@ export default function Search({placeholder,set=() => {}}) {
 
     ]
 
-    const FilterList = [
-        {title: "Ціна",list: [
-            "дешевші","дорожчі"
-        ]},
-        {title: "",list: [
-            
-        ]}
-    ]
 
     const BackLightLen = (str, search) => {
         const text = str.name.split(" ");
@@ -68,15 +65,13 @@ export default function Search({placeholder,set=() => {}}) {
             }
         });
 
-        console.log(str);
-
         return (
             <Link href={`/product/${str.id}?search=${str.name}`} className="h3-text secondary-text flex flex-row align-baseline" style={{ gap: ".3rem" }}>
                 {sub.map((el, ind) => (
                     <p key={`category-search-el-${ind}`} className="h3-text">{subCategoryObject[el]}:</p>
                 ))}
                 {text.map((el, ind) => (
-                    <p key={`search-word-el-${ind}`} className={ind === target ? "h3-text ackent-text" : "secondary-text"}>
+                    <p key={`search-word-el-${ind}`} className={ind === target ? "h3-text accent-text" : "secondary-text"}>
                         {el}
                     </p>
                 ))}
@@ -97,7 +92,6 @@ export default function Search({placeholder,set=() => {}}) {
         } else setVisible(r => ({...r,status: false}));
     },600);
 
-
     return (
         <form className={`${styles.form} flex flex-row flex-wrap align-center`} onSubmit={(e) => {
             e.preventDefault();
@@ -109,7 +103,7 @@ export default function Search({placeholder,set=() => {}}) {
                         {CategoryesList.map((el,ind) => {
                             return (
                             <ul className="flex flex-col" key={`categories-col-el-${ind}`}>
-                                <h2 className="ackent-text">{el.title}</h2>
+                                <h2 className="accent-text">{el.title}</h2>
                                 {el.list.map((el,ind) => {
                                     return <li key={`categoryies-el-${ind}`}><Link href={"/"}>{el}</Link></li>
                                 })}
@@ -131,20 +125,27 @@ export default function Search({placeholder,set=() => {}}) {
                 </ul>
             </div> 
             <ButtonWithIcon Icon={SearchIcon} title={""}></ButtonWithIcon>
-            <ButtonWithList title={language.sort} Icon={FilterIcon} onClick={() => console.log(true)}>
-                <div className={`${styles.dropList} flex flex-row align-center justify-around `}>
-                    {FilterList.map((el,ind) => {
+            <ButtonWithList relative={false} title={language.sort} Icon={FilterIcon} click={() => setVisibleList(prev => !prev)}>
+            </ButtonWithList>
+            <div className={`${styles.dropList} ${visibleList?"flex":"none"} flex-row align-center flex-wrap`} style={{width: "100%",top: "105%"}}>
+                    <InputContainer type={0} text={"Категорія"}>
+                        <SelectList setState={setSelectedCategory} arr={Object.values(categoryCONST)} name={"category"}></SelectList>
+                    </InputContainer>
+                    <InputContainer type={0} text="під категорія">
+                        <SelectList state={selectedCategory} arr={Object.values(subCategoryObject)}>
+
+                        </SelectList>
+                    </InputContainer>
+                    {searchParams.map((el,ind) => {
                         return (
-                            <ul className="flex flex-col" key={`categories-col-el-${ind}`}>
-                                <h2 className="ackent-text">{el.title}</h2>
-                                {el.list.map((el,ind) => {
-                                    return <li key={`categoryies-el-${ind}`}><Link href={"/"}>{el}</Link></li>
-                                })}
-                            </ul>
+                            <InputContainer type={0} key={`search-params-el-${ind}`} text={el.text}>
+                                {Array.isArray(el.placeholder)?
+                                    <SelectList formDataRef={paramsSearchRef} name={el.name} arr={el.placeholder} ></SelectList>
+                                :<Input name={el.name} placeholder={el.placeholder} handler={handler}></Input> }
+                            </InputContainer>    
                         )    
                     })}
                 </div>
-            </ButtonWithList>
         </form>
     )
 }

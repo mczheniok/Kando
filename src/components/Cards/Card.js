@@ -58,7 +58,7 @@ export function CardBlock({Icon,title,notifications,click}){
             <Icon width={40} height={40} />   
             <span className="flex flex-col">
                 <h3>{title}</h3>
-                <h3 className="ackent-text circle" style={{width: "25px",textAlign:"center",height: "25px",lineHeight: "25px",padding: ".5rem",boxSizing: "content-box",border: "solid var(--orange) 2px"}}>{notifications}</h3>
+                <h3 className="accent-text circle" style={{width: "25px",textAlign:"center",height: "25px",lineHeight: "25px",padding: ".5rem",boxSizing: "content-box",border: "solid var(--orange) 2px"}}>{notifications}</h3>
             </span>
         </div>
     )
@@ -161,7 +161,7 @@ export function Message({obj,set}) {
             </section>
             <section style={{width:"80%"}} className={`${styles.CardCategoryText} flex flex-col align-start`} >
                 <h3>{chat_name}</h3>
-                <h4>{sender_name}</h4>
+                <h4 className="small-text">{sender_name}</h4>
                 <h5>{""}</h5>
             </section>
             <section className={`${styles.CardRowPrice} flex flex-col align-center justify-center`} style={{border: "none"}}>

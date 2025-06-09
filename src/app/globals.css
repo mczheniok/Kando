@@ -156,7 +156,7 @@ a {
 }
 
 
-a:hover,.ackent-hover:hover {
+a:hover,.accent-hover:hover {
   color: var(--orange);
   cursor: pointer;
 }
@@ -213,21 +213,23 @@ input::placeholder {
   object-position: center;
 }
 
-.flex{display: flex; gap: 1rem;} 
-.flex-row{flex-direction: row} 
-.flex-col{flex-direction: column;}
-.flex-wrap{flex-wrap: wrap;}
-.flex-grow{flex-grow: 1;}
-.align-center{align-items: center;}
-.align-start{align-items: start;}
-.align-end{align-items:end}
-.align-baseline{align-items: baseline;}
-.justify-between{justify-content: space-between;}
-.justify-around{justify-content: space-around;}
-.justify-center{justify-content: center;}
-.justify-evenly{justify-content: space-evenly;}
-.row-reverse{flex-direction: row-reverse;}
+.flex { display: flex; gap: 1rem; }
+.flex-row { flex-direction: row; } 
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-grow { flex-grow: 1; }
 
+/* Выравнивание */
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; } /* Исправлено */
+.align-end { align-items: flex-end; } /* Исправлено */
+.align-baseline { align-items: baseline; }
+
+/* Распределение */
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-center { justify-content: center; }
+.justify-evenly { justify-content: space-evenly; }
 h1 , .h1-text { 
   font-size: clamp(1rem,calc(1vw + .5rem),2rem);
 }
@@ -242,29 +244,29 @@ h3 , .h3-text {
 }
 
 .secondary-text {
-  color: #666;
+  color: var(--block);
   font-weight: 300;
 }
 
 .tw-secondary-text{
-  color: var(--secondary-text);
+  color: var(--tw-secondary-text);
   font-weight: 500;
 }
 
-h4 , li ,.h4-text{
-  font-size: clamp(.7rem,calc(.3vw + .6rem),1.3rem);
+.text-small {
+  font-size: clamp(.7rem, calc(.3vw + .6rem), 1.3rem);
   color: var(--secondary-text);
   font-weight: 700;
 }
 
 p {
   font-size: clamp(.4rem,calc(.6vw + .4rem),1.1rem);
-  color: black;
+  color: var(--foreground);
   font-weight:550;
 }
 
-.ackent-text{
-  color: #FF7F00;
+.accent-text{
+  color: var(--orange);
 }
 
 ul{
@@ -361,4 +363,8 @@ ul{
 
 .divider::after {
   right: 0;
+}
+
+.right{
+  right: 0%;
 }

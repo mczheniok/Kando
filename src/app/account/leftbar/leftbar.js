@@ -47,14 +47,14 @@ export function LeftBar({visible,ref,userData,set}) {
                     <Suspense fallback={<Loading time={0} />}>
                         <UserAvatar padding={"0px"} src={userData?.image}  width={30} height={30}></UserAvatar>
                         <div className="flex flex-col align-start" style={{gap: '.1rem',width: "fit-content",maxWidth: "56% "}}>
-                            <h4>{userData?.name}</h4>
+                            <h4 className="small-text">{userData?.name}</h4>
                             <h5>{userData?.email?.slice(0,10) || "email"}</h5>
                         </div>                        
                         <button onClick={() => SetMore(!more)} style={{border:"none",background: "none",cursor: "pointer",width: 'fit-content'}}>
                             <MoreIcon width={25} height={25}></MoreIcon>
                         </button>
                         <ul className={`${styles.more} ${more?styles.moreVisible:""} flex flex-col`}>
-                            <li className={styles.buttonDropList}><h4>Hellow</h4></li>
+                            <li className={styles.buttonDropList}><h4 className="small-text">Hellow</h4></li>
                             <li className={styles.buttonDropList} onClick={() => {
                                 toServer("/account/exit",{
                                     method: "DELETE",

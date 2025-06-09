@@ -120,3 +120,47 @@ export const subCategoryObject = {
 }
 
 
+
+
+export const searchParams = [
+    {
+        text: "По площі",
+        name: "place",
+        placeholder: [30,40,50,60,70,80,90,100],
+    },
+    {
+        text: "Рік будівництва",
+        name: "yearconstruction",
+        placeholder: ["1980","1990","2000","2010","2020+"]
+    },
+    {
+        text: "Тип будинку",
+        name: "typeofhouse",
+        placeholder: ["Чешка","Гостинка","Совмін","Гуртожиток"]
+    },
+    {
+        text: "Район",
+        name: "region",
+        placeholder: ["Київскій район","Пересипський район","Приморський район","Хаджибейский район"]
+    },
+    {
+        text: "Працюю з рієлторами",
+        name: "workwithagents",
+        placeholder: ["Всі оголошення","Працюю з рієлторами"]
+    },
+    {
+        text: "Стан",
+        name: "state",
+        placeholder: ["Після ремонту","Євро Ремонт","Під ремонт"]
+    },
+    {
+        text: "Ціна",
+        name: "price",
+        placeholder: ["2000","3000","4000","5000","6000","7000","8000+"]    
+    },
+    {
+        text: "Поверх",
+        name: "floor",
+        placeholder: "17"
+    },
+]

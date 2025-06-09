@@ -191,14 +191,14 @@ const Page2 = () => {
         <form style={{height: "fit-content"}} className="flex flex-col">
             <Image width={400} className={styles.ShopBanner} style={{display: !file.banner?"none":""}} height={400} src={file.banner} alt="Banner Image"></Image>  
             <div id="banner" className={`${styles.ShopBanner} flex flex-col align-center justify-center`} style={{height: "400px",display: file.banner?"none":""}} onClick={click}>
-                <h3 className="ackent-text">Your Banner</h3>
+                <h3 className="accent-text">Your Banner</h3>
             </div>
             <input type="file"  name="banner" onChange={handelFile} style={{display: "none"}} id="bannerInput"></input>
             <RowBlock>
                 <div>
                     <Image src={file.logo} className="circle" style={{border: "dotted var(--orange) 2px",display: !file.logo?"none": ""}} alt="Shop Logo" width={100} height={100}></Image>    
                     <div className="circle flex flex-col align-center justify-center" style={{border: "dotted var(--orange) 2px",width: 100,height: 100,display: file.logo?"none":""}} onClick={click} id="logo">
-                        <h3 className="ackent-text">Logo</h3>
+                        <h3 className="accent-text">Logo</h3>
                     </div>
                     <input style={{display:"none"}} type="file" name="logo" onChange={handelFile} id="logoInput"></input>
                 </div>

@@ -25,7 +25,7 @@ const pacifico =  LocalFont({
     return (
         <section className={`${styles.grid2}`} id="description">
             <div className={`${styles.BlockIn} flex flex-col`} >
-                <h1 className="ackent-text">Опис</h1>
+                <h1 className="accent-text">Опис</h1>
                 <h3>
                     <FormatedText text={text}></FormatedText>
                 </h3>

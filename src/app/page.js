@@ -10,9 +10,12 @@ import { LazyCategory } from "@/components/lazy";
 export default async function Home() {
   const res = await fetch("http://localhost:4000/items/",{
     next: {revalidate: 10}
-  });
+  })
 
-  
+  if(!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
   const data = await res.json()
 
   return (

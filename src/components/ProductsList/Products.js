@@ -30,7 +30,7 @@ export default function ProductsList({title,array}) {
                 )}    
                 <div className="flex" onClick={e => handleClick(e)}>
                     <h3>дивитись ще</h3>
-                    <h3 className="ackent-text">⇒</h3>
+                    <h3 className="accent-text">⇒</h3>
                 </div>
             </div>
             <div className="flex flex-row" ref={container} style={{overflowX:"auto",height: "430px"}}>

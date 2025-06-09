@@ -29,7 +29,7 @@ function Header() {
                     }}></Button>
                     <RefWithIcon link={"/account"} Icon={UserIcon} title={language.i}></RefWithIcon>    
                     <ButtonWithList Icon={LanguageIcon} title={language.language}>
-                        <ul className="flex flex-col align-center" style={{position: "absolute",width: "100%",top:'110%',borderRadius: "0rem 0rem 1rem 1rem",left: "0",padding: ".5rem",gap: ".5rem",zIndex: "100",background: "var(--background)",border: "solid var(--border) 1px",minHeight:"fit-content"}}>
+                        <ul className="flex flex-col align-center" style={{position: "absolute",width: "100%",top:'110%',borderRadius: "0rem 0rem 1rem 1rem",left: "0",gap: ".5rem",zIndex: "100",background: "var(--bg-glass)",border: "solid var(--border) 1px",minHeight:"fit-content"}}>
                             <li><h3 data-lang="en" onClick={handleChangeLang}>Eng</h3></li>
                             <li><h3 data-lang="ua" onClick={handleChangeLang}>Укр</h3></li>
                         </ul>

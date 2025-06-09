@@ -5,9 +5,9 @@ import styles from "./buttons.module.css"
 import Image from "next/image"
 import Link from "next/link"
 
-export function ButtonWithIcon({clName=null,title,Icon,click,children=null,style="",submit=false}) {
+export function ButtonWithIcon({clName=null,relative=true,title,Icon,click,children=null,style="",submit=false}) {
     return (
-        <button type={submit?"submit":"button"} className={`${styles.ButtonWithIcon} flex flex-row align-center ${clName || ""} ${style?styles[style]:''}`} onClick={e =>  click && click(e)}>
+        <button type={submit?"submit":"button"} style={{position: relative?"relative":''}} className={`${styles.ButtonWithIcon} flex flex-row align-center ${clName || ""} ${style?styles[style]:''}`} onClick={e =>  click && click(e)}>
             {Icon && ( 
                 <Icon width={33} height={33} />
             )}
@@ -57,13 +57,13 @@ export function RefWithImg({title,Icon,link,style,alt,clName}) {
 }
 
 
-export function ButtonWithList({title,Icon,children,style}) {
+export function ButtonWithList({title,Icon,relative=true,children,style,clName,click}) {
     const [status,setStatus] = useState(false)
 
     const fun = () => setStatus(!status)
 
     return (
-        <ButtonWithIcon title={title} style={style} Icon={Icon} click={fun}>
+        <ButtonWithIcon submit={false} title={title} relative={relative} clName={clName} style={style} Icon={Icon} click={click || fun}>
             {status && children}
         </ButtonWithIcon>
     )
