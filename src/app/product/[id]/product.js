@@ -16,46 +16,6 @@
         {title: "Опис",id: "#description"}
   ]
 
-    const Ratings = [
-      {
-        "color": "green",
-        "stars": 5,
-        "date": "2025-02-20",
-        "text": "Чудовий товар! Все працює бездоганно, дуже задоволений покупкою."
-      },
-      {
-        "color": "red",
-        "stars": 2,
-        "date": "2025-02-18",
-        "text": "Не відповідає опису. Прибув пошкоджений, але обслуговування було швидким."
-      },
-      {
-        "color": "blue",
-        "stars": 4,
-        "date": "2025-02-15",
-        "text": "Добрий товар, але злегка затримали доставку. Все інше сподобалося."
-      },
-      {
-        "color": "yellow",
-        "stars": 3,
-        "date": "2025-02-10",
-        "text": "Середній товар, очікував кращої якості за таку ціну."
-      },
-      {
-        "color": "green",
-        "stars": 5,
-        "date": "2025-02-05",
-        "text": "Прекрасне обслуговування, доставка швидка, все відповідає опису. Рекомендую!"
-      }
-  ]
-
-    const TableList = [
-      {key: "Екран",value: "144hz"},
-      {key: "память",value: "128gb"},
-      {key: "Пошук",value: "none ulllka sodif  дфілвоа ліва длфіва w"},
-      {key: "None alskdf loiweur",value:"lorelka sdlk laoiweur asldfkj asldkfj askdfj ll;askjd flkasdflk ja;sldkjf laskdfal;skdjflaskd fjlsakдфліо вадл фівадфлоы вдалфыва"}
-  ]
-
   export function InfoPagination({obj}) {
     const { image_array, name , price , last_price , category , location  , subcategory, creator_id , id, views } = obj
     

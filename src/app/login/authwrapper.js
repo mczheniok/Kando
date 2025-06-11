@@ -20,7 +20,7 @@ export default function AuthWrapper() {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        fetch(`http://localhost:4000/auth/${formStyle?"signup":"login"}`,{
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/auth/${formStyle?"signup":"login"}`,{
             method: "POST",
             credentials: "include",
             headers: {
@@ -38,7 +38,7 @@ export default function AuthWrapper() {
 
     
     const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-    const REDIRECT_URI = "http://localhost:4000/auth/google/callback"; 
+    const REDIRECT_URI = `${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/auth/google/callback`; 
     const loginUrl =`https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=openid%20email%20profile`;
 
 

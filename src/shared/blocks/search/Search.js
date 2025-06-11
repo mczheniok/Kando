@@ -112,7 +112,7 @@ export default function Search({placeholder,set=() => {}}) {
               }
             }
 
-            const baseUrl = `http://localhost:3000/s/${val}?`;
+            const baseUrl = `${window.location.href}/s/${val}?`;
             const finalUrl = baseUrl + params.toString();
             window.location.href = finalUrl
         }}>

@@ -8,8 +8,10 @@ import { ContainerLanguage , MainContainer } from "@/components/Containers/conta
 import { LazyCategory } from "@/components/lazy";
 
 export default async function Home() {
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL_URL);
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/`,{
-    next: {revalidate: 10}
+    next: {revalidate: 600}
   })
 
   if(!res.ok) {
