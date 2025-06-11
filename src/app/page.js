@@ -8,7 +8,7 @@ import { ContainerLanguage , MainContainer } from "@/components/Containers/conta
 import { LazyCategory } from "@/components/lazy";
 
 export default async function Home() {
-  const res = await fetch("http://localhost:4000/items/",{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/`,{
     next: {revalidate: 10}
   })
 

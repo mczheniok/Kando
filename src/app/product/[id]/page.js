@@ -9,7 +9,7 @@ import { InfoPagination } from "./product";
 
 
 async function getData(id) {
-  const res = await fetch(`http://localhost:4000/items/product/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/product/${id}`);
   if(res.ok || !res.err) {
     const info = await res.json();
 
