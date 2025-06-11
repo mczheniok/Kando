@@ -49,10 +49,6 @@
 
 
 @media (max-width: 564px) {
-    .Grid{
-        grid-template-columns: 1fr;
-        grid-template-rows: 40% 1fr;
-    }
 
     .Form{
         width: 100%;
@@ -103,3 +99,8 @@
 
 
 
+@media (max-width: 747px) {
+    .Form{
+        width: 100%;
+    }
+}

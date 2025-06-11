@@ -50,6 +50,8 @@ coverage
 # next.js cache
 .next/cache
 
-# Optional npm/yarn lock files (if using one or the other)
+public/uploads
+
+# ptional npm/yarn lock files (if using one or the other)
 # yarn.lock
 # package-lock.json

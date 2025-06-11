@@ -11,6 +11,9 @@ export function SelectList({arr,formDataRef,name,type=false,state,setState=() =>
     const handleClick = (ind) => {
         const value = arr[ind];
         setSelected(value);
+
+        console.log(formDataRef);
+
         if(type) {
             formDataRef[name] = ind;
             setState(ind);   
@@ -27,7 +30,7 @@ export function SelectList({arr,formDataRef,name,type=false,state,setState=() =>
 
     return (
         <div className={`${styles.Input} ${styles.InputList}`} onClick={() => setVisible(!visible)}>
-            <span className="flex flex-row align-center justify-between" style={{color: "var(--secondadry)",width: "100%"}}>
+            <span className="flex flex-row align-center justify-between" style={{color: "var(--secondary-text)",width: "100%"}}>
                 {selected || state}
                 <MoreArrowIcon width={33} height={33} alt="More arrrow icon" style={{transition: "transform 0.2s ease",transform: `rotate(${visible?"90":"0"}deg)`}}></MoreArrowIcon>
             </span>

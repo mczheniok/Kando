@@ -5,20 +5,26 @@ import Footer from "@/shared/blocks/Footer";
 import GridProductsList from "@/components/ProductsList/GridProductsList"
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
 import { useState , useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams , useSearchParams } from "next/navigation";
 import { toServer } from "@/features/functions/functions";
 
 
 export default function Home() {
     const params = useParams();
     const [data,setData] = useState([]);
+    const searchParams = useSearchParams();
+
 
     useEffect(() => {
-        toServer(`/items/page/${params.search}`)
-        .then(res => {
-            setData(res.data.items)
-        });
-    },[])
+      if(!params.search) return ;
+
+      const query = searchParams.toString();
+    
+      toServer(`/items/page/${params.search}?${query}`)
+      .then(res => {
+          setData(res.data.items)
+      });
+    },[searchParams,params.search]);
 
     return (
       <ContainerLanguage>

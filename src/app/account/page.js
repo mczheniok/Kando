@@ -16,6 +16,8 @@ import {
     useEffect, 
     useCallback,
 } from "react";
+
+import { useInputHandler } from "../../shared/hooks/useInputHandler"
 import usePageRender from "@/shared/hooks/usePageRender";
 import Loading from "@/components/loader";
 import { LazyMap } from "@/components/lazy";
@@ -282,6 +284,7 @@ const Page7 = () => {
     const [category,setCategory] = useState("одежа");
     const [location,setLocation] = useState([44.4727805,44.4755123]);
     const categories = useRef([]);
+    const [product_info,handleProductInfo] = useInputHandler({})
     const [productImages,setProductImages] = useState([]);
     const fileRef = useRef(null);
 
@@ -314,11 +317,6 @@ const Page7 = () => {
     const handleClickImage = e => {
         setProductImages(prev => prev.filter(f => f.url !== e.target.src));
         console.log(productImages)
-    }
-
-    const handleChange = e => {
-        const name = e.target.name;
-        anoncement.current.info[name] = e.target.value
     }
 
     const handleAiClick = async e => {
@@ -356,6 +354,9 @@ const Page7 = () => {
             const data = new FormData();
             const {description,name,price,subcategory,info} = anoncement.current;
     
+            delete product_info.current;
+
+
             productImages.forEach((el,_) => {
                 data.append("files",el.file);
             });
@@ -368,6 +369,7 @@ const Page7 = () => {
             data.set("info",JSON.stringify(info));
             data.set("categoryes",JSON.stringify(categories.current));
             data.set("type",category);
+            data.set("product_info",JSON.stringify(product_info));
 
         
             await toServer("/account/products/create",{
@@ -458,8 +460,8 @@ const Page7 = () => {
                         const { placeholder , text , name } = el;
                         return (
                             <InputContainer text={text}  key={`input-container-${ind}`}>
-                                {typeof placeholder === "string"?<Input handler={handleChange} placeholder={placeholder} name={name}/>
-                                :<SelectList formDataRef={anoncement.current} name={name} arr={placeholder}/>}
+                                {typeof placeholder === "string"?<Input handler={handleProductInfo} placeholder={placeholder} name={name}/>
+                                :<SelectList formDataRef={product_info} name={name} arr={placeholder}/>}
                             </InputContainer>
                         );
                     })}

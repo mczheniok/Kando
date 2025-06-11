@@ -54,7 +54,22 @@ export const categoryList = {
             text: "Відео огляд",
             name: "reviewvideo",
             placeholder: "https://www.youtube.com/"
-        }
+        },
+        {
+            text: "Працюю з рієлторами",
+            name: "workwithagents",
+            placeholder: ["Ні","Працюю з рієлторами"]
+        },
+        {
+            text: "Поверх",
+            name: "floor",
+            placeholder: "17"
+        },
+        {
+            text: "Район",
+            name: "region",
+            placeholder: ["Київскій район","Пересипський район","Приморський район","Хаджибейский район"]
+        },
     ],
     "одежа": [
         {
@@ -66,7 +81,8 @@ export const categoryList = {
             text: "Відео огляд",
             name: "reviewvideo",
             placeholder: "https://www.youtube.com/"
-        }
+        },
+        
     ]
 }
 
@@ -125,7 +141,7 @@ export const subCategoryObject = {
 export const searchParams = [
     {
         text: "По площі",
-        name: "place",
+        name: "totalplace",
         placeholder: [30,40,50,60,70,80,90,100],
     },
     {

@@ -78,7 +78,8 @@ export default function Search({placeholder,set=() => {}}) {
             </Link>
         );
     }
-    
+
+
 
     const handleSearch = debounce((e) => {
         const trg = e.target.value
@@ -95,8 +96,25 @@ export default function Search({placeholder,set=() => {}}) {
     return (
         <form className={`${styles.form} flex flex-row flex-wrap align-center`} onSubmit={(e) => {
             e.preventDefault();
+
             const val = e.target.search.value;
-            window.location.href = `http://localhost:3000/s/${val}`
+            
+            if(val.length < 3) {
+                return ;
+            }
+
+            const params = new URLSearchParams();
+
+            // Додаємо лише значення, які не є undefined або null
+            for (const [key, value] of Object.entries(paramsSearchRef)) {
+              if (value !== undefined && value !== null) {
+                params.append(key, value);
+              }
+            }
+
+            const baseUrl = `http://localhost:3000/s/${val}?`;
+            const finalUrl = baseUrl + params.toString();
+            window.location.href = finalUrl
         }}>
             <ButtonWithList title={language.category} Icon={CategoryIcon}>
                 <div className={`${styles.dropList} flex flex-row align-center justify-around flex-wrap`}>
@@ -113,7 +131,7 @@ export default function Search({placeholder,set=() => {}}) {
                 </div>
             </ButtonWithList>
             <div style={{flexGrow: "1",position:"relative"}}>
-                <input type="search" name="search" onChange={handleSearch} className={styles.search} placeholder={placeholder}></input>       
+                <input type="search" name="search" onBlur={() => setVisible(false)} onChange={handleSearch} className={styles.search} placeholder={placeholder}></input>       
                 <ul className={`${styles.SearchDropList} flex flex-col`} style={{scale: visible.status?"1":"0"}}> 
                     {visible.data?.map((el,ind) => {
                         return (
@@ -124,17 +142,15 @@ export default function Search({placeholder,set=() => {}}) {
                     })}
                 </ul>
             </div> 
-            <ButtonWithIcon Icon={SearchIcon} title={""}></ButtonWithIcon>
+            <ButtonWithIcon submit={true} Icon={SearchIcon} title={""}></ButtonWithIcon>
             <ButtonWithList relative={false} title={language.sort} Icon={FilterIcon} click={() => setVisibleList(prev => !prev)}>
             </ButtonWithList>
-            <div className={`${styles.dropList} ${visibleList?"flex":"none"} flex-row align-center flex-wrap`} style={{width: "100%",top: "105%"}}>
+            <div className={`${styles.dropList} ${visibleList?"flex":"none"} flex-row align-center flex-wrap`} style={{width: "100%",gap: "2rem",top: "105%"}}>
                     <InputContainer type={0} text={"Категорія"}>
-                        <SelectList setState={setSelectedCategory} arr={Object.values(categoryCONST)} name={"category"}></SelectList>
+                        <SelectList setState={setSelectedCategory} formDataRef={paramsSearchRef} arr={Object.values(categoryCONST)} name={"category"}></SelectList>
                     </InputContainer>
                     <InputContainer type={0} text="під категорія">
-                        <SelectList state={selectedCategory} arr={Object.values(subCategoryObject)}>
-
-                        </SelectList>
+                        <SelectList name={"subcategory"} formDataRef={paramsSearchRef} state={selectedCategory} arr={Object.values(subCategoryObject)}></SelectList>
                     </InputContainer>
                     {searchParams.map((el,ind) => {
                         return (
