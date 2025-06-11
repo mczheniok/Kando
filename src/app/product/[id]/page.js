@@ -8,7 +8,7 @@ import { InfoSectionBottom } from "@/features/products/Sections";
 import { InfoPagination } from "./product";
 
 
-export async function getData(id) {
+async function getData(id) {
   const res = await fetch(`http://localhost:4000/items/product/${id}`);
   if(res.ok || !res.err) {
     const info = await res.json();
