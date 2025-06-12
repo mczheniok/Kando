@@ -20,6 +20,7 @@ export default function AuthWrapper() {
     const handleSubmit = (e) => {
         e.preventDefault();
         
+
         fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/auth/${formStyle?"signup":"login"}`,{
             method: "POST",
             credentials: "include",
@@ -29,7 +30,16 @@ export default function AuthWrapper() {
             body: JSON.stringify(formBody.current)
         })
         .then(res => {
-            if(res.ok) window.location.pathname = "/account";
+
+            if (res.ok) {
+            
+            // Небольшая задержка для гарантии установки куки
+            setTimeout(() => {
+                window.location.pathname = "/account";
+            }, 100);
+        } else {
+            console.log('Login failed');
+        }
         })
         .catch(err => {
             console.log(err);
