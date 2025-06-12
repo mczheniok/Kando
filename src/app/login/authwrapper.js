@@ -32,7 +32,7 @@ export default function AuthWrapper() {
         .then(res => res.json())
         .then(data => {
             if(data.data.token) {
-                localStorage.setItem("token",JSON.stringify(data.data.token));
+                localStorage.setItem("token",data.data.token);
                 window.location.pathname = "/account";
             } 
         })
