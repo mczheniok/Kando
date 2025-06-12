@@ -10,7 +10,7 @@ export function HistoryPage() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({history}),
-        credentials: "include"
+        headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
     },false);
 
     return (

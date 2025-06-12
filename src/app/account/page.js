@@ -83,7 +83,7 @@ const SessionBlock = ({session}) => {
     const handleRemove = async (id) => {
         toServer(`/sessions/remove/${id}`,{
             method: "DELETE",
-            credentials: "include"
+            headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` } 
         })
         .then(() => {
             document.querySelector(`[data-session-id="${id}"]`).remove();
@@ -141,7 +141,7 @@ const AccountMain = () => {
     const userData = useContext(UserContext);
 
     const [load,data] = useToServer("/sessions/all",{
-        credentials: "include"
+        headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
     },true);
 
     const MainPage = () => {
@@ -174,7 +174,7 @@ const AccountMain = () => {
 
     const MyProductsPage = () => {
         const [load,products] = useToServer("/account/products",{
-            credentials: "include"
+            headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
         },false);
         
         return (
@@ -230,7 +230,7 @@ const AccountMain = () => {
 
 const ArchivePage = () => {      
     const [load,data] = useToServer("/archive/all",{
-        credentials: "include"
+        headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
     },false);
 
     return (
@@ -322,7 +322,7 @@ const Page7 = () => {
     const handleAiClick = async e => {
         toServer("/ai/ai",{
             method: "POST",
-            credentials: "include",
+            headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` },
             headers: {
                 "Content-Type": "application/json" 
             },
@@ -375,7 +375,7 @@ const Page7 = () => {
             await toServer("/account/products/create",{
                 method: "POST",
                 body: data,
-                credentials: "include"
+                headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
             })
     }
 
@@ -479,7 +479,7 @@ const Page7 = () => {
 
 export default function Account() {
     const [_,data] = useToServer("/account/me",{
-        credentials: "include"
+        headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
     },false,false);    
 
     return (    

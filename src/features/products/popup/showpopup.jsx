@@ -14,7 +14,7 @@ export function ShowPopup({ popupdata }) {
       console.log(popUpInfo);
       toServer(`/chat/reserve/`,{
         method: "POST",
-        credentials: "include",
+        headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` },
         headers: {
           "Content-Type": "application/json"
         },

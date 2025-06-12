@@ -82,7 +82,7 @@ export function ProductImageSection({list}) {
   const handleChatClick = async () => {
     const createChat = await toServer(`/chat/chat`,{
       method: "POST",
-      credentials: "include",
+      headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` },
       headers: {
         "Content-Type":"application/json"
       },

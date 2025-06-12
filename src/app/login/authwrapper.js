@@ -23,23 +23,18 @@ export default function AuthWrapper() {
 
         fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/auth/${formStyle?"signup":"login"}`,{
             method: "POST",
-            credentials: "include",
+            headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` },
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(formBody.current)
         })
-        .then(res => {
-            if (res.ok) {
-                
-            // Небольшая задержка для гарантии установки куки
-            setTimeout(() => {
-                console.log("OK");
-            }, 100);
-
-            } else {
-                console.log('Login failed');
-            }
+        .then(res => res.json())
+        .then(data => {
+            if(data.token) {
+                localStorage.setItem("token",JSON.stringify(data.token));
+                window.location.pathname = "/account";
+            } 
         })
         .catch(err => {
             console.log(err);

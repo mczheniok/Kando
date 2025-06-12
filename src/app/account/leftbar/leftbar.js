@@ -58,7 +58,7 @@ export function LeftBar({visible,ref,userData,set}) {
                             <li className={styles.buttonDropList} onClick={() => {
                                 toServer("/account/exit",{
                                     method: "DELETE",
-                                    credentials: "include"
+                                    headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
                                 },false)
                                 .then(res => res.status === "finally"?window.location.pathname = "/login":undefined)
                                 .catch(err => console.log(err)); 
