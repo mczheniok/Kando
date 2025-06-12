@@ -121,9 +121,7 @@ const SessionBlock = ({session}) => {
                                         🌍 {el.adress} / {parseLastLogin(el.lastLogin)}
                                         </h3>
                                     </div>
-                                    <h3 className={styles.buttonRed} onClick={() => handleRemove(el.sessionId)} style={{textAlign: "center",borderRadius: ".5rem"}}>
-                                        Завершити
-                                    </h3>
+                                    <Button title={"Завершити"} click={handleRemove} style={"red"} clName={"flex-grow"}></Button>
                                 </div>
                             </div>
                         </div>
@@ -478,6 +476,10 @@ const Page7 = () => {
 
 
 export default function Account() {
+    if(typeof window !== "undefined") {
+        if(!localStorage.getItem('token')) return window.location.pathname = "/login";
+    }
+    
     const [_,data] = useToServer("/account/me",{
         headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
     },false,false);    

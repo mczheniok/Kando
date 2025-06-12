@@ -24,7 +24,17 @@
     animation: ease 10s gradientBG infinite;
 }
 
-.dark {
+
+.red{
+    color: red;
+}
+
+.red:hover{
+    border: solid red 2px;
+    cursor: pointer;
+}
+
+.dark{
     background: var(--secondary-text);
     color: var(--background);
     border: solid var(--secondary-text) 2px;
