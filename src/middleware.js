@@ -1,21 +1,21 @@
-import { NextResponse } from "next/server"; 
+// import { NextResponse } from "next/server"; 
 
-export async function middleware(req) {
-    try{
-        const token = req.cookies.get("auth-token")?.value;
+// export async function middleware(req) {
+//     try{
+//         const token = req.cookies.get("auth-token")?.value;
         
-        if(!token) {
-            return NextResponse.redirect(new URL("/login",req.url));
-        }
+//         if(!token) {
+//             return NextResponse.redirect(new URL("/login",req.url));
+//         }
 
-        console.log(token);
+//         console.log(token);
 
-        return NextResponse.next();
-    } catch(err) {
-        console.error(err)
-    }
-}
+//         return NextResponse.next();
+//     } catch(err) {
+//         console.error(err)
+//     }
+// }
 
-export const config = {
-    matcher: ["/account"]
-}
+// export const config = {
+//     matcher: ["/account"]
+// }
