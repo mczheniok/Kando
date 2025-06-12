@@ -10,7 +10,7 @@ export function HistoryPage() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({history}),
-        headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
+        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
     },false);
 
     return (

@@ -23,7 +23,7 @@ export default function AuthWrapper() {
 
         fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/auth/${formStyle?"signup":"login"}`,{
             method: "POST",
-            headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` },
+            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
             headers: {
                 "Content-Type": "application/json"
             },

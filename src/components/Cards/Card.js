@@ -87,7 +87,7 @@ export function CardRow({obj,t=false}) {
     const handleClickDeleteButton = async e => {
         toServer(`/${!t?"archive":"account"}/delete/${id}`,{
             method: "DELETE",
-            headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` }
+            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
         })
         .then(() => document.querySelector(`[data-product-id="${id}"]`).remove());
     }
@@ -95,7 +95,7 @@ export function CardRow({obj,t=false}) {
     const handleArchiveButton = () => {
         toServer(`/${!t?"archive":"account"}/add/${id}`,{
             method: "PUT",
-            headers: {   "Authorization": `Bearer ${localStorage.getItem('token')}` },
+            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
             headers: {
                 "Contant-Type": "application/json"
             },
