@@ -6,8 +6,7 @@
     "dev": "next dev -H 127.0.0.1",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "knip": "knip"
+    "lint": "next lint"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",

@@ -30,16 +30,16 @@ export default function AuthWrapper() {
             body: JSON.stringify(formBody.current)
         })
         .then(res => {
-
             if (res.ok) {
-            
+                
             // Небольшая задержка для гарантии установки куки
             setTimeout(() => {
-                window.location.pathname = "/account";
+                console.log("OK");
             }, 100);
-        } else {
-            console.log('Login failed');
-        }
+
+            } else {
+                console.log('Login failed');
+            }
         })
         .catch(err => {
             console.log(err);
