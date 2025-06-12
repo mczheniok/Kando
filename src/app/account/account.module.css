@@ -2,7 +2,7 @@
     padding: 0rem;
     display: grid;
     grid-template-columns: 230px 1fr;
-    grid-template-rows: 800px 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas: 
     "aside main"
     "aside main"
@@ -40,7 +40,7 @@
 .aside{
     height: 100%;
     grid-area: aside;
-    background: var(--bg-glass);
+    background: var(--bg-card);
     border: solid var(--border) 1px;
     border-bottom: none;
     transition: transform 0.3s linear, visibility 0.3s linear;
