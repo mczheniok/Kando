@@ -82,7 +82,7 @@ export default function AuthWrapper() {
     return (
         <div className="flex flex-row align-center justify-center" style={{width: '100%',height: "100%",backgroundImage: "url('/assets/login.jpg')",background: "cover",backgroundRepeat: 'no-repeat'}}>
             <form onSubmit={handleSubmit} className={`${styles.Form} flex flex-row`}>
-                <div className="flex flex-col align-center justify-center" style={{background: "var(--orange-transparent)"}}>
+                <div className={`${styles.loginInfo}  flex flex-col align-center justify-center`} style={{background: "var(--orange-transparent)"}}>
                     <Logo type={true} size={"h1-text accent-text"}></Logo>
                     <h3 style={{fontSize: "1.3rem"}} className={styles.HeaderSubText}>Відкрийте для себе чесні відгуки та робіть покупки з впевненістю</h3>
                 

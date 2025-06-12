@@ -13,6 +13,7 @@
     text-align: center;
     line-height: 44px;
     background: var(--overlay);
+    flex-shrink: 0;
 }
 
 .Form{
@@ -26,14 +27,15 @@
     height: 100%;
 }
 
-.Form div:nth-child(1) {
-    border-radius: 2rem 0rem 0rem 2rem;
-}
 
 .Form div:nth-child(2) {
     border-radius: 0rem 2rem 2rem 0rem;
 }
 
+
+.loginInfo{
+    border-radius: 2rem 0rem 0rem 2rem;
+}
 
 @keyframes gradientBG {
     0% {
@@ -47,60 +49,92 @@
     }
 }
 
-
-@media (max-width: 564px) {
-
+/* Адаптивность для очень маленьких экранов (320px) */
+@media (max-width: 480px) {
     .Form{
+        width: 95%;
+        height: auto;
+        max-height: 95vh;
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .Form div{
         width: 100%;
-        height: 100%;
+        height: auto;
+        border-radius: 1rem;
+        overflow: visible;
+    }
+
+    .loginInfo{
+        border-radius: 1rem;
+        padding: 1rem;
+        display: none;
+    }
+
+    .Form div:nth-child(2) {
+        border-radius: 1rem;
+        padding: 1.5rem 0rem;
+        overflow: visible;
+        min-height: auto;
+    }
+
+    .HeaderSubText {
+        font-size: 0.85rem;
+        width: 90%;
+    }
+
+    .Circle {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Адаптивность для средних мобильных устройств */
+@media (max-width: 564px) and (min-width: 481px) {
+    .Form{
+        width: 90%;
+        height: 90%;
         flex-direction: column;
     }
 
     .Form div{
         width: 100%;
-        border-radius: 0rem;
-        height: fit-content;
+        height: auto;
+        border-radius: 1rem;
     }
 
-    .Image{
-        width: 100%;
-        height: 100%;
-    }
-    
-    .LoginForm{
-        width: 100%;
-        height: 100%;
-        box-shadow: none;
+    .Form div:nth-child(1) {
+        border-radius: 1rem;
+        padding: 1.5rem 1rem;
+        height: auto;
     }
 
-    .LoginForm div{
-        width: 80%;
-        height: 50%;
-        padding: 1rem;
-        align-items: center;
-        
+    .Form div:nth-child(2) {
+        border-radius: 1rem;
+        padding: 2rem 1.5rem;
+        height: auto;
     }
-
-    .LoginContainer{
-        gap: .5rem;
-        padding: 0rem;
-    }
-
-    .Input{
-        width: 80%;
-    }
-
-    .LoginWithProviders{
-        width: 100%;
-        padding: .5rem;
-    }
-
 }
 
-
-
-@media (max-width: 747px) {
+/* Адаптивность для планшетов */
+@media (max-width: 747px) and (min-width: 565px) {
     .Form{
-        width: 100%;
+        width: 80%;
+        height: 85%;    
+    }
+
+    .Form div{
+        border-radius: 1rem;
+    }
+
+    .Form div:nth-child(1) {
+        border-radius: 1rem 0 0 1rem;
+    }
+
+    .Form div:nth-child(2) {
+        border-radius: 0 1rem 1rem 0;
     }
 }
