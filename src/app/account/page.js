@@ -121,7 +121,7 @@ const SessionBlock = ({session}) => {
                                         🌍 {el.adress} / {parseLastLogin(el.lastLogin)}
                                         </h3>
                                     </div>
-                                    <Button title={"Завершити"} click={handleRemove} style={"red"} clName={"flex-grow"}></Button>
+                                    <Button title={"Завершити"} click={handleRemove} style={"red"} clName={"flex-grow align-center"}></Button>
                                 </div>
                             </div>
                         </div>

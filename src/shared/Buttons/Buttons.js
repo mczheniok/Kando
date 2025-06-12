@@ -89,7 +89,7 @@ export function ButtonCircle({Icon,color="orange",title="none",clName,click=() =
 
 export function Button({title,style=false,submit=false,clName,click = () => {},children}) {
     return (
-        <button style={{width: "100%"}} type={submit?"submit":"button"} className={`${styles.ButtonWithIcon} flex flex-row align-center ${clName || ""} 
+        <button style={{width: "100%"}} type={submit?"submit":"button"} className={`${styles.button} flex flex-row align-center ${clName || ""} 
             ${styles[style]}`} onClick={e =>  click && click(e)}>
             {title && (
                 <span className={`${style?styles[style+"Text"]:''} h4-text`} style={{width: "50%",textAlign: "center"}}>{title}</span>
