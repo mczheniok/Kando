@@ -60,7 +60,10 @@ export function LeftBar({visible,ref,userData,set}) {
                                     method: "DELETE",
                                     headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
                                 },false)
-                                .then(res => res.status === "finally"?window.location.pathname = "/login":undefined)
+                                .then(res => {
+                                    res.status === "finally"?window.location.pathname = "/login":undefined
+                                    localStorage.removeItem("token");
+                                })
                                 .catch(err => console.log(err)); 
                             }}><h4 style={{color: "red"}}>Вийти</h4></li>
                         </ul>
