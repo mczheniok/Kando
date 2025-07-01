@@ -23,7 +23,7 @@ import Loading from "@/components/loader";
 import { LazyMap } from "@/components/lazy";
 import { ContainerLanguage } from "@/components/Containers/container";
 import { CreateNewAnnouncement ,SectionContainer} from "./sections/section";
-import { Input, InputContainer, SelectList } from "@/shared/input/input";
+import { Input, InputContainer, SelectList , InputArea } from "@/shared/input/input";
 import { NotificationContainer } from "@/components/Notifications/notification";
 import { toServer , parseLastLogin } from "@/features/functions/functions";
 import { categoryList , SubCategory } from "@/config";
@@ -148,6 +148,9 @@ const AccountMain = () => {
                 <RowBlock>
                     <Suspense fallback={<Loading/>}> 
                         <UserHeaderInfo subscription={`план: ${userData.subscription}`} image={userData?.image} email={userData?.email} username={userData?.username} ></UserHeaderInfo>
+                        <div className="flex flex-row align-center justify-around">
+                            <span></span>
+                        </div>
                     </Suspense>
                 </RowBlock>
                 <div className={styles.cardsContainer}>
@@ -414,7 +417,7 @@ const Page7 = () => {
                     </div>
                 </div>
                 
-                <textarea ref={descriptionRef} name="description" placeholder="Ввести опис оголошення" className={styles.textarea} onChange={handleInput}></textarea>
+                <InputArea ref={descriptionRef} name={"description"} placeholder={"Ввести опис оголошення"} handler={handleInput}></InputArea>
             </>
         )
     }

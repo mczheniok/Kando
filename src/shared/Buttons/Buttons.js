@@ -5,7 +5,7 @@ import styles from "./buttons.module.css"
 import Image from "next/image"
 import Link from "next/link"
 
-export function ButtonWithIcon({clName=null,relative=true,title,Icon,click,children=null,style="",submit=false}) {
+export function ButtonWithIcon({clName=null,relative=true,title,Icon,click,children=null,style="",submit=false}) {       
     return (
         <button type={submit?"submit":"button"} style={{position: relative?"relative":''}} className={`${styles.ButtonWithIcon} flex flex-row align-center ${clName || ""} ${style?styles[style]:''}`} onClick={e =>  click && click(e)}>
             {Icon && ( 

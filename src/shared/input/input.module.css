@@ -3,10 +3,14 @@
     border-radius: .5rem;
     height: 100%;
     padding: 1rem 1rem;
-    font-size: 1.3rem;
+    font-size: var(--font-md);
     flex-grow: 1;
     background: var(--secondary);
     color: var(--secondary-text);
+}
+
+.Input::placeholder{
+    font-size: var(--font-lg);
 }
 
 .InputList{
@@ -47,3 +51,20 @@
 .DropListEntity:last-child{
     border-radius: 0rem 0rem 1rem 1rem;
 }
+
+
+.InputArea{
+    border: solid var(--border) 1px;
+    padding: 1rem;
+    border-radius: 1rem;
+    outline: none;
+    height: auto;
+    font-size: var(--font-md);
+    overflow-y: hidden;
+}
+
+.InputArea:focus{
+    outline: none;
+    border: solid var(--orange) 1px;
+}
+

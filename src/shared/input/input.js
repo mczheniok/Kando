@@ -30,7 +30,7 @@ export function SelectList({arr,formDataRef,name,type=false,state,setState=() =>
 
     return (
         <div className={`${styles.Input} ${styles.InputList}`} onClick={() => setVisible(!visible)}>
-            <span className="flex flex-row align-center justify-between" style={{color: "var(--secondary-text)",width: "100%"}}>
+            <span className="flex flex-row align-center justify-between h3-text" style={{color: "var(--secondary-text)",width: "100%"}}>
                 {selected || state}
                 <MoreArrowIcon width={33} height={33} alt="More arrrow icon" style={{transition: "transform 0.2s ease",transform: `rotate(${visible?"90":"0"}deg)`}}></MoreArrowIcon>
             </span>
@@ -64,7 +64,7 @@ export function Input({type=false,placeholder,name,handler,ref=null}) {
           name={name} 
           ref={ref}
           onInput={handler} 
-          className={styles.Input} 
+          className={`${styles.Input} h3-text`} 
           placeholder={placeholder} 
           type={type ? "text" : "text"} 
     />
@@ -93,4 +93,9 @@ export function InputDate({name,handler=() => {},ref}) {
           style={{fontSize: "none",padding: "none"}}   
           type={"date"} 
     />
+}
+
+
+export function InputArea({name,handler = () => {},ref,placeholder}) {
+    return <textarea ref={ref} name={name} placeholder={placeholder} className={styles.InputArea} onChange={handler} />
 }

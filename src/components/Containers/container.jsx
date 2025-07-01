@@ -6,9 +6,9 @@ import { createContext, useState , useEffect, useMemo} from "react"
 
 export const LanguageContenxt = createContext(Language.ua);
 
-export function MainContainer({children}) {
+export function MainContainer({children,containerClass=""}) {
     return (
-        <main style={{minHeight: '400px',padding: "0rem"}} className="container flex flex-col">
+        <main style={{minHeight: '400px',padding: "0rem"}} className={`${containerClass} container flex flex-col`}>
             {children}
         </main>
     )

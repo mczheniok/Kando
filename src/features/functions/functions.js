@@ -78,3 +78,7 @@ export function parseLastLogin(lastLogin) {
 
 
 export const toDate = date => new Date(date).toLocaleString({language: "ua",region: "UA"});
+
+export const isClient = () => typeof window === "undefined"
+
+export const isUndefined = (e,f) => e !== undefined?f():null 

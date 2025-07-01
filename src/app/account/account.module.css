@@ -220,22 +220,6 @@
     border-radius: 1rem;
 }
 
-.textarea{
-    border: solid var(--border) 1px;
-    padding: 1rem;
-    border-radius: 1rem;
-    outline: none;
-    height: auto;
-    font-size: 1.5rem;
-    overflow-y: hidden;
-}
-
-.textarea:focus{
-    outline: none;
-    border: solid var(--orange) 1px;
-}
-
-
 .ProductImagesInput{
     border: solid var(--secondary) 3px;
     padding: .5rem;
