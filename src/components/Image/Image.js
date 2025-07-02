@@ -80,11 +80,13 @@ export function ProductImageSection({list}) {
     
 
   const handleChatClick = async () => {
+    console.log(true);
+
     const createChat = await toServer(`/chat/chat`,{
       method: "POST",
-      headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
-      headers: {
-        "Content-Type":"application/json"
+      headers: {   
+        "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
+        "Content-Type":"application/json" 
       },
       body: JSON.stringify({
         product_id,
@@ -92,7 +94,7 @@ export function ProductImageSection({list}) {
       })
   })
 
-    if(createChat.data.status === "ok") {
+    if(createChat.data?.status === "ok") {
       localStorage.setItem("chat",JSON.stringify({
         new_chat: true
       }))
