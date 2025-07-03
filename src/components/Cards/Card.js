@@ -29,7 +29,7 @@ export function Card({obj,type}) {
                 <p className={styles.CardHeadImportant}>-35%</p>
             </div>
             <div className={`${styles.CardFooter} flex flex-col`}>
-                <h5 className={styles.CardCategoryText}>{obj.type || "Нерухомість"} / {subcategory} / {street || "Dachaur Strasse 122"}</h5>
+                <h5 className={styles.CardCategoryText}>{obj.type || "Нерухомість"} / {subcategory} / {street || "вулицю не вказано"}</h5>
                 <h3>{nameLen(name|| "Прототип",20,15)}</h3>
                 <div className="flex flex-row align-center" style={{height: "40px"}}>
                     <ViewsIcon width={25} height={25}></ViewsIcon>
@@ -85,7 +85,7 @@ export function CardRow({obj,t=false}) {
     const [imgSrc,setImgSrc] = useState(previewimage || "/assets/noimage.webp");
 
     const handleClickDeleteButton = async e => {
-        toServer(`/${!t?"archive":"account"}/delete/${id}`,{
+        toServer(`/${t?"archive":"account"}/delete/${id}`,{
             method: "DELETE",
             headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
         })
@@ -93,12 +93,12 @@ export function CardRow({obj,t=false}) {
     }
 
     const handleArchiveButton = () => {
-        toServer(`/${!t?"archive":"account"}/add/${id}`,{
+        toServer(`/${t?"archive":"account"}/add/${id}`,{
             method: "PUT",
-            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
-            headers: {
+            headers: {  
+                "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
                 "Contant-Type": "application/json"
-            },
+            }
         })   
     }
 
@@ -128,7 +128,7 @@ export function CardRow({obj,t=false}) {
                     <h5>створенно: {new Date(created_at).toLocaleDateString()}</h5>
                     <div className="flex flex-row">
                         <ButtonCircle color="red" click={handleClickDeleteButton} Icon={TrashIcon}></ButtonCircle>
-                        <ButtonCircle color="orange" title={t?"Добавити в архів":"Повернути до оголошень"} click={handleArchiveButton} Icon={!t?ArchiveIcon:HistoryIcon}></ButtonCircle>
+                        <ButtonCircle color="orange" title={t?"Добавити в архів":"Повернути до оголошень"} click={handleArchiveButton} Icon={t?ArchiveIcon:HistoryIcon}></ButtonCircle>
                     </div>    
                 </div>
             </section>

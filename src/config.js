@@ -23,6 +23,19 @@ export const SubCategory = {
     ]
 }
 
+export const subCategoryUrl = {
+    "нерухомість": [
+        "apartments","rooms",
+        "houses","daily",
+        "land","garage",
+    ],
+    "одежа": [
+        "men", "women",
+        "shoes", "accessories",
+        "outerwear", "homewear"
+    ]
+}
+
 
 
 export const categoryList = {
@@ -117,6 +130,8 @@ export const Language = {
 }
 
 
+
+
 export const subCategoryObject = {
     "apartments": "🏢 Квартири",
     "rooms": "🛌🏿 Кімнати",
@@ -131,8 +146,6 @@ export const subCategoryObject = {
     "outerwear": "🧥 Верхній одяг",
     "homewear": "🩳 Домашній одяг"
 }
-
-
 
 
 export const searchParams = [

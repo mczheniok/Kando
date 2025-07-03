@@ -34,7 +34,7 @@ export function MessagesPage({set}) {
 
     return (
         <> 
-          <ColumnMessages set={set} load={!connected} list={chats} type={true}></ColumnMessages>
+          <ColumnMessages  set={set} load={!connected} list={chats} type={true}></ColumnMessages>
         </>
     )
 }
@@ -63,6 +63,7 @@ export function Message({obj,me}) {
 
 export function Chat({set,myId}) {
   const inputRef = useRef(null);
+  const [socket,connected] = useSocket();
   const [messages,setMessages] = useState([]);
   const [message,setMessage] = useState({}); 
   const [chatInfo,setChatInfo] = useState({
@@ -123,7 +124,7 @@ export function Chat({set,myId}) {
           <Image  width={75} alt="User profile Image" height={75} src={`/uploads${chatInfo.image}`} className={styles.CircleImage}></Image>
           <div className="flex flex-col align-start justify-around">
           <h1>{chatInfo.name || "none"}</h1>
-          <h4 className="small-text">{socket.active?"Останній раз в мережі 15хв назад":"Помилка Підключення"}</h4>
+          <h4 className="small-text">{connected?"Останній раз в мережі 15хв назад":"Помилка Підключення"}</h4>
           </div>
         </div>  
         <ButtonCircle w={75} h={75} Icon={BackIcon} click={handleBackClick} clName={styles.ButtonCircle}></ButtonCircle>

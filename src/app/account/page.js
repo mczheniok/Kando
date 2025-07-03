@@ -145,14 +145,14 @@ const AccountMain = () => {
     const MainPage = () => {
         return (
             <>
-                <RowBlock>
+                <section style={{border: "solid var(--border) 1px",borderLeft: "none"}}>
                     <Suspense fallback={<Loading/>}> 
                         <UserHeaderInfo subscription={`план: ${userData.subscription}`} image={userData?.image} email={userData?.email} username={userData?.username} ></UserHeaderInfo>
                         <div className="flex flex-row align-center justify-around">
                             <span></span>
                         </div>
                     </Suspense>
-                </RowBlock>
+                </section>
                 <div className={styles.cardsContainer}>
                     <section className="flex flex-row flex-wrap" style={{ width: "100%",padding: "1rem"}}>
                         {Cardsarray.map((el,ind) => {
@@ -231,7 +231,7 @@ const AccountMain = () => {
 
 const ArchivePage = () => {      
     const [load,data] = useToServer("/archive/all",{
-        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+        headers: { "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
     },false);
 
     return (
