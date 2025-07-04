@@ -3,32 +3,35 @@
 
 ![Превью сайта](./public/logos/kando.webp)
 
+# Kando Official Repository
+
 Welcome to the **Kando** official repository!
 
-**Kando** is an innovative platform that combines the best features of popular marketplaces like OLX, AliExpress, Amazon, Temu, and eBay. Our mission is to create a seamless and user-friendly marketplace for both buyers and sellers. Whether you’re looking for the latest products, unique finds, or incredible deals, **Kando** brings everything together in one place.
+**Kando** is a next-generation online marketplace designed to make buying and selling simple, safe, and enjoyable for everyone. Our mission is to connect people through a powerful, user-friendly platform built for real needs.
 
-## About Kando
+## What is Kando?
 
-**Kando** allows users to easily browse, buy, and sell products across various categories. Our platform offers:
+**Kando** allows users to:
 
-- A smooth and intuitive user interface
-- Secure and fast transactions
-- Personalized recommendations and reviews
-- Advanced seller tools for listing and managing products
+- Easily browse, list, buy, and sell products  
+- Use a clean, intuitive interface  
+- Enjoy secure and fast transactions  
+- Discover personalized product recommendations and read verified reviews  
+- Manage listings efficiently with advanced seller tools  
 
-Whether you’re a seller looking to reach millions of customers or a shopper hunting for the best deals, **Kando** makes it easy for you to connect and thrive.
+Whether you're offering items or searching for great deals — **Kando** gives you the tools to do it your way.
 
-## Creator
+## Meet the Creator
 
-This platform was created by **Shoroburof**, a passionate developer aiming to revolutionize online shopping and e-commerce. I'm dedicated to building a marketplace that’s not only efficient but also enjoyable for everyone involved.
+Created by **Shoroburof**, a passionate developer focused on redefining how people engage in online commerce. This project aims to bring simplicity, speed, and trust to every transaction.
 
 ## Contributing
 
-We welcome contributions to the **Kando** project! If you have ideas, suggestions, or improvements, feel free to open an issue or submit a pull request. Together, we can build a platform that benefits users and sellers alike.
+We welcome community involvement! Have an idea, feature request, or bug fix? Feel free to open an issue or send a pull request — let’s build **Kando** together.
 
 ## License
 
-This project does not have a specific license and is not under the MIT license. You are free to view, use, or modify the code as needed, but any commercial use requires separate agreements.
+This project is not under a specific open-source license (such as MIT). You may view, use, or modify the code for personal purposes. Commercial use requires prior agreement.
 
 ---
 
@@ -36,28 +39,28 @@ This project does not have a specific license and is not under the MIT license. 
 
 Ласкаво просимо до офіційного репозиторію **Kando**!
 
-**Kando** — це інноваційна платформа, яка поєднує найкращі риси популярних онлайн-майданчиків, таких як OLX, AliExpress, Amazon, Temu та eBay. Наша мета — створити зручний і сучасний маркетплейс для покупців та продавців. Якщо ви шукаєте найновіші продукти, унікальні товари чи неймовірні знижки, **Kando** збирає все це в одному місці.
+**Kando** — це онлайн-маркетплейс нового покоління, створений для зручної, безпечної та приємної купівлі та продажу товарів. Наша мета — об'єднувати людей через сучасну платформу, яка відповідає їхнім потребам.
 
-## Про Kando
+## Що таке Kando?
 
-**Kando** дозволяє користувачам легко переглядати, купувати та продавати товари в різних категоріях. Платформа пропонує:
+**Kando** дозволяє:
 
-- Простий та інтуїтивно зрозумілий інтерфейс
-- Безпечні та швидкі транзакції
-- Персоналізовані рекомендації та відгуки
-- Розширені інструменти для продавців для управління товарами
+- Легко переглядати товари, створювати оголошення, купувати й продавати  
+- Користуватись інтуїтивно зрозумілим і простим інтерфейсом  
+- Безпечно та швидко здійснювати транзакції  
+- Отримувати персоналізовані рекомендації та читати перевірені відгуки  
+- Ефективно керувати своїми оголошеннями за допомогою розширених інструментів  
 
-Будь ви продавець, який хоче охопити мільйони покупців, чи покупець, що шукає найкращі пропозиції — **Kando** робить процес зручним для кожного.
+Чи ви продаєте товари, чи шукаєте вигідні пропозиції — **Kando** надає всі необхідні можливості.
 
 ## Автор
 
-Цю платформу створив **Shoroburof**, розробник, який прагне революціонізувати онлайн-шопінг і електронну комерцію. Я присвячую себе створенню маркетплейсу, який буде не тільки ефективним, але й приємним у використанні для всіх учасників.
+Платформу створив **Shoroburof** — розробник, який прагне зробити онлайн-комерцію простою, швидкою та надійною. Цей проєкт — про комфорт, ефективність і довіру.
 
-## Як долучитися
+## Як долучитись
 
-Ми вітаємо внесок у проект **Kando**! Якщо у вас є ідеї, пропозиції чи покращення, не соромтесь створювати запит або подавати pull request. Разом ми зможемо побудувати платформу, яка принесе користь як покупцям, так і продавцям.
+Ми відкриті до вашого внеску! Маєте ідеї, знайшли помилки або хочете щось покращити? Створюйте запити або надсилайте pull request — разом зробимо **Kando** ще кращим.
 
 ## Ліцензія
 
-Цей проект не має конкретної ліцензії і не підпадає під ліцензію MIT. Ви можете вільно переглядати, використовувати або модифікувати код згідно з вашими потребами, проте будь-яка комерційна діяльність потребує окремих погоджень.
-
+Проєкт не має конкретної ліцензії (наприклад, MIT). Ви можете переглядати, використовувати або змінювати код для особистого користування. Комерційне використання можливе лише за попередньої згоди.
