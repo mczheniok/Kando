@@ -9,12 +9,13 @@ const socketConnect = () => {
     
     const URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
-    return io(URL,{
+    return io(URL, {
         auth: {
             token: localStorage.getItem("token")
         },
-        autoConnect: false
-    });
+        autoConnect: false,
+        transports: ["websocket"], // ✅ важное добавление
+    });    
 }
 
 socket = socketConnect();
