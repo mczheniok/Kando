@@ -121,7 +121,7 @@ export function Chat({set,myId}) {
     <div style={{border: "solid var(--border) 1px",borderRadius: ".5rem",height: "80vh"}}>
       <section className={`${styles.ChatHead} flex flex-row align-center justify-between`}>
         <div className="flex flex-row align-center">
-          <Image  width={75} alt="User profile Image" height={75} src={`/uploads${chatInfo.image}`} className={styles.CircleImage}></Image>
+          <Image  width={75} alt="User profile Image" height={75} src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${chatInfo.image}`} className={styles.CircleImage}></Image>
           <div className="flex flex-col align-start justify-around">
           <h1>{chatInfo.name || "none"}</h1>
           <h4 className="small-text">{connected?"Останній раз в мережі 15хв назад":"Помилка Підключення"}</h4>

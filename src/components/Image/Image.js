@@ -31,7 +31,7 @@ export function ProductImageSection({list}) {
             height: "82%",
             position: "relative",
           }}>
-          <Image src={`/uploads${ImageSrc}`} onClick={handleClickImage} priority={true} alt="Product Image" fill style={{objectFit: "contain"}}></Image>
+          <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${ImageSrc}`} onClick={handleClickImage} priority={true} alt="Product Image" fill style={{objectFit: "contain"}}></Image>
           </div>
             <div className={`${styles.ImageLength} flex flex-row`} style={{overflowX: "auto",height: "18%"}}>
                 {list.map((el,ind) => {
@@ -51,7 +51,7 @@ export function ProductImageSection({list}) {
           }}
           className="flex flex-col align-center justify-center"
           >
-            <Image src={`/uploads${ImageSrc}`} onClick={handleClickImage} 
+            <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${ImageSrc}`} onClick={handleClickImage} 
             priority={false} alt="Product Image"  
             quality={100} 
             fill 

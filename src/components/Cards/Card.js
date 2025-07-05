@@ -25,7 +25,7 @@ export function Card({obj,type}) {
     return( 
         <Link href={`/product/${obj.id}`} className={`${type === "grid"?styles.Product:styles.RowProduct} flex flex-col`} >
             <div className={`${styles.CardHead}`}>
-                <Image quality={60} width={240} height={240} src={`/uploads${previewimage}` || "/assets/noimage.webp"} alt="Preview Image" className={styles.ProductPreviewImage}></Image>
+                <Image quality={60} width={240} height={240} src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${previewimage}` || "/assets/noimage.webp"} alt="Preview Image" className={styles.ProductPreviewImage}></Image>
                 <p className={styles.CardHeadImportant}>-35%</p>
             </div>
             <div className={`${styles.CardFooter} flex flex-col`}>
@@ -105,7 +105,7 @@ export function CardRow({obj,t=false}) {
     return( 
         <article className={`${styles.CardRow} flex flex-row `} data-product-id={id}>
             <section className={styles.CardRowImage}>
-                <Image src={`/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={200} height={200}  style={{borderRadius: ".5rem 0rem 0rem .5rem",objectFit:"cover",width: "100%",height: "100%"}}></Image>
+                <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={200} height={200}  style={{borderRadius: ".5rem 0rem 0rem .5rem",objectFit:"cover",width: "100%",height: "100%"}}></Image>
             </section>
             <section style={{height: "100%"}} className={`${styles.CardRowDescription} flex flex-col justify-between`}>
                 <div className="flex flex-row">
@@ -157,7 +157,7 @@ export function Message({obj,set}) {
     return (
         <article onClick={handleMessageClick} className={`${styles.CardRow} flex flex-row`} style={{borderBottom: "solid var(--border) 2px",height: "120px",padding: "1rem",gap: "1rem",borderRadius: "0rem"}}>
             <section className={`flex flex-col align-center justify-center`} style={{width: "150px",padding: "0rem"}}>
-                <Image src={`/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={100} height={100}  style={{objectFit:"cover",borderRadius: "1rem",aspectRatio: '1',width: "100%",height: "100%"}}></Image>
+                <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={100} height={100}  style={{objectFit:"cover",borderRadius: "1rem",aspectRatio: '1',width: "100%",height: "100%"}}></Image>
             </section>
             <section style={{width:"80%"}} className={`${styles.CardCategoryText} flex flex-col align-start`} >
                 <h3>{chat_name}</h3>
