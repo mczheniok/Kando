@@ -20,12 +20,14 @@ const nextConfig = {
     return config;
   },
   images: {
+    // если используешь внешний хостинг, добавь сюда домены
+    domains: ['kando.pp.ua'],
+    // или можно использовать remotePatterns
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '4000',
-        pathname: '/**',
+        protocol: 'https',
+        hostname: 'kando.pp.ua',
+        pathname: '/uploads/**',
       },
     ],
   },
