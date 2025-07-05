@@ -1,0 +1,30 @@
+name: Deploy Frontend to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: kando.pp.ua
+          username: deployer
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            cd /home/zhen/Kando/frontend
+            git pull origin main
+            source ~/.nvm/nvm.sh
+            nvm use --lts
+            npm install --frozen-lockfile
+            npm run build
+            pm2 restart frontend || pm2 start "npm run start" --name frontend

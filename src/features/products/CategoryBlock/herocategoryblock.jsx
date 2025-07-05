@@ -11,7 +11,7 @@ export const HeroCategory = () => {
                 return <div className="flex flex-col align-start" key={`category-column-el-${key}`} style={{flexGrow: "1"}}>
                     <h1 style={{marginBottom: "2rem"}}>{categoryName[key]}</h1>
                     {ObjectValue.map((el,ind) => {
-                        const url = subCategoryUrl[objectKey][ind];
+                            const url = subCategoryUrl[objectKey][ind];
 
                         return (
                             <LinkStyled el={el} url={url} key={`link-style-el-${ind}`}></LinkStyled>

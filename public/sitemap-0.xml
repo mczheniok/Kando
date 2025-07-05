@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>http://localhost:4000/login</loc><lastmod>2025-07-05T11:47:41.359Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/about</loc><lastmod>2025-07-05T11:47:41.360Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000</loc><lastmod>2025-07-05T11:47:41.360Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/termofuse</loc><lastmod>2025-07-05T11:47:41.360Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/account</loc><lastmod>2025-07-05T11:47:41.360Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/product/2ac4fccf-4b36-4283-a91b-78cbe992f68a</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/ba0d3818-be7c-4abc-b622-1b74a5ba0b5a</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/5834fe73-7e3b-43c8-aabf-6bc7e0ccdb25</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/0b1b880a-3176-4e2c-b5eb-bf9bd29ac4de</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/4df4ac33-e4b7-4cde-b197-79b11f6d0127</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/cdb8148b-c14e-4d4d-831b-a487b3b3a8b5</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/19e3e461-1ba3-4d89-9cf8-ead7dadb287c</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/4389a3ca-c29c-455c-9cf6-406f40196acf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/product/e761cedb-6663-4507-b615-eb97b9162a2e</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>http://localhost:4000/c/apartments</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/rooms</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/houses</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/daily</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/land</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/garage</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/men</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/women</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/shoes</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/accessories</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/outerwear</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:4000/c/homewear</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+</urlset>
