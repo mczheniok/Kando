@@ -7,8 +7,7 @@ export let socket = null;
 const socketConnect = () => {
     if(isClient()) return null;
     
-    const URL = process.env.NEXT_PUBLIC_BACKEND_URL_URL
-
+    const URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
     return io(URL,{
         auth: {
