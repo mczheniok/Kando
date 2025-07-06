@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState , useEffect } from "react"
 import styles from "./image.module.css"
 import Image from "next/image"
 import { SkeletonWithShimmer , SkeletonCircleWithShimmer } from "@/shared/information/skeleton"
@@ -10,58 +10,66 @@ import { ShowPopup } from "@/features/products/popup/showpopup"
 import MessagesIcon from "@/icons/messages.svg";
 import ReserverIcon from "@/icons/reserve.svg";
 
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Keyboard } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 export function ProductImageSection({list}) {
-    const [ImageSrc,setImageSrc] = useState(list[0]);
-    const [open,setOpen] = useState(false);
+  const [ImageSrc, setImageSrc] = useState(list[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [open, setOpen] = useState(false);
 
-    const handleclick = e => {
-      const i = e.target.getAttribute("data-img-i");
-      setImageSrc(list[i]);
-      e.target.classList.add("active");
-    }
+  const handleClickImage = _ => setOpen(!open);
 
-    const handleClickImage = _ => setOpen(!open);
-  
-    return (
-      <>
-        <section className={`${styles.ImageSection} flex flex-col`}>
-          <div style={{
-            width: "100%",
-            objectFit: "contain",
-            height: "82%",
-            position: "relative",
-          }}>
-          <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${ImageSrc}`} onClick={handleClickImage} priority={true} alt="Product Image" fill style={{objectFit: "contain"}}></Image>
-          </div>
-            <div className={`${styles.ImageLength} flex flex-row`} style={{overflowX: "auto",height: "18%"}}>
-                {list.map((el,ind) => {
-                    return <Image onClick={e => handleclick(e)} className={styles.LengthBlock} width={50} data-img-i={ind} height={50} quality={30} loading="lazy" alt="next image btn" src={`/uploads${el}`} key={`next-img-${ind}`}></Image>
-                })}
-            </div>
-        </section>
-        <section style={{
-            top: "0",
-            left: "0",
-            position: "fixed",
-            visibility: `${open?"visible":"hidden"}`,
-            width: "100vw",
-            zIndex: "10001",
-            background: "rgba(1,1,1,0.5)",
-            height: "100vh",
-          }}
-          className="flex flex-col align-center justify-center"
-          >
-            <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${ImageSrc}`} onClick={handleClickImage} 
-            priority={false} alt="Product Image"  
-            quality={100} 
-            fill 
-            style={{objectFit: "contain"}}
-            sizes="100vw"
-            ></Image>
-          </section>
-      </>
-    )
-  }
+  return (
+    <>
+      <section className={`${styles.ImageSection} flex flex-col`}>
+        <div style={{width: "100%", objectFit: "contain", height: "82%", position: "relative"}}>
+          <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${ImageSrc}`} onClick={handleClickImage} priority={true} alt="Product Image" fill style={{objectFit: "contain"}} />
+        </div>
+      </section>
+      
+      <section style={{
+        top: "0", left: "0", position: "fixed", visibility: `${open ? "visible" : "hidden"}`,
+        width: "100vw", zIndex: "10001", background: "rgba(1,1,1,0.5)", height: "100vh"
+      }}>
+        <button onClick={handleClickImage} style={{
+          position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.8)",
+          border: "none", borderRadius: "50%", width: "40px", height: "40px", fontSize: "24px",
+          cursor: "pointer", zIndex: "10003"
+        }}>×</button>
+
+        <Swiper
+          modules={[Navigation, Keyboard]}
+          navigation={true}
+          keyboard={true}
+          initialSlide={currentIndex}
+          onSlideChange={(swiper) => setImageSrc(list[swiper.activeIndex])}
+          style={{width: "100%", height: "100%"}}
+        >
+          {list.map((image, index) => (
+            <SwiperSlide key={index}>
+              <div className="flex flex-col align-center justify-center" style={{width: "100%", height: "100vh"}}>
+                <Image 
+                  src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${image}`}
+                  alt={`Product Image ${index + 1}`}
+                  fill
+                  style={{objectFit: "contain"}}
+                  sizes="85vw"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+    </>
+  );
+}
+
+
+
 
   export function UserHeaderInfo({
     username,
@@ -111,8 +119,13 @@ export function ProductImageSection({list}) {
 
   
 
-  const UserAvatar = ({width,height,padding=null}) => <img  width={width} height={height} src={image} style={{padding: padding?padding:"7px"}} className={`${styles.circleImage} circle`} alt="User Avatar"></img>
-  
+  const UserAvatar = ({width,height,padding=null}) => {
+    const [img,setImg] = useState(image);
+    
+    return (
+      <img loading="lazy"  width={width} height={height} src={img} onError={() => setImg("/assets/noimage.webp")} style={{padding: padding?padding:"7px"}} className={`${styles.circleImage} circle`} alt="User Avatar"></img>
+    )
+  }
   return (
       <article className={`${styles.userInfo} flex flex-row`} style={{padding: "1rem",background: "var(--bg-card)"}}>
         <UserAvatar width={"100vw"} height={"100vh"}></UserAvatar>

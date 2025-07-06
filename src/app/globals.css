@@ -137,6 +137,13 @@ body{
 } 
 
 
+/* В вашем CSS файле */
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-color: var(--orange); /* красный цвет */
+  --swiper-navigation-size: 44px; /* размер */
+}
+
 /* Уменьшаем размер полосы прокрутки */
 ::-webkit-scrollbar {
   width: 5px; /* Уменьшаем ширину вертикальной полосы прокрутки */

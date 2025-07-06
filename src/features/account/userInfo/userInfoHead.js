@@ -35,18 +35,15 @@ export function userHeadAccount({
     const [change,setChange] = useState(false)
     const [submit,setSubmit] = useState(false);
     
-    const formDataRef = useRef({
-        username,
-        phone
-    });
+    const formDataRef = useRef(new FormData());
+    const ImageUrl = useRef(null);
 
     const handleInput = (e) => {
         const val = e.target.value 
         const name = e.target.name
 
         if(val && name) {
-            formDataRef.current[name] = val;
-            console.log(formDataRef.current);
+            formDataRef.current.append(name,val);
         }
     }
 
@@ -57,17 +54,35 @@ export function userHeadAccount({
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
-                "Content-Type": "application/json"
             },
-            body: JSON.stringify(formDataRef.current)
+            body: formDataRef.current
         },true);
     }   
 
-    const UserAvatar = ({width,height}) => <img  width={width} height={height} src={image} className={`${styles.circleImage} circle`} alt="User Avatar"></img>
-  
+
+    const handleFileInput = e => {
+        const file = e.target.files[0];
+
+        formDataRef.current.append("image",file);
+    
+        ImageUrl.current.src = URL.createObjectURL(file);   
+    }
+
+
+    const UserAvatar = ({width,height}) => {
+        const [src,setImg] = useState(`${process.env.NEXT_PUBLIC_URL}/images${image}`)
+
+        return (
+            <img width={width} ref={ImageUrl} height={height} src={src} onError={() => setImg("/assets/noimage.webp")} className={`${styles.circleImage} circle`} alt="User Avatar"></img>
+        );
+    }
+
     return (
       <form onSubmit={handleFormSubmit} className={`${styles.userInfo} flex flex-row`} style={{width: "100%",padding: "1rem",background: "var(--bg-card)"}}>
-        <UserAvatar width={"100px"} height={"100px"}></UserAvatar>
+            <label htmlFor="fileInput">
+              <UserAvatar ref={ImageUrl} width={"100px"} height={"100px"}></UserAvatar>
+            </label>
+            <input onChange={handleFileInput} id="fileInput" type="file" style={{display: "none"}}></input>
           <div className={`flex flex-col ${styles.flexColumn}`} style={{width: "100%"}}>
             {username?
             <>
