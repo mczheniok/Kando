@@ -33,7 +33,7 @@ export function ProductImageSection({list}) {
       
       <section style={{
         top: "0", left: "0", position: "fixed", visibility: `${open ? "visible" : "hidden"}`,
-        width: "100vw", zIndex: "10001", background: "rgba(1,1,1,0.5)", height: "100vh"
+        width: "100vw", zIndex: "10001", background: "var(--secondary)", height: "100vh"
       }}>
         <button onClick={handleClickImage} style={{
           position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.8)",
