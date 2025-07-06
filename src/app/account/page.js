@@ -358,8 +358,21 @@ const Page7 = () => {
                 data.append("files",el.file);
             });
 
+            function arraysEqual(a, b) {
+                return a.length === b.length && a.every((val, i) => val === b[i]);
+            }
+            
+
             data.set("description",description);
-            data.set("location",JSON.stringify(location));
+
+
+
+            if(!arraysEqual(location,[44.4727805,44.4755123])) {
+                data.set("location",JSON.stringify(location)); 
+            } else {
+                data.set("location",JSON.stringify([]));
+            }
+
             data.set("price",price);
             data.set("name",name);
             data.set("subcategory",subcategory);

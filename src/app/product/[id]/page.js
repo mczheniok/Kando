@@ -42,7 +42,6 @@ export async function generateMetadata({params,searchParams}) {
   : noImage;
 
 
-
   return {
     title: name,
     description: description?.slice(0,160) || "Знаходь то що треба на Kando",

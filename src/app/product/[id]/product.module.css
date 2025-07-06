@@ -12,7 +12,13 @@
     width: 100%;
     height: fit-content;
     overflow-y: auto;
-    max-height: 220px;  
-    margin-top: 1rem;
+    max-height: 260px;  
+    margin-top: 0rem;
     border-radius: 1rem;
+}
+
+@media screen and (max-width: 574px) {
+    .InfoBlock{
+        max-height: fit-content;
+    }
 }

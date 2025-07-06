@@ -54,3 +54,17 @@ export async function setToCache(url,data) {
         tx.onerror = () => resolve(false);
     })
 }
+
+export async function deleteFromCache(url) {
+    const db = await openCacheDB("kando");
+
+    return new Promise((resolve,reject) => {
+        const tx = db.transaction("cache","readwrite");
+        const store = tx.objectStore("cache");
+
+        const request = store.delete(url);
+    
+        request.onsuccess = () => resolve(true);
+        request.onerror = () => reject(request.error);
+    });
+}

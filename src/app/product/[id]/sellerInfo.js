@@ -18,12 +18,21 @@ export const ProductSellerInfo = ({categories = [],userId,position,product_id,an
 
     return (
       <section className={styles.SellerInfo}> 
-          <article className={styles.InfoBlock} style={{marginTop: "0rem",padding:"0rem"}}>
-            <UserHeaderInfo userId={userId} anoncement={anoncement} product_id={product_id} username={user.username} subscription={`онлайн в: ${toDate(user.last_login)}`} email={toDate(user.created_at)} image={user.image}></UserHeaderInfo>
+          <article className={styles.InfoBlock} style={{marginTop: "0rem",padding:"0rem",height: "400px"}}>
+            <UserHeaderInfo 
+              userId={userId} 
+              anoncement={anoncement} 
+              product_id={product_id} 
+              username={user.username} 
+              subscription={`онлайн в: ${toDate(user.last_login)}`} 
+              email={toDate(user.created_at)} 
+              image={user.image}
+              phone={user?.phone}
+            ></UserHeaderInfo>
           </article>
           <article className={`${styles.InfoBlock}`} style={{overflow: "auto",padding: `${position.length === 2? "0rem":".6rem"}`}}>
             {position.length === 2?
-            <LazyMap title="Ваш Будинок" position={position}></LazyMap>
+              <LazyMap title="Ваш Будинок" position={position}></LazyMap>
             :<Categoryies list={categories}></Categoryies>}
           </article>
       </section>

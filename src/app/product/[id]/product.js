@@ -48,7 +48,7 @@
     const a = () => {
       try {
         const lastcheck = JSON.parse(localStorage.getItem("lastcheck"));
-        let data =  Array.isArray (lastcheck) ? lastcheck : [];
+        let data = Array.isArray (lastcheck) ? lastcheck : [];
     
         data = data.filter(id => id !== obj.id);
     
@@ -64,8 +64,8 @@
 
   return (
       <section className="flex flex-col" style={{width: "100%",padding:"1rem .5rem",minHeight: "320px",overflow: "visible"}}>
-            <ProductNavigation listInfoPages={listInfoPages} set={setPage} refc={infoRef}></ProductNavigation>
-            <CurrentPage></CurrentPage>
+        <ProductNavigation listInfoPages={listInfoPages} set={setPage} refc={infoRef}></ProductNavigation>
+        <CurrentPage></CurrentPage>
       </section>
     )
   }

@@ -72,19 +72,20 @@ export function ProductImageSection({list}) {
 
 
   export function UserHeaderInfo({
-    username,
-    email,
-    image = "/assets/noimage.webp",
-    subscription = "pro",
-    product_id,
-    userId,
-    anoncement = false
-  }) {
+      username,
+      email,
+      image = "/assets/noimage.webp",
+      subscription = "pro",
+      product_id,
+      userId,
+      anoncement = false,
+      phone
+    }) {
 
-  const [popupdata,setPopUpData] = useState({
-    show: false,
-    title: "Забронювати оголошення"
-  });
+    const [popupdata,setPopUpData] = useState({
+      show: false,
+      title: "Забронювати оголошення"
+    });
     
 
   const handleChatClick = async () => {
@@ -135,6 +136,7 @@ export function ProductImageSection({list}) {
               <h2>{username}</h2>
               <h3>{subscription}</h3>
               <h4 className="secondary-text">{email}</h4>
+              <p>телефон: +{phone}</p>
               <div className="flex flex-row">
                 {product_id && (
                    <ButtonWithIcon Icon={MessagesIcon} title={"Написати"} clName={"justify-around flex-grow"} click={handleChatClick}></ButtonWithIcon>
@@ -150,6 +152,7 @@ export function ProductImageSection({list}) {
               <SkeletonWithShimmer w={120}></SkeletonWithShimmer>
               <SkeletonWithShimmer w={160}></SkeletonWithShimmer>
               <SkeletonWithShimmer w={200}></SkeletonWithShimmer>
+              <SkeletonWithShimmer w={240}></SkeletonWithShimmer>
             </>
             }
             {anoncement.subcategory === "daily" && (

@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from 'leaflet';
 import "leaflet/dist/leaflet.css";
 
-const MapComponent = memo(({ title, height = "200px", position = [50.4484555, 30.5382092] }) => {
+const MapComponent = memo(({ title, height = "240px", position = [] }) => {
   const mapRef = useRef();
   const customIcon = new Icon({
     iconUrl: "/icons/house.svg", 

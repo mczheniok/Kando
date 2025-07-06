@@ -12,6 +12,7 @@ import ViewsIcon from "@/icons/view.svg";
 import TrashIcon from "@/icons/trash.svg";
 import ArchiveIcon from "@/icons/archive.svg";
 import HistoryIcon from "@/icons/history.svg";
+import { deleteFromCache } from "../../shared/db/indexedDB";
 
 const nameLen = (name,len,size) => name?.length > len?name.slice(0,size) + "...": name;
 
@@ -86,15 +87,19 @@ export function CardRow({obj,t=false}) {
     const [imgSrc,setImgSrc] = useState(previewimage || "/assets/noimage.webp");
 
     const handleClickDeleteButton = async e => {
-        toServer(`/${t?"archive":"account"}/delete/${id}`,{
+        toServer(`/${!t?"archive":"account"}/delete/${id}`,{
             method: "DELETE",
             headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
         })
-        .then(() => document.querySelector(`[data-product-id="${id}"]`).remove());
+        .then(() => {
+            document.querySelector(`[data-product-id="${id}"]`).remove()
+            deleteFromCache(`/${!t?"archive":"account"}/delete/${id}`);
+        })
+        
     }
 
     const handleArchiveButton = () => {
-        toServer(`/${t?"archive":"account"}/add/${id}`,{
+        toServer(`/${!t?"archive":"account"}/add/${id}`,{
             method: "PUT",
             headers: {  
                 "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
@@ -113,7 +118,7 @@ export function CardRow({obj,t=false}) {
                     <h3>{name}</h3>
                 </div>
                 <div className="flex flex-col">
-                    <h5 className={styles.CardCategoryText}>{categoryCONST[type]} / Вул. Dachauer Str. 122</h5>
+                    <h5 className={styles.CardCategoryText}>{categoryCONST[type]} </h5>
                     <div className="flex flex-row">
                         <CardCategory src={"floorwidth"} text={"22m2"}></CardCategory>
                         <CardCategory src={"view"} text={views}></CardCategory>
