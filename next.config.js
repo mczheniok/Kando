@@ -21,6 +21,7 @@ const nextConfig = {
   },
   images: {
     // если используешь внешний хостинг, добавь сюда домены
+    unoptimized: true,
     domains: ['kando.pp.ua'],
     // или можно использовать remotePatterns
     remotePatterns: [
