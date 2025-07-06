@@ -1,7 +1,8 @@
 /**
  * @type {import('next').NextConfig}
  */
-const path = require("path")
+const path = require("path");
+require("dotenv").config();
 
 const nextConfig = {
   webpack(config) {
@@ -22,12 +23,12 @@ const nextConfig = {
   images: {
     // если используешь внешний хостинг, добавь сюда домены
     unoptimized: true,
-    domains: ['kando.pp.ua'],
+    domains: [process.env.NEXT_PUBLIC_DOMAIN],
     // или можно использовать remotePatterns
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'kando.pp.ua',
+        protocol: process.env.NEXT_PUBLIC_PROTO,
+        hostname: process.env.NEXT_PUBLIC_DOMAIN,
         pathname: '/uploads/**',
       },
     ],
