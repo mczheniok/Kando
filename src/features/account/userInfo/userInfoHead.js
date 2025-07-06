@@ -70,7 +70,7 @@ export function userHeadAccount({
 
 
     const UserAvatar = ({width,height}) => {
-        const [src,setImg] = useState(`${process.env.NEXT_PUBLIC_URL}/images${image}`)
+        const [src,setImg] = useState(`${process.env.NEXT_PUBLIC_URL}/images/${image}`)
 
         return (
             <img width={width} ref={ImageUrl} height={height} src={src} onError={() => setImg("/assets/noimage.webp")} className={`${styles.circleImage} circle`} alt="User Avatar"></img>

@@ -123,7 +123,7 @@ export function ProductImageSection({list}) {
     const [img,setImg] = useState(image);
     
     return (
-      <img loading="lazy"  width={width} height={height} src={img} onError={() => setImg("/assets/noimage.webp")} style={{padding: padding?padding:"7px"}} className={`${styles.circleImage} circle`} alt="User Avatar"></img>
+      <img loading="lazy" width={width} height={height} src={img} onError={() => setImg("/assets/noimage.webp")} style={{padding: padding?padding:"7px"}} className={`${styles.circleImage} circle`} alt="User Avatar"></img>
     )
   }
   return (
