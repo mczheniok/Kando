@@ -4,6 +4,7 @@ import styles from "./cards.module.css"
 import { ButtonCircle, ButtonWithIcon } from "@/shared/Buttons/Buttons";
 import { ButtonShare } from "@/features/client/client";
 import { categoryCONST } from "@/config"
+import { CardPreview } from "../Image/Image";
 import { toServer } from "@/features/functions/functions";
 import { useState } from "react";
 import HeartIcon from "@/icons/heart.svg";
@@ -25,7 +26,7 @@ export function Card({obj,type}) {
     return( 
         <Link href={`/product/${obj.id}`} className={`${type === "grid"?styles.Product:styles.RowProduct} flex flex-col`} >
             <div className={`${styles.CardHead}`}>
-                <Image quality={60} width={240} height={240} src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${previewimage}` || "/assets/noimage.webp"} alt="Preview Image" className={styles.ProductPreviewImage}></Image>
+                <CardPreview image={previewimage}></CardPreview>
                 <p className={styles.CardHeadImportant}>-35%</p>
             </div>
             <div className={`${styles.CardFooter} flex flex-col`}>

@@ -151,5 +151,13 @@ export const CircleImage = ({width,height,src}) => {
   src.length > 10?<Image src={src} className={`${styles.ReviewsLogo} circle`} alt={"Circle Image"} width={width} height={height}></Image>
   :<SkeletonCircleWithShimmer></SkeletonCircleWithShimmer>
 }
-  
+
+
+
 export const CardImage = ({width,height,src}) => <Image src={src} className={styles.ProductImage} alt={"Product Image"} width={width} height={height}></Image>
+
+export const CardPreview = ({image}) => {
+  const [img,setImg] = useState(`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${image}`);
+
+  return <Image quality={60} width={240} height={240} src={img} onError={() => setImg("/assets/noimage.webp")} alt="Preview Image" className={styles.ProductPreviewImage}></Image>
+}

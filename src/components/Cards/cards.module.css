@@ -43,14 +43,6 @@
     border-radius: 1rem 1rem 0rem 0rem ;
 }
 
-.ProductPreviewImage{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    max-width: 100%;
-    border-radius: 1rem 1rem 0rem 0rem;
-}
-
 
 .CardHeadImportant{
     position:absolute;
