@@ -24,9 +24,16 @@ const listTargets = [
     {title: "Історія",icon: <HistoryIcon width={25} height={25} />}
 ]
 
-export function LeftBar({visible,ref,userData,set}) {
+export function LeftBar({visible,ref,userData,set,close}) {
     const [more,SetMore] = useState(false);
     const UserAvatar = ({width,height,padding=null,src="/assets/noimage.webp"}) => <Image width={width} height={height} src={src} style={{padding: padding?padding:"7px",background: "#e5e4e2",border:"none",boxSizing: "content-box"}} className="circle" alt="User Avatar"></Image>
+
+
+    const handleClickPage = (ind) => {
+        close()
+        set(ind)
+    }
+
 
     return (
         <aside className={`${styles.aside} ${visible ? styles.visible : ""} flex-col align-center`}>
@@ -36,7 +43,7 @@ export function LeftBar({visible,ref,userData,set}) {
                 </Suspense>
                 {listTargets.map((el,ind) => {
                     return (
-                        <li key={`account-page-el-${ind}`} onClick={() => set(ind)} className="flex align-center" style={{gap: "0rem"}}>
+                        <li key={`account-page-el-${ind}`} onClick={() => handleClickPage(ind)} className="flex align-center" style={{gap: "0rem"}}>
                             {el.icon}
                             <LinkText el={el.title} ind={ind}></LinkText>
                         </li>

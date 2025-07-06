@@ -46,7 +46,7 @@ import UnknownIcon from "@/icons/linux.svg";
 
 
 
-const UserHeaderInfo = lazy(() => import("@/components/Image/Image").then(module => ({ default: module.UserHeaderInfo })));   
+const UserHeaderInfo = lazy(() => import("@/features/account/userInfo/userInfoHead.js").then(module => ({ default: module.userHeadAccount })));   
 
 const Cardsarray = [
     {title: "Повідомлення",icon: MessagesIcon,to: 3},
@@ -140,17 +140,14 @@ const AccountMain = () => {
 
     const [load,data] = useToServer("/sessions/all",{
         headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
-    },true);
+    },false);
 
     const MainPage = () => {
         return (
             <>
-                <section style={{border: "solid var(--border) 1px",borderLeft: "none"}}>
+                <section style={{width: "100%",border: "solid var(--border) 1px",borderLeft: "none"}}>
                     <Suspense fallback={<Loading/>}> 
-                        <UserHeaderInfo subscription={`план: ${userData.subscription}`} image={userData?.image} email={userData?.email} username={userData?.username} ></UserHeaderInfo>
-                        <div className="flex flex-row align-center justify-around">
-                            <span></span>
-                        </div>
+                        <UserHeaderInfo subscription={`план: ${userData.subscription}`} phone={userData?.phone} image={userData?.image} email={userData?.email} username={userData?.username} ></UserHeaderInfo>    
                     </Suspense>
                 </section>
                 <div className={styles.cardsContainer}>
@@ -202,8 +199,7 @@ const AccountMain = () => {
         const chat = JSON.parse(localStorage.getItem("chat"));
     
         if (chat?.new_chat) {
-          // Открываем вкладку чата
-          setActivePage(3); // или setActivePage(6), как у тебя
+          setActivePage(3); 
         } else return 
     },[])
 
@@ -215,7 +211,7 @@ const AccountMain = () => {
         <div>
             <Header></Header>
                 <main className={`container ${styles.GridAccount}`}>
-                    <LeftBar set={setActivePage} userData={userData} ref={pagesListContainer} visible={visible}></LeftBar>
+                    <LeftBar set={setActivePage} close={setVisible} userData={userData} ref={pagesListContainer} visible={visible}></LeftBar>
                     <button className={`${styles.Open} circle`} onClick={e => setVisible(!visible)}>
                             &gt;
                     </button>

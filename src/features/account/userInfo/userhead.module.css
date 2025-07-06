@@ -1,0 +1,35 @@
+.circleImage{
+    width: 100px;
+    height: 100px;
+    border: solid var(--secondary) 7px;
+}
+
+.userInfo {
+    width: 100%;
+}
+
+
+.input{
+    width: fit-content;
+    padding: .5rem;
+    border: solid var(--border) 1px;
+    font-size: 1rem;
+    border-radius: .5rem;
+}
+
+
+@media screen and (max-width: 547px) {
+    .userInfo{
+        flex-direction: column;
+        background-color: black;
+    }
+
+    .circleImage {
+        width: 125px;
+        height: 125px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+

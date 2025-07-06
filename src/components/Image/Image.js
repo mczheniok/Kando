@@ -66,7 +66,7 @@ export function ProductImageSection({list}) {
   export function UserHeaderInfo({
     username,
     email,
-    image = "/assets/me.jpg",
+    image = "/assets/noimage.webp",
     subscription = "pro",
     product_id,
     userId,
