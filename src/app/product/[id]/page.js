@@ -60,7 +60,7 @@ export async function generateMetadata({params,searchParams}) {
         }
       ],
       locale: "uk-UA",
-      type: "product"
+      type: "website"
     },
     twitter: {
       card: "summary_large_image",
@@ -82,7 +82,7 @@ function Info({obj,user}) {
 
 
 export default async function Product({params}) {
-  const { id } = await params
+  const { id } = await params;
   const info = await getData(id);
   const user = {};
 
