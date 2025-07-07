@@ -243,6 +243,8 @@ input::placeholder {
 .justify-around { justify-content: space-around; }
 .justify-center { justify-content: center; }
 .justify-evenly { justify-content: space-evenly; }
+.justify-end {  justify-content: end; }
+
 h1 , .h1-text { 
   font-size: clamp(1rem,calc(1vw + .5rem),2rem);
 }

@@ -17,8 +17,8 @@ import { deleteFromCache } from "../../shared/db/indexedDB";
 const nameLen = (name,len,size) => name?.length > len?name.slice(0,size) + "...": name;
 
 
-function CardCategory({src,text}) {
-    return <h4 className="tw-secondary-text">{nameLen(text,25,25)}</h4>
+function CardCategory({src,text,label}) {
+    return <h4 className="tw-secondary-text">{label} {nameLen(text,25,25)}</h4>
 }
 
 export function Card({obj,type}) {
@@ -83,7 +83,7 @@ export function CardBlockPicture({title,text,img,src}){
 
 
 export function CardRow({obj,t=false}) {
-    const {name,id,price,type,views,category,created_at,previewimage} = obj;
+    const {name,id,price,type,views,created_at,previewimage} = obj;
     const [imgSrc,setImgSrc] = useState(previewimage || "/assets/noimage.webp");
 
     const handleClickDeleteButton = async e => {
@@ -119,24 +119,23 @@ export function CardRow({obj,t=false}) {
                 </div>
                 <div className="flex flex-col">
                     <h5 className={styles.CardCategoryText}>{categoryCONST[type]} </h5>
-                    <div className="flex flex-row">
-                        <CardCategory src={"floorwidth"} text={"22m2"}></CardCategory>
-                        <CardCategory src={"view"} text={views}></CardCategory>
+                    <div className="flex flex-row justify-between">
+                        <CardCategory src={"view"} label={"Переглядів"} text={views}></CardCategory>
+                        <h5 className="secondary-text">створенно: {new Date(created_at).toLocaleDateString()}</h5>
                     </div>
                 </div>
             </section>
+            
             <section className={`${styles.CardRowPrice} flex flex-col align-end justify-between`}>
-                <span className="flex flex-row align-baseline">
-                    <h3>{price}</h3>
-                    <h4 className="through-text">{obj.LastPrice || "22.000,00"}</h4>
-                </span>
-                <div className="flex flex-col align-end"  style={{width: "100%",height: "fit-content",gap: ".5rem"}}>
-                    <h5>створенно: {new Date(created_at).toLocaleDateString()}</h5>
-                    <div className="flex flex-row">
+                <div className="flex flex-row align-end justify-end"  style={{width: "100%",height: "fit-content",gap: ".5rem"}}>
+                    <div className="flex flex-row align-center">
                         <ButtonCircle color="red" click={handleClickDeleteButton} Icon={TrashIcon}></ButtonCircle>
                         <ButtonCircle color="orange" title={t?"Добавити в архів":"Повернути до оголошень"} click={handleArchiveButton} Icon={t?ArchiveIcon:HistoryIcon}></ButtonCircle>
                     </div>    
                 </div>
+                <span className="flex flex-row align-baseline">
+                    <h2>{price}</h2>
+                </span>
             </section>
         </article>
     )
