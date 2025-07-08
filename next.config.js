@@ -24,7 +24,10 @@ const nextConfig = {
   images: {
     // если используешь внешний хостинг, добавь сюда домены
     unoptimized: true,
-    domains: [process.env.NEXT_PUBLIC_DOMAIN],
+    domains: [
+      process.env.NEXT_PUBLIC_DOMAIN,
+      "h3.googleusercontent.com"
+    ],
     // или можно использовать remotePatterns
     remotePatterns: [
       {
@@ -32,6 +35,11 @@ const nextConfig = {
         hostname: process.env.NEXT_PUBLIC_DOMAIN,
         pathname: '/uploads/**',
       },
+      {
+        protocol: "http",
+        hostname: "h3.googleusercontent.com",
+        pathname: "/**"
+      }
     ],
   },
 };
