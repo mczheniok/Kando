@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./buttons.module.css"
 import Image from "next/image"
 import Link from "next/link"
@@ -68,6 +68,38 @@ export function ButtonWithList({title,Icon,relative=true,children,style,clName,c
         </ButtonWithIcon>
     )
 }
+
+export function ButtonLazyDropList({title,Icon,relative=true,style,clName,click,children,name}) {
+    const [status,setStatus] = useState(false);
+    const [lazyList,setLazyList] = useState([[]]);
+    const [loaded,setLoaded] = useState(false)
+    
+    const fun = () => setStatus(p => !p);
+
+    useEffect(() => {
+        if (status && !loaded) {
+            import("../../config")
+            .then((mod) => {
+                const md = mod[name];
+                
+                setLazyList(md);
+                setLoaded(true);
+            })
+            .catch(err => {
+                console.error('Failed to load SubCategory:', err);
+            }); 
+        }
+    }, [status, loaded]);
+
+    return (
+        <ButtonWithIcon submit={false} title={title} relative={relative} clName={clName} style={style} Icon={Icon} click={click || fun}>
+            {status && typeof children === 'function' && children(lazyList)}
+            {status && typeof children !== 'function' && children}
+        </ButtonWithIcon>
+    )
+}
+
+
 
 export function ButtonMini({title}) {
     return (

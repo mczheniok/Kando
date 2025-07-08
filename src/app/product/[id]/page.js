@@ -6,7 +6,7 @@ import { ContainerLanguage, MainContainer} from "@/components/Containers/contain
 import { notFound } from "next/navigation";
 import { InfoSectionBottom } from "@/features/products/Sections";
 import { InfoPagination } from "./product";
-
+import { ProductSeoSchema } from "../../../SEO/SeoSchemaOrg";
 
 async function getData(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/product/${id}`);
@@ -21,7 +21,8 @@ async function getData(id) {
 
 
 export async function generateMetadata({params,searchParams}) {
-  const info = await getData(params.id);
+  const { id } = await params
+  const info = await getData(id);
 
   if(!info) {
     return {
@@ -48,7 +49,7 @@ export async function generateMetadata({params,searchParams}) {
     openGraph: {
       title: `${name}`,
       description: description?.slice(0,160),
-      url: `${process.env.NEXT_PUBLIC_URL}/product/${params.id}`,
+      url: `${process.env.NEXT_PUBLIC_URL}/product/${id}`,
       siteName: "Kando",
       images: [
         {
@@ -83,15 +84,40 @@ function Info({obj,user}) {
 export default async function Product({params}) {
   const { id } = await params;
   const info = await getData(id);
-  const user = {};
+
+  const {
+    name,
+    image_array,
+    price,
+    description,
+    created_at
+  } = info;
+
+  
+  const noImage = `${process.env.NEXT_PUBLIC_URL}/assets/noimage.webp`;
+
+  const firstImage = image_array?.[0]
+  ? `${process.env.NEXT_PUBLIC_URL}/uploads${image_array[0]}`
+  : noImage;
+
+
+  const productForSeo = {
+    id,
+    name,
+    price,
+    created_at,
+    image: firstImage,
+    description: description || "Опис продукту скоро з'явиться — слідкуйте за оновленнями",
+  }
 
   if(info) {
     return (
         <ContainerLanguage>
           <Header></Header>
+            <ProductSeoSchema product={productForSeo}/>
             <MainContainer>
               <Search></Search>
-                <Info user={user} obj={info}></Info>
+                <Info obj={info}></Info>
                 <InfoSectionBottom text={info.description}></InfoSectionBottom>
                 <NotificationContainer></NotificationContainer>
             </MainContainer>

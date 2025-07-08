@@ -48,3 +48,15 @@
 .navContainer{
     gap: min(4vw,1rem);
 }
+
+
+@media screen and (max-width: 574px) {
+    #footer {
+        padding: 0rem 1rem;
+    }
+    
+    #footer div nav {
+        flex-direction: column;
+        align-items: start;
+    }
+}

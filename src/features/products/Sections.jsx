@@ -54,7 +54,7 @@ export const HeadMainPage = () => {
           style={{
             background: "var(--bg-glass)",
             backdropFilter: "blur(8px)",
-            marginTop: "5rem",
+            paddingTop: "5rem",
             borderRadius: "1rem",
             width: "100%",
             maxWidth: "600px",

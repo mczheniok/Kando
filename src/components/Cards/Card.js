@@ -45,7 +45,7 @@ export function Card({obj,type}) {
                     <h2>{obj?.price}</h2>
                 </div>  
                 <div className="flex flex-row align-center">
-                    <ButtonShare></ButtonShare>
+                    <ButtonShare id={obj.id}></ButtonShare>
                     <ButtonWithIcon Icon={HeartIcon}  clName={"flex-grow justify-around"} style="dark" title={"В Обрані"}></ButtonWithIcon>
                 </div>
             </div>
@@ -113,6 +113,7 @@ export function CardRow({obj,t=false}) {
             <section className={styles.CardRowImage}>
                 <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={200} height={200}  style={{borderRadius: ".5rem 0rem 0rem .5rem",objectFit:"cover",width: "100%",height: "100%"}}></Image>
             </section>
+            
             <section style={{height: "100%"}} className={`${styles.CardRowDescription} flex flex-col justify-between`}>
                 <div className="flex flex-row">
                     <h3>{name}</h3>

@@ -2,9 +2,9 @@
 
 import styles from "./components.module.css"
 import Link from "next/link"
-import { ButtonWithIcon, ButtonWithList } from "../../Buttons/Buttons"
+import { ButtonWithIcon, ButtonWithList, ButtonLazyDropList } from "../../Buttons/Buttons"
 import { LanguageContenxt } from "@/components/Containers/container";
-import { useContext , useState } from "react";
+import { useContext ,useState } from "react";
 import { debounce, toServer } from "@/features/functions/functions"
 import { subCategoryObject } from "@/config"
 import SearchIcon from "@/icons/search.svg";
@@ -21,28 +21,6 @@ export default function Search({placeholder,set=() => {}}) {
     const [paramsSearchRef,handler] = useInputHandler();
     const [visibleList,setVisibleList] = useState(false);
     const [selectedCategory,setSelectedCategory] = useState(categoryCONST.realestate);
-
-    const CategoryesList = [
-        {title: "Техника",list: [
-            "телефони","годинники","ноутбуки","монітори"
-        ]},
-        {title: "Нерухомість",list: [
-            "квартири","будинки","кімнати","подобова аренда"
-        ]},
-        {title: "Техника",list: [
-            "телефони","годинники","ноутбуки","монітори"
-        ]},
-        {title: "Нерухомість",list: [
-            "квартири","будинки","кімнати","подобова аренда"
-        ]},
-        {title: "Техника",list: [
-            "телефони","годинники","ноутбуки","монітори"
-        ]},
-        {title: "Нерухомість",list: [
-            "квартири","будинки","кімнати","подобова аренда"
-        ]},
-
-    ]
 
 
     const BackLightLen = (str, search) => {
@@ -80,7 +58,6 @@ export default function Search({placeholder,set=() => {}}) {
     }
 
 
-
     const handleSearch = debounce((e) => {
         const trg = e.target.value
         if(trg.length > 2) {
@@ -116,22 +93,24 @@ export default function Search({placeholder,set=() => {}}) {
             const finalUrl = baseUrl + params.toString();
             window.location.href = finalUrl
         }}>
-            <ButtonWithList title={language.category} Icon={CategoryIcon}>
-                <div className={`${styles.dropList} flex flex-row align-center justify-around flex-wrap`}>
-                        {CategoryesList.map((el,ind) => {
+            <ButtonLazyDropList name={"SubCategory"} relative={false} title={language.category} Icon={CategoryIcon}>
+                {(lazylist) => (
+                    <div className={`${styles.dropList} flex flex-row align-center justify-around flex-wrap`}>
+                        {lazylist.length !== 0 && Object.entries(lazylist).map(([key,val],ind) => {
                             return (
-                            <ul className="flex flex-col" key={`categories-col-el-${ind}`}>
-                                <h2 className="accent-text">{el.title}</h2>
-                                {el.list.map((el,ind) => {
-                                    return <li key={`categoryies-el-${ind}`}><Link href={"/"}>{el}</Link></li>
-                                })}
-                            </ul>
-                        )    
-                    })}
-                </div>
-            </ButtonWithList>
+                                <ul className="flex flex-col" key={`categories-col-el-${ind}`}>
+                                    <h2 className="accent-text">{key}</h2>
+                                    {val.map((el,ind) => {
+                                        return <li key={`categoryies-el-${ind}`}><Link href={"/"}>{el}</Link></li>
+                                    })}
+                                </ul>
+                            )    
+                        })}
+                    </div>
+                )}
+            </ButtonLazyDropList>
             <div style={{flexGrow: "1",position:"relative"}}>
-                <input type="search" name="search" onBlur={() => setVisible(false)} onChange={handleSearch} className={styles.search} placeholder={placeholder}></input>       
+                <input type="search" name="search" onBlur={() => setVisible(prev => ({...prev,status: false}))} onChange={handleSearch} className={styles.search} placeholder={placeholder}></input>       
                 <ul className={`${styles.SearchDropList} flex flex-col`} style={{scale: visible.status?"1":"0"}}> 
                     {visible.data?.map((el,ind) => {
                         return (

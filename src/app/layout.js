@@ -17,7 +17,7 @@ export const metadata = {
   title: {
     default: "Kando"
   },  
-  description: "Discover a wide range of products on Kando, your go-to online marketplace. Shop electronics, fashion, home goods, and more at competitive prices. Enjoy easy navigation. Kando – the best place for online shopping in Ukraine. Compare prices, read reviews, and shop with confidence today!",
+  description: "Kando — маркетплейс оголошень в Україні: купівля, оренда, продаж товарів і послуг.",
   icons: {
     icon: "/logos/kando.ico"
   },

@@ -27,7 +27,7 @@
       return (
         <InfoContainer>
           <ProductImageSection list={image_array}></ProductImageSection>
-            <ProductInfoSection subcategory={subcategory} categories={category} list={image_array} type={type} title={name} Price={price} LastPrice={last_price} Reviews={views} Images={image_array}></ProductInfoSection>
+            <ProductInfoSection id={id} subcategory={subcategory} categories={category} list={image_array} type={type} title={name} Price={price} LastPrice={last_price} Reviews={views} Images={image_array}></ProductInfoSection>
           <ProductSellerInfo anoncement={{subcategory,show: false}} product_id={id} type={type} userId={creator_id} categories={category} position={JSON.parse(location)}></ProductSellerInfo>
         </InfoContainer>
       );

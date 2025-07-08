@@ -22,7 +22,7 @@ function Header() {
             <div className="container flex flex-row align-center justify-between">
                 <Logo size={`${styles.logo}`} type={true}></Logo>
                 <nav className={`${styles.navContainer} flex flex-row align-center`}>
-                    <Button title={"theme"}  click={() => {
+                    <Button title={"тема"}  click={() => {
                         const html = document.documentElement;
                         const current  = html.getAttribute("data-theme");
                         html.setAttribute("data-theme",current === "dark"? "light" : "dark");

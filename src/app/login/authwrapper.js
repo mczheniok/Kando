@@ -128,7 +128,6 @@ export default function AuthWrapper() {
                         <div className="divider" style={{width: "100%"}}>або</div>
                         
                         <div className="flex flex-row flex-wrap" style={{width: '100%'}}>
-                            <SignButton title={"Github"} img={"github"}></SignButton>
                             <SignButton title={"Google"} img={"google"}></SignButton>
                         </div>
                         

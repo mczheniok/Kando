@@ -51,11 +51,11 @@
 .dropList{
     text-align: start;
     position: absolute;
-    top: 160%;
+    top: 105%;
     left: 0;
     background: var(--bg-card);
     border: var(--border);
-    width: 500%;
+    width: 100%;
     border-radius: 1rem;
     padding: 1rem;
     z-index: 10;
@@ -126,7 +126,8 @@
 
 @media (max-width: 564px) {
     .dropList{
-        left: -125%;
-        width: 250%;
+        left: 0%;
+        width: 100%;
     }
+
 }

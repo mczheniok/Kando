@@ -1,15 +1,51 @@
 import Header from "@/shared/blocks/Header"
 import Search from "@/shared/blocks/search/Search";
 import Footer from "@/shared/blocks/Footer";
+import { HomeSeoSchema } from "@/SEO/SeoSchemaOrg";
 import GridProductsList from "@/components/ProductsList/GridProductsList";
 import { HeadMainPage } from "@/features/products/Sections";
 import { HeadInfoBlock } from "@/features/products/headinfoblock/HeadInfoBlock";
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
 import { LazyCategory } from "@/components/lazy";
 
-export default async function Home() {
-  console.log(process.env.NEXT_PUBLIC_BACKEND_URL_URL);
 
+export async function generateMetadata({params,searchParams}) {
+  const name = "Kando";
+  const description = "Kando — маркетплейс оголошень в Україні: купівля, оренда, продаж товарів і послуг.";
+  const Image = `${process.env.NEXT_PUBLIC_URL}/assets/background.webp`;
+
+  return {
+    title: name,
+    description: description,
+    openGraph: {
+      title: `${name}`,
+      description: description,
+      url: `${process.env.NEXT_PUBLIC_URL}`,
+      siteName: "Kando",
+      images: [
+        {
+          url: Image,
+          width: 800,
+          height: 600,
+          alt: name
+        }
+      ],
+      locale: "uk-UA",
+      type: "website"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name}`,
+      description: description,
+      images: [
+        Image
+      ]
+    }
+  }
+}
+
+
+export default async function Home() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/`,{
     next: {revalidate: 600}
   })
@@ -18,10 +54,11 @@ export default async function Home() {
     throw new Error(`HTTP error! status: ${res.status}`);
   }
 
-  const data = await res.json()
+  const data = await res.json();
 
   return (
     <ContainerLanguage>
+      <HomeSeoSchema />
       <link rel="preload" as="image" href="/assets/background.webp" fetchPriority="high"/>
       <Header></Header>
         <MainContainer>

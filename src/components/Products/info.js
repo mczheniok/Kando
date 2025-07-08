@@ -4,7 +4,6 @@ import SelectImage from "../Select/SelectImage"
 import { Listh4 } from "../Lists/Lists"
 import { LazyMap } from "../lazy"
 import { ButtonShare } from "@/features/client/client"
-import { ButtonWithIcon } from "@/shared/Buttons/Buttons"
 
 export const ProductSellerInfo = ({categories = [],user,type="product",position}) => {
   return (
@@ -59,13 +58,13 @@ export function ProductsellerInfo({categories = [],children,type="neryhomist"}) 
     )
   }
 
-export function ProductInfoSection({title,Price,LastPrice,categories,list,Reviews,type="product"}) {
+export function ProductInfoSection({id,title,Price,LastPrice,categories,list,Reviews,type="product"}) {
 
   return (
     <section className="flex flex-col flex-wrap" style={{maxHeight: "400px"}}>
       <div className="flex flex-row align-center justify-between">
         <h1>{title}</h1>
-        <ButtonShare></ButtonShare>
+        <ButtonShare id={id}></ButtonShare>
       </div>
       <PriceBlock Price={Price} LastPrice={LastPrice}></PriceBlock>
         <div className="flex flex-row align-center flex-wrap">

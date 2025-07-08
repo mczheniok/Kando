@@ -1,15 +1,8 @@
-"use client"
-
-import { MainContainer } from "@/components/Containers/container";
 import Logo from "@/shared/blocks/Logo";
-import Header from "@/shared/blocks/Header";
-import Footer from "@/shared/blocks/Footer";
 
 export default function NotFound() {
   return (
     <>
-      <Header /> 
-      <MainContainer>
         <div style={{ 
           width: '100%', 
           height: "600px", 
@@ -57,9 +50,6 @@ export default function NotFound() {
             />
           </div>
         </div>
-      </MainContainer>
-      
-      <Footer />
     </>
   );
 }   
