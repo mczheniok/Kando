@@ -5,6 +5,7 @@ const path = require("path");
 require("dotenv").config();
 
 const nextConfig = {
+  matcher: ['/account/:path*', '/dashboard/:path*', '/profile/:path*'],
   webpack(config) {
     // Конфигурация для SVG
     config.module.rules.push({

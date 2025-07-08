@@ -7,10 +7,11 @@ export function HistoryPage() {
     const [_,data] = useToServer("/account/history",{
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` 
         },
         body: JSON.stringify({history}),
-        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+        credentials: "include",
     },false);
 
     return (

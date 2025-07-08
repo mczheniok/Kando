@@ -14,16 +14,14 @@ export default function AuthWrapper() {
     const handlerInput = e => {
         const i = e.target
         formBody.current[i.name] = i.value;
-        console.log(formBody);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         
-
         fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/auth/${formStyle?"signup":"login"}`,{
             method: "POST",
-            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -31,10 +29,12 @@ export default function AuthWrapper() {
         })
         .then(res => res.json())
         .then(data => {
-            if(data.data.token) {
-                localStorage.setItem("token",data.data.token);
-                window.location.pathname = "/account";
-            } 
+            if(data.status === "ok") setTimeout(() => {
+                window.location.pathname = "/account"
+            },1000)
+        })
+        .finally(ok => {
+            if(ok) window.location.href = "/account";
         })
         .catch(err => {
             console.log(err);
@@ -108,7 +108,7 @@ export default function AuthWrapper() {
                         <div className="flex flex-col align-center" style={{width :"100%",padding: "0rem"}}>
                             {formInputs[Number(formStyle)].map((el,ind) => {
                                 return (
-                                    <InputContainer key={`form-input-el-${ind}`} type={2} text={el.text}>
+                                    <InputContainer key={`form-input-el-${ind}`} type={0} text={el.text}>
                                         <Input handler={handlerInput} type={el.type} placeholder={el.placeholder} name={el.name} ></Input>
                                     </InputContainer>
                                 )
@@ -141,29 +141,3 @@ export default function AuthWrapper() {
         </div>
     )  
 }
-
-        // <div className={styles.Grid} style={{background: "url('/assets/login.jpg')",backgroundSize: "cover",backgroundPosition: "50%",position: "absolute",width: "100%",gap: "0",height:"100svh"}}>
-        //     <section className={`${styles.Image} flex flex-col align-center justify-center`}>  
-        //         <h1>Welcome To Kando</h1>
-        //         <h3>Discover read reviews, and shop with confidence today!</h3>  
-        //     </section>
-        //     <form onSubmit={handleSubmit} className={`${styles.LoginForm} flex flex-col justify-center align-center`}>
-        //     <div className={`${styles.LoginContainer} flex flex-col`} style={{border: "solid var(--orange-transparent) 2px",background: "var(--orange-transparent)",borderRadius: '1rem'}}>
-        //         <h1 className="accent-text">USER LOGIN</h1>
-        //         <Input name={"email"} handler={handlerInput} placeholder={"email"} type="email"></Input>
-        //         <Input name={"password"} handler={handlerInput} placeholder={"password"} type="password"></Input>
-        //             <div className="flex flex-row justify-between flex-wrap">
-        //                 <SignButton title={"Github"} img={"github"} />
-        //                 <SignButton title={"Google"} img={"google"} />
-        //             </div>
-        //             <div className="flex flex-row align-center justify-between">
-        //                 <input className={styles.Radio} type="radio"></input>
-        //                 <h3 style={{cursor: "pointer",color: "var(--orange)"}}>ще не маєте акаунта?</h3>
-        //             </div>
-        //         <div className="flex flex-row">
-        //             <button type="submit" className={styles.Submit}>Ввійти</button>
-        //             <button type="submit" className={styles.Submit}>Створити</button>
-        //         </div>
-        //     </div> 
-        //     </form>
-        // </div>

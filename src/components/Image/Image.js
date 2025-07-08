@@ -97,6 +97,7 @@ export function ProductImageSection({list}) {
         "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
         "Content-Type":"application/json" 
       },
+      credentials: "include",
       body: JSON.stringify({
         product_id,
         to_user_id: userId

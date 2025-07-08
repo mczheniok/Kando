@@ -89,7 +89,8 @@ export function CardRow({obj,t=false}) {
     const handleClickDeleteButton = async e => {
         toServer(`/${!t?"archive":"account"}/delete/${id}`,{
             method: "DELETE",
-            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+            credentials: "include"
         })
         .then(() => {
             document.querySelector(`[data-product-id="${id}"]`).remove()
@@ -104,7 +105,8 @@ export function CardRow({obj,t=false}) {
             headers: {  
                 "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
                 "Contant-Type": "application/json"
-            }
+            },
+            credentials: "include",
         })   
     }
 

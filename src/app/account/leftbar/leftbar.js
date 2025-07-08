@@ -50,7 +50,8 @@ export const MoreButton = ({userData}) => {
                 <li className={styles.buttonDropList} onClick={() => {
                     toServer("/account/exit",{
                         method: "DELETE",
-                        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+                        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+                        credentials: "include",
                     },false)
                     .then(res => {
                         res.status === "finally"?window.location.pathname = "/login":undefined

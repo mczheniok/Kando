@@ -2,7 +2,7 @@
 import Header from "@/shared/blocks/Header";
 import Footer from "@/shared/blocks/Footer";
 import styles from "./account.module.css";
-import RowBlock from "@/components/Row/RowBlock";
+import { debounce } from "@/features/functions/functions";
 import { Button, ButtonCircle} from "@/shared/Buttons/Buttons";
 import { Column } from "@/components/Columns/ColumnComponents";
 import { CardBlock } from "@/components/Cards/Card";
@@ -43,6 +43,7 @@ import AppleIcon from "@/icons/apple.svg";
 import AndroidIcon from "@/icons/android.svg";
 import ChromeIcon from "@/icons/chrome.svg";
 import UnknownIcon from "@/icons/linux.svg";
+import { HeadInputList, includeSearchName } from "../../config";
 
 
 
@@ -83,7 +84,8 @@ const SessionBlock = ({session}) => {
     const handleRemove = async (id) => {
         toServer(`/sessions/remove/${id}`,{
             method: "DELETE",
-            headers: { "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` } 
+            headers: { "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+            credentials: "include"
         })
         .then(() => {
             document.querySelector(`[data-session-id="${id}"]`).remove();
@@ -139,7 +141,8 @@ const AccountMain = () => {
     const userData = useContext(UserContext);
 
     const [load,data] = useToServer("/sessions/all",{
-        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+        credentials: "include"
     },false);
 
     const MainPage = () => {
@@ -172,7 +175,8 @@ const AccountMain = () => {
 
     const MyProductsPage = () => {
         const [load,products] = useToServer("/account/products",{
-            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+            credentials: "include"
         },false);
         
         return (
@@ -227,7 +231,8 @@ const AccountMain = () => {
 
 const ArchivePage = () => {      
     const [load,data] = useToServer("/archive/all",{
-        headers: { "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+        headers: { "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+        credentials: "include"
     },false);
 
     return (
@@ -246,7 +251,7 @@ const ArchivePage = () => {
 }
 
 
-const DescriptionData = ({set,ref,state}) => {
+const DescriptionData = ({set,ref,state,setName}) => {
     const arr = ["нерухомість","одежа"];
     const [select,setSelect] = state;
 
@@ -258,15 +263,49 @@ const DescriptionData = ({set,ref,state}) => {
             <InputContainer type={1} text={"Підкатегорія"}>
                 <SelectList formDataRef={ref} name={"subcategory"} type={true} arr={SubCategory[select]} ></SelectList>
             </InputContainer>
-            <InputContainer type={1} text={"Назва Оголошення"}>
-                <Input name={'name'} placeholder={"Назва оголошення"} handler={set}></Input>
+            <InputContainer type={2} text={"Назва Оголошення"}>
+                <Input name={'name'} placeholder={"Назва оголошення"} handler={e => {
+                    setName(e.target.value.trim());
+                    set(e);
+                }}></Input>
             </InputContainer>   
             <InputContainer type={1} text={"Ціна"}>
                 <Input name={"price"} handler={set} placeholder={"22.000,00"}></Input>
             </InputContainer>
+            {HeadInputList[select].map((el,ind) => {
+                return (
+                    <InputContainer key={`head-input-el-${ind}`} type={1} text={el.text}>
+                        <SelectList name={el.name} type={true} formDataRef={ref} arr={el.placeholder}></SelectList>
+                    </InputContainer>
+                )
+            })}
         </div>
     )
 }
+
+const MapLayout = ({location,setLocation}) => {
+    return <SectionContainer headerText={"Місцезнаходження"}>
+    <div className="flex flex-col" style={{maxWidth: "100%",borderRadius: "1rem"}}>
+            <div style={{width: "100%"}}>
+                <LazyMap height="400px" title={"ваша квартира"} position={location}></LazyMap>
+            </div>
+            
+            <input placeholder="Введіть адресу або посилання на Google Maps" type="text" name="location" onChange={e => {
+                setTimeout(() => {
+                    const regex = /@([^,]+),([^,]+),([^z]+)/;
+                    const matches = e.target.value.match(regex);
+                
+                    if(matches) {
+                        const latitude = matches[1];  // Широта
+                        const longitude = matches[2]; // Долгота
+                        const zoom = matches[3];      // Зум
+                        setLocation(prev => [latitude,longitude]);
+                    }
+                },100)
+            }} className={styles.AccountInput}></input>
+    </div>
+    </SectionContainer>
+} 
   
 
 const Page7 = () => {
@@ -277,6 +316,7 @@ const Page7 = () => {
         subcategory: "",
         info: {}
     });
+    const [name,setName] = useState(anoncement.current.name);
     const descriptionRef = useRef(null);
     const [category,setCategory] = useState("одежа");
     const [location,setLocation] = useState([44.4727805,44.4755123]);
@@ -319,7 +359,7 @@ const Page7 = () => {
     const handleAiClick = async e => {
         toServer("/ai/ai",{
             method: "POST",
-            headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json" 
             },
@@ -385,33 +425,28 @@ const Page7 = () => {
             await toServer("/account/products/create",{
                 method: "POST",
                 body: data,
-                headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+                headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+                credentials: "include"
             })
     }
 
-    const MapLayout = () => {
-        return <SectionContainer headerText={"Місцезнаходження"}>
-        <div className="flex flex-col" style={{maxWidth: "100%",borderRadius: "1rem"}}>
-                <div style={{width: "100%"}}>
-                    <LazyMap height="400px" title={"ваша квартира"} position={location}></LazyMap>
-                </div>
-                
-                <input placeholder="Введіть адресу або посилання на Google Maps" type="text" name="location" onChange={e => {
-                    setTimeout(() => {
-                        const regex = /@([^,]+),([^,]+),([^z]+)/;
-                        const matches = e.target.value.match(regex);
-                    
-                        if(matches) {
-                            const latitude = matches[1];  // Широта
-                            const longitude = matches[2]; // Долгота
-                            const zoom = matches[3];      // Зум
-                            setLocation(prev => [latitude,longitude]);
-                        }
-                    },100)
-                }} className={styles.AccountInput}></input>
-        </div>
-        </SectionContainer>
-    } 
+
+    const debouncedSearch = debounce((searchName) => {
+        Object.entries(includeSearchName).forEach(([key,value]) => {
+            if (searchName.toLowerCase().includes(key)) {
+                setCategory(value[0]);
+                anoncement.current.typeagreement = value;
+            }
+        });
+    }, 600);
+    
+    // В компоненте:
+    useEffect(() => {
+        if (name) {
+            debouncedSearch(name);
+        }
+    }, [name]);
+
 
     const DescriptionSection = () => {
         return(
@@ -441,17 +476,12 @@ const Page7 = () => {
     
     return (
         <>
-            <RowBlock>
-                <h3 style={{flexGrow: '1'}}>Основна Інформація</h3>
-                <h3 style={{flexGrow: '1'}}>Фото</h3>
-                <h3 style={{flexGrow: '1'}}>Деталі</h3>
-            </RowBlock> 
             <form onSubmit={handleSubmit} className="flex flex-col" style={{width: "100%",padding: '1rem',marginTop: "2rem"}}>
                 <SectionContainer headerText={"Основна Інформація"}>
-                    <DescriptionData state={[category,setCategory]} ref={anoncement.current} set={handleInput}></DescriptionData>
+                    <DescriptionData setName={setName} state={[category,setCategory]} ref={anoncement.current} set={handleInput}></DescriptionData>
                     <DescriptionSection></DescriptionSection>
                 </SectionContainer>
-                <MapLayout></MapLayout>
+                <MapLayout location={location} setLocation={setLocation}></MapLayout>
                 <SectionContainer headerText={"Фотографії"}>
                     <div className="flex flex-row flex-wrap" style={{width: "100%"}}>
                         {productImages.map((el,ind) => {
@@ -493,7 +523,8 @@ export default function Account() {
     }
     
     const [_,data] = useToServer("/account/me",{
-        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` }
+        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+        credentials: "include",
     },false,false);    
 
     return (    

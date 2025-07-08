@@ -46,19 +46,19 @@ export const categoryList = {
             placeholder: "40",
         },
         {
+            text: "Площа Кухні, м²",
+            name: "kitchenplace",
+            placeholder: "15"
+        },
+        {
             text: "Рік будівництва",
             name: "yearconstruction",
             placeholder: "2007"
         },
         {
-            text: "Стан",
+            text: "Ремонт",
             name: "state",
-            placeholder: ["Після ремонту","Євро Ремонт","Під ремонт"]
-        },
-        {
-            text: "Тип угоди",
-            name: "typeagreement",
-            placeholder: ["Оренда","Продаж","Подобова Аренда"]
+            placeholder: ["Євро Ремонт","Після ремонту","Під ремонт","Косметичний Ремонт","Авторський Ремонт"]
         },
         {
             text: "Відео огляд",
@@ -76,10 +76,30 @@ export const categoryList = {
             placeholder: "17"
         },
         {
+            text: "Поверховість",
+            name: "totalfloor",
+            placeholder: "17"
+        },
+        {
             text: "Район",
             name: "region",
             placeholder: ["Київскій район","Пересипський район","Приморський район","Хаджибейский район"]
         },
+        {
+            text: "Планування",
+            name: "objectplane",
+            placeholder: ["Роздільно","Суміжно Прохідна","Студія","Смарт","Пентхаус"]
+        },
+        {
+            text: "Санвузол",
+            name: "bathroom",
+            placeholder: ["Роздільний","Суміжний","2 і більше"]
+        },
+        {
+            text: "Опалення",
+            name: "heating",
+            placeholder: ["Централізоване","Власна котельня","Індивідуальне Газове","Індивідуальне Електро","Інше"]
+        }
     ],
     "одежа": [
         {
@@ -96,6 +116,29 @@ export const categoryList = {
     ]
 }
 
+
+export const HeadInputList = {
+    "нерухомість": [
+        {
+            text: "Тип угоди",
+            name: "typeagreement",
+            placeholder: ["Оренда","Долгосрочна Оренда","Продаж"]
+        },
+        {
+            text: "Кількість Кімнат",
+            reqiure: true,
+            name: "totalrooms",
+            placeholder: ["1","2","3","4","5","5+"]
+        }
+    ],
+    "одежа": [
+        {
+            text: "Розмір одягу",
+            name: "size",
+            placeholder: ["XSS","XS","S","M","L","XL","XXL"]
+        },
+    ]
+}
 
 
 // ********************************************************************************
@@ -167,7 +210,7 @@ export const searchParams = [
     {
         text: "Район",
         name: "region",
-        placeholder: ["Київскій район","Пересипський район","Приморський район","Хаджибейский район"]
+        placeholder: ["Київській район","Пересипський район","Приморський район","Хаджибейьский район"]
     },
     {
         text: "Працюю з рієлторами",
@@ -187,6 +230,10 @@ export const searchParams = [
     {
         text: "Поверх",
         name: "floor",
-        placeholder: "17"
+        placeholder: "10"
     },
 ]
+
+export const includeSearchName = {
+    "сдам": ["нерухомість","Долгосрочна Оренда"]
+}

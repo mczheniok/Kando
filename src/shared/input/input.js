@@ -47,12 +47,15 @@ export function SelectList({arr,formDataRef,name,type=false,state,setState=() =>
     )
 }
 
-export function InputContainer({type=0,children,text}) {
-    const sizes = ["33%","50%","100%"]
-    const size = sizes[type]; 
-
+export function InputContainer({type=2,children,text}) {
+    const classNames = [
+        styles.InputContainer33,
+        styles.InputContainer50,
+        styles.InputContainer100
+    ];
+    
     return (
-        <div className={`flex flex-col`} style={{width: `calc(${size} ${size === "100%"?"":"- 2rem"})`}}>
+        <div className={`${classNames[type]} flex flex-col`}>
             <InputHeader text={text} />
             {children && children}
         </div>
@@ -60,14 +63,16 @@ export function InputContainer({type=0,children,text}) {
 }
 
 export function Input({type=false,placeholder,name,handler,ref=null}) {
-    return <input 
-          name={name} 
-          ref={ref}
-          onInput={handler} 
-          className={`${styles.Input} h3-text`} 
-          placeholder={placeholder} 
-          type={type ? "text" : "text"} 
-    />
+    return (
+        <input 
+            name={name} 
+            ref={ref}
+            onInput={handler} 
+            className={`${styles.Input} h3-text`} 
+            placeholder={placeholder} 
+            type={type ? "text" : "text"} 
+        />
+    )
 }
 
 

@@ -55,6 +55,7 @@ export function userHeadAccount({
             headers: {
                 "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
             },
+            credentials: "include",
             body: formDataRef.current
         },true);
     }   
