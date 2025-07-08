@@ -58,7 +58,7 @@ export function ProductSeoSchema({product}) {
             "@type": "Offer",
             "url": `${url}/product/${id}`,
             "priceCurrency": "UAH",
-            "price": 22000.00,
+            "price": price,
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/UsedCondition"
         }
