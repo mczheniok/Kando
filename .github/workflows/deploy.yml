@@ -16,7 +16,7 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
         with:
-          host: kando.pp.ua
+          host: ${{ secrets.VPS_HOST }}
           username: deployer
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
