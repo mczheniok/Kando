@@ -19,7 +19,8 @@ export function HomeSeoSchema() {
           "contactType": "customer service",
           "areaServed": "UA",
           "availableLanguage": ["Ukrainian","Russian"]
-        }
+        },
+        "foundingDate": "2025"
     };
 
     return (

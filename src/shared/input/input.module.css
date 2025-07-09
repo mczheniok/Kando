@@ -81,6 +81,12 @@
     width: 100%;
 }
 
+.HeaderText{
+    color: var(--primary);
+    font-weight: 100;
+    text-wrap: nowrap;
+}
+
 @media screen and (max-width: 574px) {
     .InputContainer33 {
         width: calc(33% - 1rem);
@@ -91,5 +97,7 @@
         flex-grow: 1;
     }
 
-
+    .HeaderText{
+        font-size: 1.1rem;
+    }
 }

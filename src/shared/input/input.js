@@ -2,7 +2,7 @@ import styles from "./input.module.css";
 import { useState  , useEffect } from "react";
 import MoreArrowIcon from "@/icons/morearrow.svg";
 
-export const InputHeader = ({ text }) => <h3 style={{color: "var(--primary)",textWrap: "nowrap",fontWeight: "100"}}>{text}</h3>
+export const InputHeader = ({ text }) => <h3 className={styles.HeaderText} >{text}</h3>
 
 export function SelectList({arr,formDataRef,name,type=false,state,setState=() => {}}) {
     const [selected,setSelected] = useState(arr[0] || state || formDataRef[name]);
@@ -102,5 +102,27 @@ export function InputDate({name,handler=() => {},ref}) {
 
 
 export function InputArea({name,handler = () => {},ref,placeholder}) {
-    return <textarea ref={ref} name={name} placeholder={placeholder} className={styles.InputArea} onChange={handler} />
+    const onPaste = (e) => {
+        const TextArea = e.target;
+        
+        setTimeout(() => {
+            const prevHeight = TextArea.style.height;
+    
+            TextArea.style.height = "auto";
+            const newHeight = TextArea.scrollHeight + "px";
+    
+            TextArea.style.height = prevHeight;
+    
+            requestAnimationFrame(() => {
+                TextArea.style.transition = 'height 0.5s ease';
+                TextArea.style.height = newHeight;
+            });
+    
+            console.log("Вставка обработана");
+        }, 0);
+    }
+
+    return (
+        <textarea onPaste={onPaste} minLength={40} maxLength={1600} ref={ref} name={name} placeholder={placeholder} className={styles.InputArea} onChange={handler} />
+    )
 }

@@ -90,7 +90,7 @@ export function userHeadAccount({
                 <div style={{width: '100%'}} className="flex flex-row justify-between flex-grow align-center flex-wrap">
                         <div style={{width: "fit-content"}}>
                             {change ?
-                                <Input handler={handleInput} val={username} name={"username"} type={"text"}></Input>
+                                <Input placeholder="юзер нейм" handler={handleInput} val={username} name={"username"} type={"text"}></Input>
                             :<h2>{username}</h2>
                             }
                         </div>
@@ -107,8 +107,8 @@ export function userHeadAccount({
 
                 <div className="flex flex-row justify-between" style={{width: "100%"}}>
                     {change ?
-                        <Input handler={handleInput} type={"tel"} name={"phone"} val={phone}></Input>
-                    :<h5 className="secondary-text">+{phone}</h5>
+                        <Input placeholder="номер телефону" handler={handleInput} type={"tel"} name={"phone"} val={phone}></Input>
+                    :<h5 className="secondary-text">+38{phone}</h5>
                     }
                     <div style={{width: "fic-content"}}>
                         <Button title={"Зберегти"} submit={true}></Button>

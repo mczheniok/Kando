@@ -19,6 +19,29 @@ export const SectionContainer = ({children,headerText}) => (
 
 export function CreateNewAnnouncement({handler}) {
     const ArrAllProducts = [
+        {
+            title: "Меблювання", arr: [
+                "з меблями",
+                "без меблів"
+            ]
+        },
+        {
+            title: "Домашні Улюбленці", arr: [
+                "ні",
+                "так,кіт",
+                "так,маленький пес",
+                "так,середній пес",
+            ]
+        },
+        {
+            title: "Автономність при блекауті", arr: [
+                "Працює інтернет",
+                "Працює ліфт",
+                "Працює",
+                "Працює опалення",
+                "Резервне підключення"  
+            ]
+        },
         {title: "Побутова Техінка",arr: [
             "Електрочайник", 
             "Кавомашина",
@@ -115,7 +138,7 @@ export function CreateNewAnnouncement({handler}) {
             "Можна іноземцям",
             "Можна з дітьми",
             "Можна курити",
-        ]}
+        ]},
     ]
 
 

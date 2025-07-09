@@ -406,7 +406,6 @@ const Page7 = () => {
             data.set("description",description);
 
 
-
             if(!arraysEqual(location,[44.4727805,44.4755123])) {
                 data.set("location",JSON.stringify(location)); 
             } else {
