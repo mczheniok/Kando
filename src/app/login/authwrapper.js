@@ -4,12 +4,13 @@ import styles from "./login.module.css"
 import { useRef, useState } from "react";
 import { Button,  RefWithImg } from "@/shared/Buttons/Buttons";
 import Logo from "@/shared/blocks/Logo";
+import { useRouter } from "next/navigation";
 
 export default function AuthWrapper() {
     const formBody = useRef({});
     const form = useRef({});
     const [formStyle,setFormStyle] = useState(false);
-
+    const router = useRouter();
 
     const handlerInput = e => {
         const i = e.target
@@ -18,6 +19,7 @@ export default function AuthWrapper() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         
         fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/auth/${formStyle?"signup":"login"}`,{
             method: "POST",
@@ -28,6 +30,11 @@ export default function AuthWrapper() {
             body: JSON.stringify(formBody.current)
         })
         .then(res => res.json())
+        .then(data => {
+            setTimeout(() => {
+                router.push('/account');
+            },1000);
+        })
         .catch(err => {
             console.log(err);
         })

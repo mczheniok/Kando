@@ -517,11 +517,7 @@ const Page7 = () => {
 }
 
 
-export default function Account() {
-    if(typeof window !== "undefined") {
-        if(!localStorage.getItem('token')) return window.location.pathname = "/login";
-    }
-    
+export default function Account() {    
     const [_,data] = useToServer("/account/me",{
         headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
         credentials: "include",
