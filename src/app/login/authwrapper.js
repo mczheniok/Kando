@@ -28,14 +28,6 @@ export default function AuthWrapper() {
             body: JSON.stringify(formBody.current)
         })
         .then(res => res.json())
-        .then(data => {
-            if(data.status === "ok") setTimeout(() => {
-                window.location.pathname = "/account"
-            },1000)
-        })
-        .finally(ok => {
-            if(ok) window.location.href = "/account";
-        })
         .catch(err => {
             console.log(err);
         })
