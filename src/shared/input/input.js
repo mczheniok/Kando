@@ -117,8 +117,6 @@ export function InputArea({name,handler = () => {},ref,placeholder}) {
                 TextArea.style.transition = 'height 0.5s ease';
                 TextArea.style.height = newHeight;
             });
-    
-            console.log("Вставка обработана");
         }, 0);
     }
 

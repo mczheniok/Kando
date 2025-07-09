@@ -257,18 +257,18 @@ const DescriptionData = ({set,ref,state,setName}) => {
 
     return (
         <div className={`${styles.DescriptionData} flex flex-row flex-wrap`} style={{marginRight: "0rem",width: "100%"}}>
-            <InputContainer type={1} text={"Категорія"}>
-                <SelectList state={select} setState={setSelect} formDataRef={ref} arr={arr} name={"category"}></SelectList>
-            </InputContainer>
-            <InputContainer type={1} text={"Підкатегорія"}>
-                <SelectList formDataRef={ref} name={"subcategory"} type={true} arr={SubCategory[select]} ></SelectList>
-            </InputContainer>
             <InputContainer type={2} text={"Назва Оголошення"}>
                 <Input name={'name'} placeholder={"Назва оголошення"} handler={e => {
                     setName(e.target.value.trim());
                     set(e);
                 }}></Input>
-            </InputContainer>   
+            </InputContainer> 
+            <InputContainer type={1} text={"Категорія"}>
+                <SelectList state={select} setState={setSelect} formDataRef={ref} arr={arr} name={"category"}></SelectList>
+            </InputContainer>
+            <InputContainer type={1} text={"Підкатегорія"}>
+                <SelectList formDataRef={ref} name={"subcategory"} type={true} arr={SubCategory[select]} ></SelectList>
+            </InputContainer>  
             <InputContainer type={1} text={"Ціна"}>
                 <Input name={"price"} handler={set} placeholder={"22.000,00"}></Input>
             </InputContainer>
