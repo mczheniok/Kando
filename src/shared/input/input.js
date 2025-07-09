@@ -123,6 +123,6 @@ export function InputArea({name,handler = () => {},ref,placeholder}) {
     }
 
     return (
-        <textarea onPaste={onPaste} minLength={40} maxLength={1600} ref={ref} name={name} placeholder={placeholder} className={styles.InputArea} onChange={handler} />
+        <textarea onPaste={onPaste} minLength={40} maxLength={3000} ref={ref} name={name} placeholder={placeholder} className={styles.InputArea} onChange={handler} />
     )
 }
