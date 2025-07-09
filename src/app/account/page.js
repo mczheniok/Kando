@@ -283,7 +283,7 @@ const DescriptionData = ({set,ref,state,setName}) => {
     )
 }
 
-const MapLayout = ({location,setLocation}) => {
+const MapLayout = ({location,setLocation,map}) => {
     return <SectionContainer headerText={"Місцезнаходження"}>
     <div className="flex flex-col" style={{maxWidth: "100%",borderRadius: "1rem"}}>
             <div style={{width: "100%"}}>

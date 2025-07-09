@@ -14,7 +14,7 @@ const MapComponent = memo(({ title, height = "240px", position = [] }) => {
 
   useEffect(() => {
     if (mapRef.current && position) {
-      map.setView(position);
+      mapRef.current.setView(position);
     }
   }, [position[0], position[1]]);
 
