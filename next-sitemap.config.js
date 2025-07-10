@@ -25,8 +25,8 @@ module.exports = {
       };
 
       const [productsRes, categoriesRes] = await Promise.all([
-        fetch(`${baseUrl}/items`, fetchOptions),
-        fetch(`${baseUrl}/items/categories`, fetchOptions)
+        fetch(`${baseUrl}/api/items`, fetchOptions),
+        fetch(`${baseUrl}/api/items/categories`, fetchOptions)
       ]);
 
       // Проверяем статус ответов
