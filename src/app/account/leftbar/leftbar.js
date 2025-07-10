@@ -25,7 +25,7 @@ const listTargets = [
 ]
 
 const UserAvatar = ({width,height,padding=null,src}) => {
-    const [imgUrl,setImgUrl] = useState(`${process.env.NEXT_PUBLIC_URL}/${src}`);
+    const [imgUrl,setImgUrl] = useState(`${process.env.NEXT_PUBLIC_URL}/images/${src}`);
 
     return (
         <Image width={width} height={height} src={imgUrl} onError={() => setImgUrl("/assets/noimage.webp")} style={{padding: padding?padding:"7px",background: "#e5e4e2",border:"none",boxSizing: "content-box"}} className="circle" alt="User Avatar"></Image>
