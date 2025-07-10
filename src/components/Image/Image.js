@@ -89,12 +89,9 @@ export function ProductImageSection({list}) {
     
 
   const handleChatClick = async () => {
-    console.log(true);
-
     const createChat = await toServer(`/chat/chat`,{
       method: "POST",
       headers: {   
-        "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,
         "Content-Type":"application/json" 
       },
       credentials: "include",

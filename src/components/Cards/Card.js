@@ -31,7 +31,7 @@ export function Card({obj,type}) {
                 <p className={styles.CardHeadImportant}>-35%</p>
             </div>
             <div className={`${styles.CardFooter} flex flex-col`}>
-                <h5 className={styles.CardCategoryText}>{obj.type || "Нерухомість"} / {subcategory} / {street || "вулицю не вказано"}</h5>
+                <h4 className={styles.CardCategoryText}>{obj.type || "Нерухомість"} / {subcategory} / {street || "вулицю не вказано"}</h4>
                 <h3>{nameLen(name|| "Прототип",20,15)}</h3>
                 <div className="flex flex-row align-center" style={{height: "40px"}}>
                     <ViewsIcon width={25} height={25}></ViewsIcon>

@@ -5,14 +5,44 @@ import styles from "./buttons.module.css"
 import Image from "next/image"
 import Link from "next/link"
 
-export function ButtonWithIcon({clName=null,relative=true,title,Icon,click,children=null,style="",submit=false}) {       
+export function ButtonWithIcon({
+        clName=null,
+        relative=true,
+        title,
+        Icon,
+        click,
+        children=null,
+        style="",
+        submit=false,
+        ariaLabel = "Кнопка",
+        ariaDescribedBy,
+        id,
+        disabled = false
+    }) {       
     return (
-        <button type={submit?"submit":"button"} style={{position: relative?"relative":''}} className={`${styles.ButtonWithIcon} flex flex-row align-center ${clName || ""} ${style?styles[style]:''}`} onClick={e =>  click && click(e)}>
+        <button 
+                id={id} 
+                type={submit ? "submit" : "button"} 
+                style={{position: relative?"relative":''}} 
+                disabled={disabled}
+                aria-label={ariaLabel || title} 
+                aria-describedby={ariaDescribedBy}
+                aria-disabled={disabled}
+                className={`${styles.ButtonWithIcon} flex flex-row align-center ${clName || ""} ${disabled ? styles.disabled : ''}  ${style?styles[style]:''}`} 
+                onClick={e =>  click && click(e)}
+            >
             {Icon && ( 
-                <Icon width={33} height={33} />
+                <Icon aria-hidden="true" focusable="false" width={33} height={33} />
             )}
             {title && (
-                <span className={`${style?styles[style+"Text"]:''} h4-text`} style={{width: "50%",textAlign: "center"}}>{title}</span>
+                <span 
+                    className={`${style?styles[style+"Text"]:''} h4-text`} 
+                    style={{width: "50%",
+                    textAlign: "center"}}
+                    aria-hidden={ariaLabel ? "true" : "false"}
+                >
+                    {title}
+                </span>
             )}
             {children}
         </button>

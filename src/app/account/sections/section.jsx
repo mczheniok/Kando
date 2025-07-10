@@ -190,7 +190,7 @@ const Page2 = () => {
     const click = (e) => document.getElementById(`${e.target.id}Input`).click()
 
     const ShopStats = [
-        {title: "144 товари",src: "/icons/product.svg"},
+        {title: "44 товари",src: "/icons/product.svg"},
         {title: "З нами Вже 10 років",src: "/icons/time.svg"},
     ]
 

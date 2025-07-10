@@ -8,6 +8,7 @@ import { HeadInfoBlock } from "@/features/products/headinfoblock/HeadInfoBlock";
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
 import { LazyCategory } from "@/components/lazy";
 import Head from "next/head";
+import { unstable_cache } from "next/cache";
 
 export async function generateMetadata({params,searchParams}) {
   const name = "Kando";
@@ -19,6 +20,19 @@ export async function generateMetadata({params,searchParams}) {
     description: description,
     alternates: {
       canonical: "https://kando.pp.ua",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': "30",
+        'max-image-preview': "large",
+        'max-snippet': "150",
+      },
     },
     openGraph: {
       title: `${name}`,
@@ -45,7 +59,25 @@ export async function generateMetadata({params,searchParams}) {
       ]
     }
   }
-}
+} 
+
+const checktime = unstable_cache(
+  () => {
+    const now = new Date();
+    const ukraineTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Kiev"}));
+    const ukraineHour = ukraineTime.getHours();
+
+
+    if(ukraineHour > 22 || ukraineHour < 5) {
+      return true
+    } else {
+      return false
+    }
+  },["ukraine-time-check"]
+  ,{revalidate: 3600,tags: ["time-check"]}
+);
+
+
 
 
 export default async function Home() {
@@ -59,10 +91,14 @@ export default async function Home() {
 
   const data = await res.json();
 
+  const isAfterEight = await checktime();
+  
+  const HeadImage = isAfterEight ? "/assets/dark.webp":"/assets/background.webp";
+
   return (
     <ContainerLanguage>
       <Head>
-        <link rel="preload" as="image" href="/assets/background.webp" fetchPriority="high"/>
+        <link rel="preload" as="image" href={HeadImage} fetchPriority="high"/>
       </Head>
 
       <HomeSeoSchema />
@@ -70,7 +106,7 @@ export default async function Home() {
       <Header></Header>
         <MainContainer>
           <Search placeholder={"Введіть назву товару або послуги..."}></Search>
-            <div className="flex flex-col" style={{backgroundRepeat: "no-repeat",backgroundSize: "cover",backgroundColor:"var(--orange)",backgroundPosition: "center",borderRadius: "1rem",backgroundImage: "url('assets/background.webp')",gap:"1rem"}}>
+            <div className="flex flex-col" style={{backgroundRepeat: "no-repeat",backgroundSize: "cover",backgroundColor:"var(--orange)",backgroundPosition: "center",borderRadius: "1rem",backgroundImage: `url(${HeadImage})`,gap:"1rem"}}>
               <HeadMainPage />
               <HeadInfoBlock />
             </div>

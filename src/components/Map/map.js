@@ -1,7 +1,10 @@
 import { useRef, useEffect, memo } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from 'leaflet';
+
 import "leaflet/dist/leaflet.css";
+
+
 
 const MapComponent = memo(({ title, height = "240px", position = [] }) => {
   const mapRef = useRef();

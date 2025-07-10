@@ -20,7 +20,7 @@ async function getData(id) {
 }
 
 
-export async function generateMetadata({params,searchParams}) {
+export async function generateMetadata ({params,searchParams}) {
   const { id } = await params
   const info = await getData(id);
 
@@ -48,6 +48,19 @@ export async function generateMetadata({params,searchParams}) {
     description: description?.slice(0,160) || "Знаходь то що треба на Kando",
     alternates: {
       canonical: `https://kando.pp.ua/product/${id}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': "30",
+        'max-image-preview': "large",
+        'max-snippet': "150",
+      },
     },
     openGraph: {
       title: `${name}`,
@@ -101,6 +114,7 @@ export default async function Product({params}) {
   
   const noImage = `${process.env.NEXT_PUBLIC_URL}/assets/noimage.webp`;
 
+
   const firstImage = image_array?.[0]
   ? `${process.env.NEXT_PUBLIC_URL}/uploads${image_array[0]}`
   : noImage;
@@ -115,16 +129,17 @@ export default async function Product({params}) {
     description: description || "Опис продукту скоро з'явиться — слідкуйте за оновленнями",
   }
 
+
   if(info) {
     return (
-        <ContainerLanguage>
+      <ContainerLanguage>
           <Header></Header>
             <ProductSeoSchema product={productForSeo}/>
-            <MainContainer>
-              <Search></Search>
-                <Info obj={info}></Info>
+              <MainContainer>
+                <Search></Search>
+                  <Info obj={info}></Info>
                 <InfoSectionBottom text={info.description}></InfoSectionBottom>
-                <NotificationContainer></NotificationContainer>
+              <NotificationContainer></NotificationContainer>
             </MainContainer>
           <Footer></Footer>
       </ContainerLanguage>

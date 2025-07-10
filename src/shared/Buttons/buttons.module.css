@@ -107,6 +107,12 @@
   border-radius: 10px;
 }
 
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+  
+
 @keyframes gradientBG {
     0% {
         background-position: 0% 50%;

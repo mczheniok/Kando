@@ -121,7 +121,7 @@ export default function Search({placeholder,set=() => {}}) {
                     })}
                 </ul>
             </div> 
-            <ButtonWithIcon submit={true} Icon={SearchIcon} title={""}></ButtonWithIcon>
+            <ButtonWithIcon ariaLabel="кнопка шукати" aria submit={true} Icon={SearchIcon} title={""}></ButtonWithIcon>
             <ButtonWithList relative={false} title={language.sort} Icon={FilterIcon} click={() => setVisibleList(prev => !prev)}>
             </ButtonWithList>
             <div className={`${styles.dropList} ${visibleList?"flex":"none"} flex-row align-center flex-wrap`} style={{width: "100%",gap: "2rem",top: "105%"}}>

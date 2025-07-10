@@ -38,12 +38,12 @@ export async function toServer(url,params={},n=true) { // n = with nofification
 }
 
 
-let timeOut;
-
 export function debounce(callback, delay) {
+  let timeOut;
+  
   return function (...args) {
     if (timeOut) {
-      clearTimeout(timeOut); // ← здесь правильно
+      clearTimeout(timeOut);
     }
     timeOut = setTimeout(() => {
       callback.apply(this, args);

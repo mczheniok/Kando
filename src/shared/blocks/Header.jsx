@@ -3,7 +3,7 @@ import styles from "./blocks.module.css";
 import { Button, ButtonWithList, RefWithIcon } from "@/shared/Buttons/Buttons";
 import Logo from "./Logo";
 import { LanguageContenxt } from "@/components/Containers/container";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import LanguageIcon from "@/icons/language.svg"
 import UserIcon from "@/icons/user.svg"
 
@@ -16,6 +16,17 @@ function Header() {
         set(lang);
         localStorage.setItem("language",JSON.stringify(lang));
     }
+    
+    const time = new Date().getHours();
+
+
+    useEffect(() => {
+        if(time > 22 || time < 5) {
+            const html = document.documentElement;
+            html.setAttribute("data-theme","dark");
+            
+        }
+    })
 
     return ( 
         <header className={`${styles.header} flex flex-row align-center`}>

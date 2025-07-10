@@ -20,7 +20,6 @@ import {
 import { useInputHandler } from "../../shared/hooks/useInputHandler"
 import usePageRender from "@/shared/hooks/usePageRender";
 import Loading from "@/components/loader";
-import { LazyMap } from "@/components/lazy";
 import { ContainerLanguage } from "@/components/Containers/container";
 import { CreateNewAnnouncement ,SectionContainer} from "./sections/section";
 import { Input, InputContainer, SelectList , InputArea } from "@/shared/input/input";
@@ -31,7 +30,7 @@ import { LeftBar } from "./leftbar/leftbar";
 import { useToServer } from "@/shared/hooks/useToServer";
 import { HistoryPage } from "./history/history";
 import { Chat, MessagesPage } from "./messages/messages";
-
+import { MapLayout , Description } from "./newanoncement/new";
 
 import MessagesIcon from "@/icons/messages.svg"
 import HistoryIcon from "@/icons/history.svg"
@@ -43,6 +42,8 @@ import AndroidIcon from "@/icons/android.svg";
 import ChromeIcon from "@/icons/chrome.svg";
 import UnknownIcon from "@/icons/linux.svg";
 import { anoncementSchema } from "@/schemas/zod";
+
+
 import { SendNotify } from "@/components/Notifications/notification";
 
 import { HeadInputList, includeSearchName } from "../../config";
@@ -285,29 +286,6 @@ const DescriptionData = ({set,ref,state,setName}) => {
     )
 }
 
-const MapLayout = ({location,setLocation,map}) => {
-    return <SectionContainer headerText={"Місцезнаходження"}>
-    <div className="flex flex-col" style={{maxWidth: "100%",borderRadius: "1rem"}}>
-            <div style={{width: "100%"}}>
-                <LazyMap height="400px" title={"ваша квартира"} position={location}></LazyMap>
-            </div>
-            
-            <input placeholder="Введіть адресу або посилання на Google Maps" type="text" name="location" onChange={e => {
-                setTimeout(() => {
-                    const regex = /@([^,]+),([^,]+),([^z]+)/;
-                    const matches = e.target.value.match(regex);
-                
-                    if(matches) {
-                        const latitude = matches[1];  // Широта
-                        const longitude = matches[2]; // Долгота
-                        const zoom = matches[3];      // Зум
-                        setLocation(prev => [latitude,longitude]);
-                    }
-                },100)
-            }} className={styles.AccountInput}></input>
-    </div>
-    </SectionContainer>
-} 
   
 
 const Page7 = () => {
@@ -316,12 +294,11 @@ const Page7 = () => {
         price: 0,
         description: "",
         subcategory: "",
-        info: {}
+        info: {},
+        location: []
     });
     const [name,setName] = useState(anoncement.current.name);
-    const descriptionRef = useRef(null);
     const [category,setCategory] = useState("одежа");
-    const [location,setLocation] = useState([44.4727805,44.4755123]);
     const categories = useRef([]);
     const [product_info,handleProductInfo] = useInputHandler({})
     const [productImages,setProductImages] = useState([]);
@@ -361,10 +338,11 @@ const Page7 = () => {
     const handleSubmit = async  e => {
             e.preventDefault(); 
             const data = new FormData();
-            const {description,name,price,subcategory,info} = anoncement.current;
+            const {description,name,price,subcategory,info,location} = anoncement.current;
     
             delete product_info.current;
 
+            
 
             if(productImages.length === 0) {
                 return SendNotify("Не прікріплено жодної фотографії","warning")
@@ -416,7 +394,6 @@ const Page7 = () => {
             await toServer("/account/products/create",{
                 method: "POST",
                 body: data,
-                headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
                 credentials: "include"
             })
     }
@@ -439,20 +416,6 @@ const Page7 = () => {
     }, [name]);
 
 
-    const DescriptionSection = () => {
-        return(
-            <>
-                <div className="flex flex-row" style={{width: '100%'}}>
-                    <div className="flex flex-col align-start" style={{width: "100%"}}>
-                        <h1>Опис</h1>
-                    </div>
-                </div>
-                
-                <InputArea ref={descriptionRef} name={"description"} placeholder={"Ввести опис оголошення"} handler={handleInput}></InputArea>
-            </>
-        )
-    }
-
 
     useEffect(() => {
         anoncement.current.info = categoryList[category].reduce((acc, el) => {
@@ -466,9 +429,9 @@ const Page7 = () => {
             <form onSubmit={handleSubmit} className="flex flex-col" style={{width: "100%",padding: '1rem',marginTop: "2rem"}}>
                 <SectionContainer require={true} headerText={"Основна Інформація"}>
                     <DescriptionData setName={setName} state={[category,setCategory]} ref={anoncement.current} set={handleInput}></DescriptionData>
-                    <DescriptionSection></DescriptionSection>
+                    <Description descriptionRef={anoncement.current}></Description>
                 </SectionContainer>
-                <MapLayout location={location} setLocation={setLocation}></MapLayout>
+                <MapLayout locationRef={anoncement.current}></MapLayout>
                 <SectionContainer headerText={"Фотографії"}>
                     <div className="flex flex-row flex-wrap" style={{width: "100%"}}>
                         {productImages.map((el,ind) => {
