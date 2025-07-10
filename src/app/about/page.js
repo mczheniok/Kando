@@ -18,6 +18,7 @@ export default function Page() {
 
     return (
         <ContainerLanguage>
+          <link rel="canonical" href="https://kando.pp.ua/about" />
           <Header></Header>
             <MainContainer>
                 <section className="flex flex-col align-start" style={{padding: "1rem 0rem",gap: "1.5rem"}}>
@@ -47,7 +48,6 @@ export default function Page() {
                     <UL title={"Зараз сайт активно розвивається. Найближчим часом планую впровадити:"}>
                         <li>функції просування оголошень для збільшення охоплення;</li>
                         <li>базову аналітику переглядів;</li>
-                        <li>мобільну адаптацію та зручну навігацію;</li>
                         <li>можливість створення профілю продавця з рейтингом та історією оголошень;</li>
                         <li>інтеграцію з Google Ads та аналітикою для більш ефективної реклами.</li>
                     </UL>

@@ -24,7 +24,7 @@ const listTargets = [
     {title: "Історія",icon: <HistoryIcon width={25} height={25} />}
 ]
 
-const UserAvatar = ({width,height,padding=null,src="/assets/noimage.webp"}) => {
+const UserAvatar = ({width,height,padding=null,src}) => {
     const [imgUrl,setImgUrl] = useState(`${process.env.NEXT_PUBLIC_URL}/${src}`);
 
     return (

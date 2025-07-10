@@ -1,13 +1,13 @@
 import Header from "@/shared/blocks/Header"
 import Search from "@/shared/blocks/search/Search";
 import Footer from "@/shared/blocks/Footer";
-import { HomeSeoSchema } from "@/SEO/SeoSchemaOrg";
+import { HomeSeoSchema , FooterSeoSchema } from "@/SEO/SeoSchemaOrg";
 import GridProductsList from "@/components/ProductsList/GridProductsList";
 import { HeadMainPage } from "@/features/products/Sections";
 import { HeadInfoBlock } from "@/features/products/headinfoblock/HeadInfoBlock";
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
 import { LazyCategory } from "@/components/lazy";
-
+import Head from "next/head";
 
 export async function generateMetadata({params,searchParams}) {
   const name = "Kando";
@@ -17,6 +17,9 @@ export async function generateMetadata({params,searchParams}) {
   return {
     title: name,
     description: description,
+    alternates: {
+      canonical: "https://kando.pp.ua",
+    },
     openGraph: {
       title: `${name}`,
       description: description,
@@ -58,8 +61,12 @@ export default async function Home() {
 
   return (
     <ContainerLanguage>
+      <Head>
+        <link rel="preload" as="image" href="/assets/background.webp" fetchPriority="high"/>
+      </Head>
+
       <HomeSeoSchema />
-      <link rel="preload" as="image" href="/assets/background.webp" fetchPriority="high"/>
+      <FooterSeoSchema />
       <Header></Header>
         <MainContainer>
           <Search placeholder={"Введіть назву товару або послуги..."}></Search>
