@@ -17,7 +17,7 @@
   ]
 
   export function InfoPagination({obj}) {
-    const { image_array, name , price , last_price , category , location  , subcategory, creator_id , id, views } = obj
+    const { image_array, name , product_info,  price , last_price , category , location  , subcategory, creator_id , id, views } = obj
     
     const infoRef = useRef(null);
     const [activePage,setPage] = usePageRender(infoRef);
@@ -33,7 +33,7 @@
       );
     }
 
-  const videoPage = () => <LazyVideoSection VideoId={"jE7bMW_JPJs"}></LazyVideoSection>
+  const videoPage = () => <LazyVideoSection VideoId={product_info.reviewvideo}></LazyVideoSection>
 
   const pages = [
     main,

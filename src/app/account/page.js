@@ -3,7 +3,7 @@ import Header from "@/shared/blocks/Header";
 import Footer from "@/shared/blocks/Footer";
 import styles from "./account.module.css";
 import { debounce } from "@/features/functions/functions";
-import { Button, ButtonCircle} from "@/shared/Buttons/Buttons";
+import { Button} from "@/shared/Buttons/Buttons";
 import { Column } from "@/components/Columns/ColumnComponents";
 import { CardBlock } from "@/components/Cards/Card";
 import { 
@@ -33,7 +33,6 @@ import { HistoryPage } from "./history/history";
 import { Chat, MessagesPage } from "./messages/messages";
 
 
-
 import MessagesIcon from "@/icons/messages.svg"
 import HistoryIcon from "@/icons/history.svg"
 import NewIcon from "@/icons/new.svg"
@@ -43,6 +42,9 @@ import AppleIcon from "@/icons/apple.svg";
 import AndroidIcon from "@/icons/android.svg";
 import ChromeIcon from "@/icons/chrome.svg";
 import UnknownIcon from "@/icons/linux.svg";
+import { anoncementSchema } from "@/schemas/zod";
+import { SendNotify } from "@/components/Notifications/notification";
+
 import { HeadInputList, includeSearchName } from "../../config";
 
 
@@ -150,7 +152,7 @@ const AccountMain = () => {
             <>
                 <section style={{width: "100%",border: "solid var(--border) 1px",borderLeft: "none"}}>
                     <Suspense fallback={<Loading/>}> 
-                        <UserHeaderInfo subscription={`план: ${userData.subscription}`} phone={userData?.phone} image={userData?.image} email={userData?.email} username={userData?.username} ></UserHeaderInfo>    
+                        <UserHeaderInfo subscription={`план: ${userData?.subscription}`} phone={userData?.phone} image={userData?.image} email={userData?.email} username={userData?.username} ></UserHeaderInfo>    
                     </Suspense>
                 </section>
                 <div className={styles.cardsContainer}>
@@ -257,7 +259,7 @@ const DescriptionData = ({set,ref,state,setName}) => {
 
     return (
         <div className={`${styles.DescriptionData} flex flex-row flex-wrap`} style={{marginRight: "0rem",width: "100%"}}>
-            <InputContainer type={2} text={"Назва Оголошення"}>
+            <InputContainer require={true} type={2} text={"Назва Оголошення"}>
                 <Input name={'name'} placeholder={"Назва оголошення"} handler={e => {
                     setName(e.target.value.trim());
                     set(e);
@@ -270,7 +272,7 @@ const DescriptionData = ({set,ref,state,setName}) => {
                 <SelectList formDataRef={ref} name={"subcategory"} type={true} arr={SubCategory[select]} ></SelectList>
             </InputContainer>  
             <InputContainer type={1} text={"Ціна"}>
-                <Input name={"price"} handler={set} placeholder={"22.000,00"}></Input>
+                <Input name={"price"} handler={set} placeholder={"22000"}></Input>
             </InputContainer>
             {HeadInputList[select].map((el,ind) => {
                 return (
@@ -311,7 +313,7 @@ const MapLayout = ({location,setLocation,map}) => {
 const Page7 = () => {
     const anoncement = useRef({
         name: "",
-        price: "",
+        price: 0,
         description: "",
         subcategory: "",
         info: {}
@@ -356,36 +358,6 @@ const Page7 = () => {
         console.log(productImages)
     }
 
-    const handleAiClick = async e => {
-        toServer("/ai/ai",{
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json" 
-            },
-            body: JSON.stringify({description: anoncement.current.description})
-        },true)
-        .then(data => {
-            const TextArea = descriptionRef.current
-            anoncement.current.description = data.data.ai
-            TextArea.value = data.data.ai;
-
-            if(!TextArea) return ;
-
-            const prevHeight = TextArea.style.height;
-
-            TextArea.style.height = "auto";
-            const newHeight = TextArea.scrollHeight + "px";
-            
-            TextArea.style.height = prevHeight;
-
-            requestAnimationFrame(() => {
-                TextArea.style.transition = 'height 0.5s ease';
-                TextArea.style.height = newHeight;
-            })
-        });
-    }
-
     const handleSubmit = async  e => {
             e.preventDefault(); 
             const data = new FormData();
@@ -393,6 +365,10 @@ const Page7 = () => {
     
             delete product_info.current;
 
+
+            if(productImages.length === 0) {
+                return SendNotify("Не прікріплено жодної фотографії","warning")
+            }
 
             productImages.forEach((el,_) => {
                 data.append("files",el.file);
@@ -402,6 +378,21 @@ const Page7 = () => {
                 return a.length === b.length && a.every((val, i) => val === b[i]);
             }
             
+
+            const result = anoncementSchema.safeParse({
+                ...anoncement.current,
+                categories: categories.current,
+                price: parseInt(anoncement.current.price),
+                category
+            });
+
+
+            if(!result.success) {
+                const err = result.error.errors[0].message
+
+                return SendNotify(err,"warning");
+            }
+
 
             data.set("description",description);
 
@@ -416,9 +407,10 @@ const Page7 = () => {
             data.set("name",name);
             data.set("subcategory",subcategory);
             data.set("info",JSON.stringify(info));
-            data.set("categoryes",JSON.stringify(categories.current));
+            data.set("categories",JSON.stringify(categories.current));
             data.set("type",category);
             data.set("product_info",JSON.stringify(product_info));
+
 
         
             await toServer("/account/products/create",{
@@ -453,10 +445,6 @@ const Page7 = () => {
                 <div className="flex flex-row" style={{width: '100%'}}>
                     <div className="flex flex-col align-start" style={{width: "100%"}}>
                         <h1>Опис</h1>
-                        <div className="flex flex-row align-center justify-between" style={{width: "100%"}}>
-                            <h3 className="secondary-text">Якщо ви маєте підписку ви також можете створити опис за допомогою штучного інтелекту</h3>
-                            <ButtonCircle title="Створити за допомогою ai" Icon={NewIcon} color="violet" click={handleAiClick}></ButtonCircle>
-                        </div>
                     </div>
                 </div>
                 
@@ -476,7 +464,7 @@ const Page7 = () => {
     return (
         <>
             <form onSubmit={handleSubmit} className="flex flex-col" style={{width: "100%",padding: '1rem',marginTop: "2rem"}}>
-                <SectionContainer headerText={"Основна Інформація"}>
+                <SectionContainer require={true} headerText={"Основна Інформація"}>
                     <DescriptionData setName={setName} state={[category,setCategory]} ref={anoncement.current} set={handleInput}></DescriptionData>
                     <DescriptionSection></DescriptionSection>
                 </SectionContainer>

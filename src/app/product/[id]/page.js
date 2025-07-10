@@ -85,6 +85,8 @@ export default async function Product({params}) {
   const { id } = await params;
   const info = await getData(id);
 
+  if(!info) return notFound();
+
   const {
     name,
     image_array,

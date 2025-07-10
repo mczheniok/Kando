@@ -12,6 +12,8 @@ export default function AuthWrapper() {
     const [formStyle,setFormStyle] = useState(false);
     const router = useRouter();
 
+    const [status,setStatus] = useState(false);
+
     const handlerInput = e => {
         const i = e.target
         formBody.current[i.name] = i.value;
@@ -31,9 +33,15 @@ export default function AuthWrapper() {
         })
         .then(res => res.json())
         .then(data => {
-            setTimeout(() => {
-                router.push('/account');
-            },1000);
+            if(data.status === "ok") {
+                setTimeout(() => {
+                    router.push('/account');
+                },1000);
+            }
+
+            setStatus(data.status);
+
+            console.log(data.status);
         })
         .catch(err => {
             console.log(err);
@@ -102,19 +110,25 @@ export default function AuthWrapper() {
                         <h2 style={{fontSize: "1rem"}} className={"tw-secondary-text"}>Введіть свої дані для входу</h2>
                     </div>
                     
-                    <div className="flex flex-col align-center" style={{width: "100%",padding: "0rem 3rem",height:"fit-content"}}>
+                    <div className="flex flex-col align-center" style={{gap: ".3rem",width: "100%",padding: "0rem 3rem",height:"fit-content"}}>
                         
-                        <div className="flex flex-col align-center" style={{width :"100%",padding: "0rem"}}>
+                        <div className="flex flex-col align-center" style={{gap: "0rem",width :"100%",padding: "0rem"}}>
                             {formInputs[Number(formStyle)].map((el,ind) => {
                                 return (
                                     <InputContainer key={`form-input-el-${ind}`} type={0} text={el.text}>
-                                        <Input handler={handlerInput} type={el.type} placeholder={el.placeholder} name={el.name} ></Input>
+                                        <Input required={true} handler={handlerInput} type={el.type} placeholder={el.placeholder} name={el.name} ></Input>
                                     </InputContainer>
                                 )
                             })}
                         </div>
 
-                        <div className="flex flex-row align-center justify-between" style={{width: "100%"}}>
+                        {status && (
+                            <div className="flex flex-row align-start" style={{padding: ".6rem 0rem"}}>
+                                <span style={{color: "#ff7043"}}>{status}</span>    
+                            </div> 
+                        )}
+
+                        <div className="flex flex-row align-center justify-between" style={{marginBottom: "1rem",width: "100%"}}>
                             <span className="flex flex-row align-center">
                                 <input id="input" style={{width: "24px",height: "24px"}} type="checkbox"></input>
                                 <label htmlFor="input">Запам'ятати мене</label>
@@ -130,7 +144,7 @@ export default function AuthWrapper() {
                             <SignButton title={"Google"} img={"google"}></SignButton>
                         </div>
                         
-                        <span className="flex flex-row align-center">
+                        <span className="flex flex-row align-center justify-between">
                             <h4 className="tw-secondary-text">Ще не маєте акаунту?</h4> 
                             <a className="href-a" onClick={handleClickIdontHaveAccount}>{formStyle?"Ввійти":"Створити акаунт"}</a>
                         </span>

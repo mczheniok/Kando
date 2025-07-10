@@ -2,7 +2,17 @@ import styles from "./input.module.css";
 import { useState  , useEffect } from "react";
 import MoreArrowIcon from "@/icons/morearrow.svg";
 
-export const InputHeader = ({ text }) => <h3 className={styles.HeaderText} >{text}</h3>
+export const InputHeader = ({ text , require = false}) => {
+    return (
+        <h3 className={styles.HeaderText}>
+            {text} 
+            {require && (
+                <p style={{color: "#ff7043",display: "inline",marginLeft: "1rem"}}>* Обов'язкове поле</p>
+            )}
+        </h3>
+    )
+}
+
 
 export function SelectList({arr,formDataRef,name,type=false,state,setState=() => {}}) {
     const [selected,setSelected] = useState(arr[0] || state || formDataRef[name]);
@@ -47,7 +57,7 @@ export function SelectList({arr,formDataRef,name,type=false,state,setState=() =>
     )
 }
 
-export function InputContainer({type=2,children,text}) {
+export function InputContainer({type=2,children,text,require = false}) {
     const classNames = [
         styles.InputContainer33,
         styles.InputContainer50,
@@ -56,16 +66,17 @@ export function InputContainer({type=2,children,text}) {
     
     return (
         <div className={`${classNames[type]} flex flex-col`}>
-            <InputHeader text={text} />
+            <InputHeader require={require} text={text} />
             {children && children}
         </div>
     )
 }
 
-export function Input({type=false,placeholder,name,handler,ref=null}) {
+export function Input({type=false,placeholder,name,handler,ref=null,required=false}) {
     return (
         <input 
             name={name} 
+            required={required}
             ref={ref}
             onInput={handler} 
             className={`${styles.Input} h3-text`} 

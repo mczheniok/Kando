@@ -43,12 +43,13 @@ export function userHeadAccount({
         const name = e.target.name
 
         if(val && name) {
-            formDataRef.current.append(name,val);
+            formDataRef.current.set(name,val);
         }
     }
 
     const handleFormSubmit = e => {
         e.preventDefault();
+
 
         toServer("/account/change",{
             method: "POST",
@@ -64,7 +65,7 @@ export function userHeadAccount({
     const handleFileInput = e => {
         const file = e.target.files[0];
 
-        formDataRef.current.append("image",file);
+        formDataRef.current.set("image",file);
     
         ImageUrl.current.src = URL.createObjectURL(file);   
     }

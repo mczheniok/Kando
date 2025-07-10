@@ -37,7 +37,7 @@ export default function NotFound() {
               </p>
             </div>
             <img 
-              src="/assets/what.png" 
+              src="/assets/who.png" 
               alt="Page not found"
               width={150} 
               height={150}  
