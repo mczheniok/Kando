@@ -100,7 +100,7 @@ export function CardRow({obj,t=false}) {
     }
 
     const handleArchiveButton = () => {
-        toServer(`/${!t?"archive":"account"}/add/${id}`,{
+        toServer(`/${t?"archive":"account"}/add/${id}`,{
             method: "PUT",
             headers: {  
                 "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}`,

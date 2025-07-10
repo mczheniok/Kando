@@ -74,9 +74,7 @@ export function ProductInfoSection({id,title,Price,LastPrice,categories,list,Rev
             <h4 className="small-text">10,000+ продажів</h4>
         </div>
         {<article className={`${styles.InfoBlock}`} style={{overflowY: "auto",maxHeight: 'auto',border: "none",padding: "0rem"}}>
-          {type?
-          <Categoryies list={categories}></Categoryies>
-          :<SelectImage list={list}></SelectImage>}
+          {type && <Categoryies list={categories}></Categoryies>}
         </article>}
     </section>
   )

@@ -4,13 +4,13 @@ require('dotenv').config();
  * @type {import('next-sitemap').IConfig}
  */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_BACKEND_URL_URL,
+  siteUrl: process.env.NEXT_PUBLIC_URL,
   generateRobotsTxt: true,
   async additionalPaths(config) {
-    const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL_URL;
+    const baseUrl = process.env.NEXT_PUBLIC_URL;
 
     if (!baseUrl) {
-      console.error('❌ ОШИБКА: Переменная окружения NEXT_PUBLIC_BACKEND_URL_URL не задана');
+      console.error('❌ ОШИБКА: Переменная окружения NEXT_PUBLIC_URL не задана');
       return [];
     }
 
