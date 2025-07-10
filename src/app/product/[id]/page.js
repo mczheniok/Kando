@@ -7,6 +7,8 @@ import { notFound } from "next/navigation";
 import { InfoSectionBottom } from "@/features/products/Sections";
 import { InfoPagination } from "./product";
 import { ProductSeoSchema } from "../../../SEO/SeoSchemaOrg";
+import Head from "next/head";
+
 
 async function getData(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/product/${id}`);
@@ -115,6 +117,9 @@ export default async function Product({params}) {
   if(info) {
     return (
         <ContainerLanguage>
+          <Head>
+            <link rel="canonical" href={`https://kando.pp.ua/product/${id}`} />
+          </Head>
           <Header></Header>
             <ProductSeoSchema product={productForSeo}/>
             <MainContainer>

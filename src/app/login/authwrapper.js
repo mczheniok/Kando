@@ -106,16 +106,16 @@ export default function AuthWrapper() {
                 </div>
                 <div className="flex flex-col align-center justify-evenly" style={{background: "var(--bg-card)"}}>
                     <div className="flex flex-col align-center" style={{height :'fit-content'}}>
-                        <h1 style={{fontSize: "2rem",textWrap: "nowrap"}}>Увійти до акаунту</h1>
-                        <h2 style={{fontSize: "1rem"}} className={"tw-secondary-text"}>Введіть свої дані для входу</h2>
+                        <h1 className={styles.TextHeader}>Увійти до акаунту</h1>
+                        <h2 className={`${styles.SecondaryTextHeader} tw-secondary-text`}>Введіть свої дані для входу</h2>
                     </div>
                     
                     <div className="flex flex-col align-center" style={{gap: ".3rem",width: "100%",padding: "0rem 3rem",height:"fit-content"}}>
                         
-                        <div className="flex flex-col align-center" style={{gap: "0rem",width :"100%",padding: "0rem"}}>
+                        <div className="flex flex-col align-center" style={{gap: "0rem",width: "100%",padding: "0rem"}}>
                             {formInputs[Number(formStyle)].map((el,ind) => {
                                 return (
-                                    <InputContainer key={`form-input-el-${ind}`} type={0} text={el.text}>
+                                    <InputContainer key={`form-input-el-${ind}`} type={2} text={el.text}>
                                         <Input required={true} handler={handlerInput} type={el.type} placeholder={el.placeholder} name={el.name} ></Input>
                                     </InputContainer>
                                 )
