@@ -8,7 +8,7 @@ import { CategorySchema } from "../../../SEO/SeoSchemaOrg"
 import { BreadCrumbs } from "@/shared/blocks/BreadCrumbs/BreadCrumbs";
 
 
-export const revalidate = 86400; // обновление раз в сутки
+export const revalidate = 43200; // обновление раз в сутки
 
 export async function generateStaticParams() {
   const paths = [];
@@ -96,7 +96,7 @@ export default async function ViewCategory({ params }) {
   const { category , subcategory } = await params;
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?subcategory=${subcategory}&page=1`, {
-    next: { revalidate: 86400 }
+    next: { revalidate: 43200 }
   });
 
   const data = await res.json();
