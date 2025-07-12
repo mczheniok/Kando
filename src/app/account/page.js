@@ -304,7 +304,7 @@ const Page7 = () => {
     const [product_info,handleProductInfo] = useInputHandler({})
     const [productImages,setProductImages] = useState([]);
     const [load,setLoad] = useState(false);
-    const fileRef = useRef(null);
+    const fileRef = useRef(null); 
 
 
     const handleCheckBoxClick = (e) => {

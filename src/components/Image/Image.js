@@ -73,7 +73,7 @@ export function ProductImageSection({list}) {
       username,
       email,
       image = "/assets/noimage.webp",
-      subscription = "pro",
+      lastTime = new Date(),
       product_id,
       userId,
       anoncement = false,
@@ -130,9 +130,9 @@ export function ProductImageSection({list}) {
             {username?
             <>
               <h2>{username}</h2>
-              <h3>{subscription}</h3>
+              <h3>{lastTime}</h3>
               <h4 className="secondary-text">{email}</h4>
-              <p>телефон: +{phone}</p>
+              <p>телефон: +38{phone}</p>
               <div className="flex flex-row">
                 {product_id && (
                    <ButtonWithIcon Icon={MessagesIcon} title={"Написати"} clName={"justify-around flex-grow"} click={handleChatClick}></ButtonWithIcon>

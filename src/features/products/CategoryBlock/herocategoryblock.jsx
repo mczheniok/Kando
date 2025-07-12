@@ -8,7 +8,7 @@ export const HeroCategory = () => {
     return (
         <div className="flex flex-row flex-wrap" style={{width: "100%",minHeight: "300px",padding: "2rem 1rem",gap: "5rem"}}>
             {Object.entries(subCategoryUrl).map(([category,subcategories],categoryInd) => {        
-                const UAtext = ukraineText[categoryInd] 
+                const UAtext = ukraineText[categoryInd];
 
                 return (
                     <div className="flex flex-col align-start flex-grow" key={category}>

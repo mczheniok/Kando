@@ -1,7 +1,7 @@
 import styles from "./sections.module.css";
 import { Fragment } from "react";
 import LocalFont from "next/font/local";
-import { RefWithIcon } from "@/shared/Buttons/Buttons";
+import { Ref } from "@/shared/Buttons/Buttons";
 
 
 
@@ -83,7 +83,7 @@ export const HeadMainPage = () => {
               Kando — місце, де ви можете знайти все: від товарів до послуг, від продажу до оренди. Створюйте оголошення легко та швидко!
             </p>
           </div>
-          <RefWithIcon style={"dark"} link={"/account"}  title={"Почати"} />
+          <Ref style={"dark"} link={"/account"}  title={"Почати"} />
         </div>
       </section>
     );

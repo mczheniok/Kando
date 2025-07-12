@@ -4,7 +4,7 @@ import { Listh4 } from "@/components/Lists/Lists"
 import { LazyMap } from "@/components/lazy"
 import { UserHeaderInfo } from "@/components/Image/Image"
 import { useToServer } from "@/shared/hooks/useToServer"
-import { toDate } from "@/features/functions/functions"
+import { parseLastLogin } from "@/features/functions/functions"
 
 const Categoryies = ({list}) => {
     return (
@@ -24,8 +24,8 @@ export const ProductSellerInfo = ({categories = [],userId,position,product_id,an
               anoncement={anoncement} 
               product_id={product_id} 
               username={user.username} 
-              subscription={`онлайн в: ${toDate(user.last_login)}`} 
-              email={toDate(user.created_at)} 
+              lastTime={`онлайн ${parseLastLogin(user.last_login)}`} 
+              email={`дата реестрації ${parseLastLogin(user.created_at)}`} 
               image={user.image}
               phone={user?.phone}
             ></UserHeaderInfo>

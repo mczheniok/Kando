@@ -6,7 +6,7 @@ import Link from "next/link";
 export function LinkStyled({el,url}) {
     return (
         <Link href={`${url}`} className={styles["category-item"]}>
-            <p>{el}</p> 
+            <span>{el}</span> 
         </Link>
     )
 }
