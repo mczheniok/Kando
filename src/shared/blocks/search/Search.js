@@ -2,6 +2,7 @@
 
 import styles from "./components.module.css"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { ButtonWithIcon, ButtonWithList, ButtonLazyDropList } from "../../Buttons/Buttons"
 import { LanguageContenxt } from "@/components/Containers/container";
 import { useContext ,useState } from "react";
@@ -21,6 +22,7 @@ export default function Search({placeholder,set=() => {}}) {
     const [paramsSearchRef,handler] = useInputHandler();
     const [visibleList,setVisibleList] = useState(false);
     const [selectedCategory,setSelectedCategory] = useState(categoryCONST.realestate);
+    const params = useSearchParams();
 
 
     const BackLightLen = (str, search) => {
@@ -79,8 +81,6 @@ export default function Search({placeholder,set=() => {}}) {
             if(val.length < 3) {
                 return ;
             }
-
-            const params = new URLSearchParams();
 
             // Додаємо лише значення, які не є undefined або null
             for (const [key, value] of Object.entries(paramsSearchRef)) {

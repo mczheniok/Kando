@@ -50,13 +50,14 @@ module.exports = {
 
       const categoriesRaw = categoriesData?.data || [];
 
-      const categoriesFlat = categoriesRaw.flat();
-
-      const categoryPaths = categoriesFlat.map(category => ({
-        loc: `/c/${category}`,
-        changefreq: 'weekly',
-        priority: 0.7,
-      })) || [];
+      const categoryPaths = categoriesRaw.map(([category,sb],ind) => {
+        sb?.map(subcategory => ({
+            loc: `/${category}/${subcategory}`,
+            changefreq: 'weekly',
+            priority: 0.7,
+          })
+        ) 
+      }) || [];
 
       return [...productPaths, ...categoryPaths];
     } catch (err) {
