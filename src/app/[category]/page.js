@@ -1,8 +1,8 @@
 import Header from "@/shared/blocks/Header"
 import Footer from "@/shared/blocks/Footer"
 import { ContainerLanguage, MainContainer } from "@/components/Containers/container"
-import Search from "@/shared/blocks/search/Search"
-import GridProductsList from "@/components/ProductsList/GridProductsList"
+import { Search } from "../../shared/blocks/search/SearchWrapper";
+import { GridProductsList } from "../../components/ProductsList/GridListWrapper";
 import { subCategoryUrl, subCategoryUrls } from "../../config"
 import { BreadCrumbs } from "@/shared/blocks/BreadCrumbs/BreadCrumbs";
 import { CategorySchema } from "@/SEO/SeoSchemaOrg";
@@ -88,7 +88,7 @@ export default async function ViewCategory({ params }) {
         />
         <Header />
         <MainContainer>
-          <Search placeholder="Введіть назву оголошення..." />
+           <Search placeholder={"Введіть назву оголошення або послуги..."}></Search>
             <section className="flex flex-col justify-center" style={{
               width: "100%",
               background: "var(--background)",

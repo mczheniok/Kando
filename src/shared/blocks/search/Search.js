@@ -2,7 +2,6 @@
 
 import styles from "./components.module.css"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
 import { ButtonWithIcon, ButtonWithList, ButtonLazyDropList } from "../../Buttons/Buttons"
 import { LanguageContenxt } from "@/components/Containers/container";
 import { useContext ,useState } from "react";
@@ -22,7 +21,7 @@ export default function Search({placeholder,set=() => {}}) {
     const [paramsSearchRef,handler] = useInputHandler();
     const [visibleList,setVisibleList] = useState(false);
     const [selectedCategory,setSelectedCategory] = useState(categoryCONST.realestate);
-    const params = useSearchParams();
+    const params = new URLSearchParams();
 
 
     const BackLightLen = (str, search) => {

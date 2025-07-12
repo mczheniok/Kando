@@ -9,3 +9,4 @@ export const LazyReviewsSection = dynamic(() => import("./Reviews/ReviewsBlock")
 export const LazySpecifications = dynamic(() => import("./Specifications/specifications"),{ssr: false,loading});
 export const LazyNone = dynamic(() => import("@/shared/information/none"),{ssr: false,loading});
 export const LazyCategory = dynamic(() => import("@/features/products/CategoryBlock/herocategoryblock").then(mod => ({default: mod.HeroCategory})),{ssr: false,loading});
+export const LazySearch = dynamic(() => import("../shared/blocks/search/Search").then(mod => ({default: mod.default})),{ssr: false,loading});

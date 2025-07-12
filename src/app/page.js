@@ -1,13 +1,13 @@
 import Header from "@/shared/blocks/Header"
-import Search from "@/shared/blocks/search/Search";
 import Footer from "@/shared/blocks/Footer";
 import { HomeSeoSchema , FooterSeoSchema } from "@/SEO/SeoSchemaOrg";
-import GridList from "../components/ProductsList/GridProductsList";
+import { GridProductsList } from "../components/ProductsList/GridListWrapper";
 import { HeadMainPage } from "@/features/products/Sections";
 import { HeadInfoBlock } from "@/features/products/headinfoblock/HeadInfoBlock";
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
 import { LazyCategory } from "@/components/lazy";
 import Head from "next/head";
+import { Search } from "../shared/blocks/search/SearchWrapper";
 
 export async function generateMetadata({params,searchParams}) {
   const name = "Kando";
@@ -82,13 +82,13 @@ export default async function Home() {
       <FooterSeoSchema />
       <Header></Header>
         <MainContainer>
-          <Search placeholder={"Введіть назву товару або послуги..."}></Search>
+          <Search />
             <div className="flex flex-col" style={{backgroundRepeat: "no-repeat",backgroundSize: "cover",backgroundColor:"var(--orange)",backgroundPosition: "center",borderRadius: "1rem",backgroundImage: `url(/assets/background.webp)`,gap:"1rem"}}>
               <HeadMainPage />
               <HeadInfoBlock />
             </div>
           <LazyCategory></LazyCategory>
-          <GridList showLoadMore={true} baseUrl="" list={data.data.items}></GridList>
+          <GridProductsList showLoadMore={true} baseUrl="" list={data.data.items} />
         </MainContainer>
       <Footer></Footer>
     </ContainerLanguage>
