@@ -18,7 +18,7 @@ import { LinkText } from "@/shared/link/link";
 
 const listTargets = [
     {title: "Я",icon: <UserIcon width={25} height={25}></UserIcon>},
-    {title: "archive",icon: <ArchiveIcon width={25} height={25} />},
+    {title: "архів",icon: <ArchiveIcon width={25} height={25} />},
     {title: "Оголошення",icon: <NewIcon width={25} height={25} />},
     {title: "Повідомлення",icon: <MessagesIcon width={25} height={25} />},
     {title: "Історія",icon: <HistoryIcon width={25} height={25} />}

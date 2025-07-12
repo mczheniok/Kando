@@ -89,9 +89,9 @@ export default function Search({placeholder,set=() => {}}) {
               }
             }
 
-            const baseUrl = `${window.location.href}/s/${val}?`;
-            const finalUrl = baseUrl + params.toString();
-            window.location.href = finalUrl
+            const baseUrl = `/s/${val}`;
+            const finalUrl = baseUrl
+            window.location.pathname = finalUrl
         }}>
             <ButtonLazyDropList name={"SubCategory"} relative={false} title={language.category} Icon={CategoryIcon}>
                 {(lazylist) => (

@@ -21,18 +21,22 @@ function CardCategory({src,text,label}) {
     return <h4 className="tw-secondary-text">{label} {nameLen(text,25,25)}</h4>
 }
 
-export function Card({obj,type}) {
+export function Card({obj,type,priority}) {
     const { views , name , category ,subcategory , previewimage, street } = obj;
 
     return( 
-        <Link href={`/product/${obj.id}`} className={`${type === "grid"?styles.Product:styles.RowProduct} flex flex-col`} >
+        <Link href={`/product/${obj.id}`} className={`${type === "grid"?styles.Product:styles.RowProduct} flex flex-col card`} >
             <div className={`${styles.CardHead}`}>
-                <CardPreview image={previewimage}></CardPreview>
-                <p className={styles.CardHeadImportant}>-35%</p>
+                <CardPreview 
+                    img={previewimage}
+                    priority={priority}
+                    loading={priority ? "eager": "lazy"}
+                    alt={nameLen(name,20,60)}
+                />
             </div>
             <div className={`${styles.CardFooter} flex flex-col`}>
-                <h4 className={styles.CardCategoryText}>{obj.type || "Нерухомість"} / {subcategory} / {street || "вулицю не вказано"}</h4>
-                <h3>{nameLen(name|| "Прототип",20,15)}</h3>
+                <h4 className={styles.CardCategoryText}>{obj.type || "Нерухомість"} / {subcategory}</h4>
+                <h3>{nameLen(name|| "Прототип",20,60)}</h3>
                 <div className="flex flex-row align-center" style={{height: "40px"}}>
                     <ViewsIcon width={25} height={25}></ViewsIcon>
                     <CardCategory text={views}></CardCategory>

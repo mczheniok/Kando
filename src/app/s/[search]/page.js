@@ -9,7 +9,7 @@ import { useParams , useSearchParams } from "next/navigation";
 import { toServer } from "@/features/functions/functions";
 
 
-export default function Home() {
+export default function SearchPage() {
     const params = useParams();
     const [data,setData] = useState([]);
     const searchParams = useSearchParams();
@@ -30,10 +30,8 @@ export default function Home() {
       <ContainerLanguage>
         <Header></Header>
           <MainContainer>
-            <div className="flex flex-col" style={{ backgroundRepeat: "no-repeat",backgroundSize: "cover",backgroundColor:"var(--orange)",backgroundPosition: "center",borderRadius: "1rem",backgroundImage: "url('assets/background.webp')",gap:"1rem"}}>
-                <Search set={setData} placeholder={"Шукати товар"}></Search>
-            </div>
-            <GridProductsList items={data}></GridProductsList>
+            <Search set={setData} placeholder={"Шукати товар"}></Search>
+              <GridProductsList list={data}></GridProductsList>
           </MainContainer>
         <Footer></Footer>
       </ContainerLanguage>

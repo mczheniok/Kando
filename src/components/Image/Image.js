@@ -69,8 +69,6 @@ export function ProductImageSection({list}) {
 }
 
 
-
-
   export function UserHeaderInfo({
       username,
       email,
@@ -119,7 +117,7 @@ export function ProductImageSection({list}) {
   
 
   const UserAvatar = ({width,height,padding=null}) => {
-    const [img,setImg] = useState(image);
+    const [img,setImg] = useState(`${process.env.NEXT_PUBLIC_SOCKET_URL}/images/${image}`);
     
     return (
       <img loading="lazy" width={width} height={height} src={img} onError={() => setImg("/assets/noimage.webp")} style={{padding: padding?padding:"7px"}} className={`${styles.circleImage} circle`} alt="User Avatar"></img>
@@ -170,8 +168,31 @@ export const CircleImage = ({width,height,src}) => {
 
 export const CardImage = ({width,height,src}) => <Image src={src} className={styles.ProductImage} alt={"Product Image"} width={width} height={height}></Image>
 
-export const CardPreview = ({image}) => {
-  const [img,setImg] = useState(`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${image}`);
 
-  return <Image quality={60} width={240} height={240} src={img} onError={() => setImg("/assets/noimage.webp")} alt="Preview Image" className={styles.ProductPreviewImage}></Image>
+export function CardPreview({ img, priority = false , alt = "Превью оголошення"}) {
+  const [imageSrc,setImgSrc] = useState(`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${img}`);
+
+  return (
+      <div className={styles.imageContainer}>
+          <Image
+              src={imageSrc || '/assets/noimage.webp'}
+              alt={alt}
+              width={300}
+              onError={(e) => {
+                setImgSrc("/assets/noimage.webp");
+              }}
+              fetchPriority={priority ? "high" : "low"} // ✅ Дополнительный hint
+              height={200}
+              priority={priority}
+              {...(!priority && { loading: "lazy" })}
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{
+                  width: '100%',
+                  objectFit: 'cover',
+                  maxHeight: "240px"
+              }}
+          />
+      </div>
+  )
 }

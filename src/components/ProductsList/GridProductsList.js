@@ -1,62 +1,154 @@
+// ========== Улучшенный компонент списка товаров ==========
 "use client";
-
-import styles from "./products.module.css"
-import { Card } from "../Cards/Card"
-import { useEffect , useRef, useState } from "react";
+import { useState, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import styles from "./products.module.css";
+import { Card } from "../Cards/Card";
+import { Button } from "../../shared/Buttons/Buttons";
 import { Pagination } from "@/shared/blocks/pagination";
-import Loading from "../loader";
+
+export default function GridProductsList({ 
+  list = [], 
+  itemsPerPage = 12,
+  showLoadMore = true,
+  baseUrl = '',
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentPage = parseInt(searchParams.get('page')) || 1;
+  const [items,setItems] = useState(list);
+  const [loading, setLoading] = useState(false);
+  const [loadMoreMode, setLoadMoreMode] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(itemsPerPage);
+
+  // Вычисляем пагинацию
+  const pagination = useMemo(() => {
+    const totalPages = Math.ceil(items.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = items.slice(startIndex, endIndex);
+    
+    return {
+      totalPages,
+      currentItems,
+      hasMore: endIndex < items.length,
+      totalItems: items.length
+    };
+  }, [items, currentPage, itemsPerPage]);
+
+  // Для режима "Load More"
+  const handleLoadMore = async () => {
+    setLoading(true);
+    setVisibleCount(prev => Math.min(prev + itemsPerPage, items.length));
+    
 
 
-export default function GridProductsList({items=[],set,count=1}) {
-    const [paginationPage,setPaginationPage] = useState(1);  
-    const containerRef = useRef();
+    setLoadMoreMode(true);
+    setLoading(false);
+  };
 
-    useEffect(() => { // NEED DELETE THIS TO 100 PERFOMANCE ; 
-      const targets = containerRef.current.querySelectorAll("a");
+  // Обработчик изменения страницы
+  const handlePageChange = (page) => {
+    setLoadMoreMode(false); 
+    setVisibleCount(itemsPerPage);
 
-      targets.forEach((el) => {
-        el.style.opacity = "0";
-      });
-  
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const ITEM_PER_ROW = 4;
-            const DELAY_TIME = 0.1
-            const index = Array.from(targets).indexOf(entry.target);
-            const row = index % ITEM_PER_ROW;
-            const delay = row * DELAY_TIME;
+  };
 
-            if (entry.isIntersecting) {
-              entry.target.style.transition = `opacity .3s ease ${delay}s`;
-              entry.target.style.opacity = "1";
-            } else {
-              entry.target.style.transition = `opacity 0.1s ease ${delay}s`;
-              entry.target.style.opacity = "0";
-            }
-          });
-        },
-        { threshold: 0.3 }
-      );
-      
-  
-      targets.forEach((el) => observer.observe(el));
-  
-      return () => {
-        targets.forEach((el) => observer.unobserve(el));
-      };
-    },[items])
+  // Определяем какие товары показывать
+  const displayItems = loadMoreMode ? items.slice(0, visibleCount) : pagination.currentItems;
 
-    return (
-      <div className="flex flex-col" style={{gap: "0rem",padding: '1rem'}}>
-          <div ref={containerRef} className={styles.GridProductsList}>
-            {items.length > 0?
-             items?.map((el,ind) => {
-              return <Card type={"grid"} obj={el} key={`products-list-el-${ind}`}></Card>
-            }):<Loading />
-            }
-          </div>
-          <Pagination pages={count} state={[paginationPage,setPaginationPage]} set={set}></Pagination>
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '24px',
+      padding: '1rem 0rem'
+    }}>
+
+      <div className={styles.GridProductsList}>
+        {displayItems.map((el, ind) => {  
+          return (
+            <Card 
+              key={`card-${currentPage}-${ind}`}
+              type="grid" 
+              obj={el} 
+              priority={ind < 4}
+            />
+          )
+        })}
       </div>
-    )
+
+      {/* Загрузить еще (только если не в режиме пагинации) */}
+      {!loadMoreMode && showLoadMore && pagination.hasMore && (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center'
+        }}>
+          <Button 
+            title={loading ? "Загрузка..." : `Показати ще ${Math.min(itemsPerPage, items.length - visibleCount)}`}
+            click={handleLoadMore} 
+            clName="justify-center"
+          />
+        </div>
+      )}
+
+      {/* Информация о загруженных товарах в режиме Load More */}
+      {loadMoreMode && (
+        <div style={{
+          textAlign: 'center',
+          color: '#6b7280'
+        }}>
+          <p>Показано {visibleCount} из {items.length} товаров</p>
+          <button
+            onClick={() => {
+              setLoadMoreMode(false);
+              setVisibleCount(itemsPerPage);
+              router.push(`${baseUrl}?page=${currentPage}`);
+            }}
+            style={{
+              marginTop: '8px',
+              color: 'var(--orange, #ff6b35)',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.textDecoration = 'none';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.textDecoration = 'underline';
+            }}
+          >
+            Перейти к пагинации
+          </button>
+        </div>
+      )}
+
+      {/* Пагинация (только если не в режиме Load More) */}
+      {!loadMoreMode && pagination.totalPages > 1 && (
+        <Pagination
+          totalPages={pagination.totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          baseUrl={baseUrl}
+          totalItems={pagination.totalItems}
+          itemsPerPage={itemsPerPage}
+          showInfo={true}
+          showNavigation={true}
+        />
+      )}
+
+      {/* Сообщение о том, что все товары показаны */}
+      {!pagination.hasMore && !loadMoreMode && items.length > itemsPerPage && (
+        <div style={{
+          textAlign: 'center',
+          color: '#6b7280',
+          padding: '16px 0'
+        }}>
+          Показані всі оголошення ({items.length})
+        </div>
+      )}
+    </div>
+  );
 }

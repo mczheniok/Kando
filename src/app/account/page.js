@@ -3,7 +3,7 @@ import Header from "@/shared/blocks/Header";
 import Footer from "@/shared/blocks/Footer";
 import styles from "./account.module.css";
 import { debounce } from "@/features/functions/functions";
-import { Button} from "@/shared/Buttons/Buttons";
+import { Button } from "@/shared/Buttons/Buttons";
 import { Column } from "@/components/Columns/ColumnComponents";
 import { CardBlock } from "@/components/Cards/Card";
 import { 
@@ -22,7 +22,7 @@ import usePageRender from "@/shared/hooks/usePageRender";
 import Loading from "@/components/loader";
 import { ContainerLanguage } from "@/components/Containers/container";
 import { CreateNewAnnouncement ,SectionContainer} from "./sections/section";
-import { Input, InputContainer, SelectList , InputArea } from "@/shared/input/input";
+import { Input, InputContainer, SelectList  } from "@/shared/input/input";
 import { NotificationContainer } from "@/components/Notifications/notification";
 import { toServer , parseLastLogin } from "@/features/functions/functions";
 import { categoryList , SubCategory } from "@/config";
@@ -255,8 +255,9 @@ const ArchivePage = () => {
 
 
 const DescriptionData = ({set,ref,state,setName}) => {
-    const arr = ["нерухомість","одежа"];
+    const array = Object.keys(SubCategory);
     const [select,setSelect] = state;
+
 
     return (
         <div className={`${styles.DescriptionData} flex flex-row flex-wrap`} style={{marginRight: "0rem",width: "100%"}}>
@@ -267,7 +268,7 @@ const DescriptionData = ({set,ref,state,setName}) => {
                 }}></Input>
             </InputContainer> 
             <InputContainer type={1} text={"Категорія"}>
-                <SelectList state={select} setState={setSelect} formDataRef={ref} arr={arr} name={"category"}></SelectList>
+                <SelectList state={select} setState={setSelect} formDataRef={ref} arr={array} name={"category"}></SelectList>
             </InputContainer>
             <InputContainer type={1} text={"Підкатегорія"}>
                 <SelectList formDataRef={ref} name={"subcategory"} type={true} arr={SubCategory[select]} ></SelectList>
@@ -277,7 +278,7 @@ const DescriptionData = ({set,ref,state,setName}) => {
             </InputContainer>
             {HeadInputList[select].map((el,ind) => {
                 return (
-                    <InputContainer key={`head-input-el-${ind}`} type={1} text={el.text}>
+                    <InputContainer key={`head-input-${ind}`} type={1} text={el.text}>
                         <SelectList name={el.name} type={true} formDataRef={ref} arr={el.placeholder}></SelectList>
                     </InputContainer>
                 )
@@ -298,10 +299,11 @@ const Page7 = () => {
         location: []
     });
     const [name,setName] = useState(anoncement.current.name);
-    const [category,setCategory] = useState("одежа");
+    const [category,setCategory] = useState("Нерухомість");
     const categories = useRef([]);
     const [product_info,handleProductInfo] = useInputHandler({})
     const [productImages,setProductImages] = useState([]);
+    const [load,setLoad] = useState(false);
     const fileRef = useRef(null);
 
 
@@ -342,7 +344,6 @@ const Page7 = () => {
     
             delete product_info.current;
 
-            
 
             if(productImages.length === 0) {
                 return SendNotify("Не прікріплено жодної фотографії","warning")
@@ -380,7 +381,6 @@ const Page7 = () => {
             } else {
                 data.set("location",JSON.stringify([]));
             }
-
             data.set("price",price);
             data.set("name",name);
             data.set("subcategory",subcategory);
@@ -389,13 +389,15 @@ const Page7 = () => {
             data.set("type",category);
             data.set("product_info",JSON.stringify(product_info));
 
+            setLoad(true);
 
-        
             await toServer("/account/products/create",{
                 method: "POST",
                 body: data,
                 credentials: "include"
             })
+            
+            setLoad(false);
     }
 
 
@@ -459,7 +461,7 @@ const Page7 = () => {
                 </SectionContainer>
                 <CreateNewAnnouncement handler={handleCheckBoxClick}></CreateNewAnnouncement>
                 <SectionContainer>
-                    <Button submit={true} style={"dark"} Icon={"add"} title={"Створити Оголошення"} clName={"justify-center"}></Button>  
+                    <Button disabled={load} submit={true} style={"dark"} Icon={"add"} title={"Створити Оголошення"} clName={"justify-center"}></Button>  
                 </SectionContainer>
             </form>
         </>
