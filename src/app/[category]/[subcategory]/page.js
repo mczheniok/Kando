@@ -108,7 +108,7 @@ export default async function ViewCategory({ params }) {
         category={getCategoryName(category)}
         subcategory={getCategoryName(subcategory)}
         list={data.data.items.slice(0,12)}
-        path={{category,subcategory}}  
+        path={{main: "/",category,subcategory}}  
       />
       <Header />
         <MainContainer>
