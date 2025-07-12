@@ -15,7 +15,7 @@ export async function generateMetadata({params,searchParams}) {
   const Image = `${process.env.NEXT_PUBLIC_URL}/assets/background.webp`;
 
   return {
-    title: name,
+    title: `Маркетплейс оголошень | ${name}`,
     description: description,
     alternates: {
       canonical: "https://kando.pp.ua",
