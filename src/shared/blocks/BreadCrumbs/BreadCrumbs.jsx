@@ -4,7 +4,7 @@ import { subCategoryUrls } from "../../../config";
 export function BreadCrumbs({ baseUrl }) {
     const parts = baseUrl
         .split("/")
-        .filter(Boolean); // удаляем пустые строки
+        .filter(Boolean); 
 
     const crumbs = [
         { href: "/", label: "Головна" },
