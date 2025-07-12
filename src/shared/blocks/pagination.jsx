@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./blocks.module.css";
 

@@ -1,5 +1,5 @@
-// ========== Улучшенный компонент списка товаров ==========
 "use client";
+
 import { useState, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./products.module.css";
@@ -41,7 +41,6 @@ export default function GridProductsList({
     setLoading(true);
     setVisibleCount(prev => Math.min(prev + itemsPerPage, items.length));
     
-
 
     setLoadMoreMode(true);
     setLoading(false);

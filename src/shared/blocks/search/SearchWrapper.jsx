@@ -1,3 +1,4 @@
+"use client";
 import SearchComponent from "./Search"
 import { Suspense } from "react";
 
