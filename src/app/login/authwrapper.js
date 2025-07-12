@@ -1,18 +1,28 @@
 "use client"
 import { Input, InputContainer } from "@/shared/input/input";
 import styles from "./login.module.css"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button,  RefWithImg } from "@/shared/Buttons/Buttons";
 import Logo from "@/shared/blocks/Logo";
-import { useRouter } from "next/navigation";
+import { useRouter , useSearchParams } from "next/navigation";
 
 export default function AuthWrapper() {
+    const params = useSearchParams();
     const formBody = useRef({});
     const form = useRef({});
     const [formStyle,setFormStyle] = useState(false);
     const router = useRouter();
 
     const [status,setStatus] = useState(false);
+
+
+    useEffect(() => {
+        const redirect = params.get("redirect");
+        
+        if(redirect) {
+            router.push("/account");
+        }
+    },[params])
 
     const handlerInput = e => {
         const i = e.target
@@ -33,7 +43,7 @@ export default function AuthWrapper() {
         })
         .then(res => res.json())
         .then(data => {
-            if(data.status === "ok") {
+            if(data.status === "ok" || window.location.search.redirect) {
                 setTimeout(() => {
                     router.push('/account');
                 },1000);
