@@ -2,8 +2,7 @@ import Link from "next/link";
 import { subCategoryUrls } from "../../../config";
 
 export function BreadCrumbs({ baseUrl }) {
-    const parts = new URL(`${process.env.NEXT_PUBLIC_URL}/${baseUrl}`)
-        .pathname
+    const parts = baseUrl
         .split("/")
         .filter(Boolean); // удаляем пустые строки
 
