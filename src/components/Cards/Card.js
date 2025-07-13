@@ -58,15 +58,14 @@ export function Card({obj,type,priority,course}) {
 }
 
 
-export function CardBlock({Icon,title,notifications,click}){
+export function CardBlock({Icon,title,click,href}){
     return (
-        <div onClick={() => click && click()} className={`${styles.Card} flex flex-row align-center flex-wrap`}>
+        <Link href={href} onClick={() => click && click()}  className={`${styles.Card} flex flex-row align-center flex-wrap`}>
             <Icon width={40} height={40} />   
             <span className="flex flex-col">
                 <h3>{title}</h3>
-                <h3 className="accent-text circle" style={{width: "25px",textAlign:"center",height: "25px",lineHeight: "25px",padding: ".5rem",boxSizing: "content-box",border: "solid var(--orange) 2px"}}>{notifications}</h3>
             </span>
-        </div>
+        </Link>
     )
 }
 

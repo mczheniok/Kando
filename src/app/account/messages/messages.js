@@ -9,7 +9,7 @@ import { useState , useRef, useLayoutEffect } from "react"
 import BackIcon from "@/icons/back.svg";
 import { useSocket } from "@/shared/hooks/useSocket";
 
-export function MessagesPage({set}) {
+export function MessagesPage() {
     const [socket,connected] = useSocket();
     const [chats,setChats] = useState([]);
 
@@ -34,7 +34,7 @@ export function MessagesPage({set}) {
 
     return (
         <> 
-          <ColumnMessages  set={set} load={!connected} list={chats} type={true}></ColumnMessages>
+          <ColumnMessages load={connected} list={chats} type={true}></ColumnMessages>
         </>
     )
 }

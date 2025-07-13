@@ -115,10 +115,10 @@ export default async function ViewCategory({ params , searchParams}) {
   return (
     <ContainerLanguage>
       <CategorySchema 
-        count={data.data.count}
+        count={data.data?.count || 0}
         category={getCategoryName(category)}
         subcategory={getCategoryName(subcategory)}
-        list={data.data.items.slice(0,12)}
+        list={data?.data?.items.slice(0,12)}
         path={{main: "/",category,subcategory}}  
       />
       <Header />
@@ -144,8 +144,8 @@ export default async function ViewCategory({ params , searchParams}) {
           <GridProductsList
             baseUrl={`${category}/${subcategory}`}
             currentPage={page}
-            totalCount={data.data.count}
-            list={data.data.items || []}
+            totalCount={data?.data?.count || 0}
+            list={data?.data?.items || []}
           />
         </MainContainer>
       <Footer />

@@ -3,7 +3,7 @@ import { socket } from "@/features/client/socket";
 
 
 export function useSocket() {
-    const [status, setStatus] = useState(socket.connected);
+    const [status, setStatus] = useState(socket?.connected);
 
     useLayoutEffect(() => {
         // Подключаемся только если не подключены

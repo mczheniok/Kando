@@ -1,58 +1,97 @@
 import { SendNotify } from "@/components/Notifications/notification";
-import { useState , useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getFromCache, setToCache } from "../db/indexedDB";
-import { BACKEND_URL } from "@/config";
 
-function checkStatus(status) {
+function checkStatus(status,error) {
     switch(status) {
-        case 429: return SendNotify("Забагато запитів","error");
-    } 
+        case 429: 
+            return SendNotify("Забагато запитів", "error");
+        default:
+            return SendNotify(error,"error");
+    }
 }
 
-export function useToServer(url,params={},n=true,t=true) { // n = with nofification
-    const [loading,setLoading] = useState(false);
-    const [data,setData] = useState(t?[]:{});
+export function useToServer(url, n = true, t = true) {
+    const [data, setData] = useState(t ? [] : {});
+    const [isLoading, setIsLoading] = useState(false);
+    const workerRef = useRef(null);
+    const hasFetchedRef = useRef(false);
 
     useEffect(() => {
-        const a = async () => {
-            setLoading(true);
-            const cached = await getFromCache(url);
+        if (hasFetchedRef.current) return;
+        hasFetchedRef.current = true;
 
-            if(cached) {
-                setData(cached);
-                setLoading(false);
-                if (n) SendNotify('Дані з Кешу','success'); 
-                return;
-            } 
+        const initWorkerAndFetch = async () => {
+            setIsLoading(true);
 
-            
             try {
-                if(n) SendNotify("Обробка...","info");
-
-                const res = await fetch(`${BACKEND_URL}${url}`, params);                
-                const resData = await res.json();
-                const { status , err } = resData; 
-
-
-                if(res.status) checkStatus(res.status); 
-
-                if(err) {
-                    if (n) SendNotify(status,"error");
-                } else {
-                    await setToCache(url,resData.data);
-                    setData(resData.data);
-                    if(n) SendNotify(status,"success");
+                const cached = await getFromCache(url);
+                if (cached) {
+                    setData(cached);
                 }
+
+                if (!workerRef.current) {
+                    workerRef.current = new Worker("/workers/fetch-worker.js");
+                }
+
+                const response = await new Promise((resolve, reject) => {
+                    const handleMessage = event => {
+                        const { type, payload } = event.data;
+                        if (type === "FETCH_SUCCESS") {
+                            workerRef.current.removeEventListener("message", handleMessage);
+                            resolve(payload.data);
+                        } else if (type === "ERROR") {
+                            workerRef.current.removeEventListener("message", handleMessage);
+                            reject(new Error(payload.message));
+                        }
+                    };
+
+                    workerRef.current.addEventListener("message", handleMessage);
+                    
+                    const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL_URL || '';
+                    workerRef.current.postMessage({
+                        payload: { 
+                            url: `${baseUrl}${url}`, 
+                            options: {
+                                credentials: "include",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            }
+                        }
+                    });
+                });
+
+                if (response.status) {
+                    checkStatus(response.status);
+                }
+
+                if (response.err || response.error) {
+                    SendNotify(response.message || "Помилка запиту", "error");
+                    return;
+                }
+                const responseData = response.data || response;
+                
+                await setToCache(url, responseData);
+                setData(responseData);
             } catch (err) {
-                return SendNotify(err, "error");
+                const errorMessage = err.message || "Помилка мережі";
+                SendNotify(errorMessage, "error");
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
-        }
+        };
 
-        a();
-    },[url]);
+        initWorkerAndFetch();
 
+        // Cleanup
+        return () => {
+            if (workerRef.current) {
+                workerRef.current.terminate();
+                workerRef.current = null;
+            }
+        };
+    }, [url, n]); // Только url и n в зависимостях
 
-    return [loading,data];
+    return [isLoading, data];
 }

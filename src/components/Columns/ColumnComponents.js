@@ -3,17 +3,43 @@ import { CardRow, Message } from "../Cards/Card"
 import { ReviewRow} from "../Products/Reviews"
 import Loading from "../loader"
 
-export function Column({load,list,type=false}) {
+export function Column({load, list = [], type = false}) {
+    const renderContent = () => {
+        if (load) {
+            return <Loading time={200}/>;
+        }
+        
+        // Проверяем, что list это массив
+        if (!Array.isArray(list) || list.length === 0) {
+            return <None />;
+        }
+        
+        return list.map((el, ind) => (
+            <CardRow 
+                t={type} 
+                key={`column-el-ind-${ind}`} 
+                obj={el}
+            />
+        ));
+    };
+
     return (
-        <section className="flex flex-col" style={{width: "100%",padding: "0rem  2rem 0rem 0rem",margin: "1rem",height: "fit-content",marginBottom: "5rem"}}>
-            {load?<Loading time={200}/>:list?.length === 0 && !load?<None />:list?.map((el,ind) => {
-                return (
-                    <CardRow t={type} key={`column-el-ind-${ind}`} obj={el}></CardRow>
-                )
-            })}
+        <section 
+            className="flex flex-col" 
+            style={{
+                width: "100%",
+                padding: "0rem 2rem 0rem 0rem",
+                margin: "1rem",
+                height: "fit-content",
+                marginBottom: "5rem"
+            }}
+        >
+            {renderContent()}
         </section>
-    )
+    );
 }
+
+
 
 export function ColumnReviews({list,img = null}) {
     return (

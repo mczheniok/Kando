@@ -71,7 +71,7 @@
     transition: .3s;
     gap: .8rem; 
     display: flex;
-    padding: .4rem 1rem;
+    padding: 1rem 0rem;
 }
 
 .asideList li{

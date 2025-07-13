@@ -7,28 +7,31 @@ import Image from "next/image";
 import { ButtonWithIcon } from "@/shared/Buttons/Buttons";
 import { useState } from "react";
 import { toServer } from "@/features/functions/functions";
+import { useToServer } from "../../../shared/hooks/useToServer";
+import { usePathname } from "next/navigation";
+
 import BuyIcon from "@/icons/buy.svg"; 
-import UserIcon from "@/icons/user.svg"
-import ArchiveIcon from "@/icons/archive.svg"
-import NewIcon from "@/icons/new.svg"
-import MessagesIcon from "@/icons/messages.svg";
-import HistoryIcon from "@/icons/history.svg";
-import MoreIcon from "@/icons/more.svg"
-import { LinkText } from "@/shared/link/link";
+import MoreIcon from "@/icons/more.svg";
+
+
+import { LinkStyled } from "@/shared/link/link";
+
 
 const listTargets = [
-    {title: "Я",icon: <UserIcon width={25} height={25}></UserIcon>},
-    {title: "архів",icon: <ArchiveIcon width={25} height={25} />},
-    {title: "Оголошення",icon: <NewIcon width={25} height={25} />},
-    {title: "Повідомлення",icon: <MessagesIcon width={25} height={25} />},
-    {title: "Історія",icon: <HistoryIcon width={25} height={25} />}
+    {title: "Я",url: "/",prefetch: true},
+    {title: "Архів",url: "/archive",prefetch: false},
+    {title: "Оголошення",url: "/ogoloshennia",prefetch: false},
+    {title: "Повідомлення",url: "/messages",prefetch: false},
+    {title: "Історія",url: "/history",prefetch: false},
+    {title: "Створити",url: "/create",prefetch: true},
+    {title: "Безпека",url: "/safety",prefetch: false}
 ]
 
 const UserAvatar = ({width,height,padding=null,src}) => {
     const [imgUrl,setImgUrl] = useState(`${process.env.NEXT_PUBLIC_URL}/images/${src}`);
 
     return (
-        <Image width={width} height={height} src={imgUrl} onError={() => setImgUrl("/assets/noimage.webp")} style={{padding: padding?padding:"7px",background: "#e5e4e2",border:"none",boxSizing: "content-box"}} className="circle" alt="User Avatar"></Image>
+        <Image width={width} priority={true} loading="eager" height={height} src={imgUrl} onError={() => setImgUrl("/assets/noimage.webp")} style={{padding: padding?padding:"7px",objectFit: "cover",background: "#e5e4e2",border:"none",boxSizing: "content-box"}} className="circle" alt="User Avatar"></Image>
     )
 }
 
@@ -66,31 +69,41 @@ export const MoreButton = ({userData}) => {
 }
 
 
-export function LeftBar({visible,ref,userData,set,close}) {
-    const handleClickPage = (ind) => {
-        close()
-        set(ind)
-    }
+export function LeftBar({ref}) {
+    const [_,data] = useToServer("/account/me",{
+        headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
+        credentials: "include",
+    },false,false);   
 
+    const userData = data;
+
+    const pathname = usePathname().split("/").filter(e => e !== "");
+    const [visible,setVisible] = useState(false);
 
     return (
         <aside className={`${styles.aside} ${visible ? styles.visible : ""} flex-col align-center`}>
             <ul data-id={"asideList"} ref={ref} className={`${styles.asideList} flex-col justify-around align-center`} style={{marginTop: "1rem"}}>
                 <Suspense fallback={<Loading/>}>
-                    <UserAvatar src={userData?.image} width={100} height={100}></UserAvatar>
+                    <UserAvatar src={userData?.image} width={100} height={100} />
                 </Suspense>
                 {listTargets.map((el,ind) => {
                     return (
-                        <li key={`account-page-el-${ind}`} onClick={() => handleClickPage(ind)} className="flex align-center" style={{gap: "0rem"}}>
-                            {el.icon}
-                            <LinkText el={el.title} ind={ind}></LinkText>
-                        </li>
-                    )
-                })}
-                <ButtonWithIcon Icon={BuyIcon} clName={"justify-around"} style="dark" title={"план"}></ButtonWithIcon>
+                            <li key={`account-page-el-${ind}`} onClick={() => {}} className="flex align-center" style={{gap: "0rem"}}>
+                                {el.icon}
+                                <LinkStyled size={`h3-text ${el.url.replace("/","") === pathname[1]?"active":""}`} el={el.title} url={`/account${el.url}`}></LinkStyled>
+                            </li>
+                        )
+                    })
+                }
+                <div style={{padding: "0rem 1rem",width: "100%"}}>
+                    <ButtonWithIcon Icon={BuyIcon} clName={"justify-around"} style="dark" title={"план"} />
+                </div>
+                <button className={`${styles.Open} circle`} onClick={e => setVisible(!visible)}>
+                    {!visible?"↩️":"↪️"}
+                </button>    
             </ul>  
             <div style={{padding: "0rem 1rem"}}>
-                <MoreButton userData={userData}></MoreButton>
+                <MoreButton userData={userData} />
             </div>  
         </aside>
     )

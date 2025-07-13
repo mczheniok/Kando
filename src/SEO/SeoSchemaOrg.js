@@ -168,7 +168,7 @@ export function CategorySchema({count,category,subcategory = "",path,list=[]}) {
                 "@type": "ListItem",
                 "position": ind + 1,
                 "name": ind === 0 ? "Головна" : subCategoryUrls[value] || value,
-                "item": `https://kando.pp.ua/${fullPath}`.replace(/([^:]\/)\/+/g, "$1") 
+                "item": `https://kando.pp.ua/${fullPath}`.replace(/([^:]\/)\/+/g, '/')   
               };
             })
           }

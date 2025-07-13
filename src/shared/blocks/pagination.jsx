@@ -144,12 +144,10 @@ export function Pagination({
         </div>
       )}
 
-      {/* Пагинация */}
       <div 
         className="flex flex-row justify-center items-center flex-wrap" 
         style={{width: "100%", gap: ".5rem"}}
       >
-        {/* Кнопка "Назад" */}
         {showNavigation && (
           <NavigationButton
             direction="prev"
@@ -160,7 +158,6 @@ export function Pagination({
           </NavigationButton>
         )}
 
-        {/* Страницы */}
         {visiblePages.map((page, index) => (
           <div key={`page-${index}`}>
             {page === '...' ? (
@@ -184,7 +181,6 @@ export function Pagination({
           </div>
         ))}
 
-        {/* Кнопка "Вперед" */}
         {showNavigation && (
           <NavigationButton
             direction="next"
