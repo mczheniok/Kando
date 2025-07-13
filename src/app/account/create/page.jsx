@@ -23,7 +23,7 @@ import { toServer } from "../../../features/functions/functions";
 
 import AddIcon from "@/icons/add.svg"
 
-export function MapLayout ({locationRef}) {
+function MapLayout ({locationRef}) {
     const [location,setLocation] = useState([44.4727805,44.4755123]);
     
 
@@ -65,7 +65,7 @@ export function MapLayout ({locationRef}) {
 } 
 
 
-export function Description ({descriptionRef}) {
+function Description ({descriptionRef}) {
     const [length,setLength] = useState(3000);
 
     const handleInput = useCallback((e) => {

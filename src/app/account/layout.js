@@ -3,7 +3,7 @@ import Header  from "../../shared/blocks/Header";
 import Footer from  "../../shared/blocks/Footer";
 import { LeftBar } from "./leftbar/leftbar";
 import { NotificationContainer } from "../../components/Notifications/notification"
-
+import { Suspense } from "react";
 
 export const metadata = {
     robots: {
@@ -20,7 +20,9 @@ export default function AccountLayout({ children }) {
                 <main className={`container ${styles.GridAccount}`}>
                     <LeftBar />
                     <div className={`${styles.main} flex flex-col`}>
-                        {children}
+                        <Suspense fallback={<div style={{minHeight: "600px",width: "100%"}}>🚀 Загрузка...</div>}>
+                            {children}
+                        </Suspense>
                     </div>
                 </main>
                 <NotificationContainer />
