@@ -1,5 +1,5 @@
 .ButtonWithIcon , .button{
-    border-radius: .8rem;
+    border-radius: .6rem;
     background-color: inherit;
     border: solid var(--border) 2px;
     padding: .3rem 1rem;
@@ -92,8 +92,12 @@
     color: var(--button-color);
 }
 
-.ButtonWithIcon:hover{
+.ButtonWithIcon:hover , .button:hover{
     color: var(--orange);
+    border: solid var(--orange) 2px;
+}
+
+.active{
     border: solid var(--orange) 2px;
 }
 

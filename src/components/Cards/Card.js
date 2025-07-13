@@ -5,7 +5,7 @@ import { ButtonCircle, ButtonWithIcon } from "@/shared/Buttons/Buttons";
 import { ButtonShare } from "@/features/client/client";
 import { categoryCONST } from "@/config"
 import { CardPreview } from "../Image/Image";
-import { toServer } from "@/features/functions/functions";
+import { toServer , parsePrice } from "@/features/functions/functions";
 import { useState } from "react";
 import HeartIcon from "@/icons/heart.svg";
 import ViewsIcon from "@/icons/view.svg";
@@ -21,7 +21,7 @@ function CardCategory({src,text,label}) {
     return <h4 className="tw-secondary-text">{label} {nameLen(text,25,25)}</h4>
 }
 
-export function Card({obj,type,priority}) {
+export function Card({obj,type,priority,course}) {
     const { views , name , category ,subcategory , previewimage, street } = obj;
 
     return( 
@@ -46,7 +46,7 @@ export function Card({obj,type,priority}) {
                 </div>
 
                 <div className={`${styles.CardInfo} flex flex-row align-baseline`}>
-                    <h2>{obj?.price}</h2>
+                    <h2>{parsePrice(obj?.price,course)}</h2>
                 </div>  
                 <div className="flex flex-row align-center">
                     <ButtonShare id={obj.id}></ButtonShare>

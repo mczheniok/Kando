@@ -6,6 +6,8 @@ import { GridProductsList } from "../../../components/ProductsList/GridListWrapp
 import { subCategoryUrl, subCategoryUrls } from "../../../config"
 import { CategorySchema } from "../../../SEO/SeoSchemaOrg"
 import { BreadCrumbs } from "@/shared/blocks/BreadCrumbs/BreadCrumbs";
+import { Filters } from "../../../shared/blocks/filter";
+import { Suspense } from "react";
 
 
 export const revalidate = 43200; // обновление раз в сутки
@@ -80,22 +82,31 @@ export async function generateMetadata({ params }) {
       url: `https://kando.pp.ua/${category}/${subcategory}`,
       images: [
         {
-          url: 'https://kando.pp.ua/assets/og-category.webp', // Сделайте общее или генерируйте динамически
+          url: 'https://kando.pp.ua/assets/og-category.webp', 
           width: 1200,
           height: 630,
         },
       ],
       type: 'website'
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${subcategoryName} - ${categoryName}`,
+      description: `Оголошення про ${subcategoryName} на дошці оголошеннь Kando`,
+      images: [
+        "https://kando.pp.ua/assets/og-category.webp"
+      ]
     }
   };
 }
 
 
 
-export default async function ViewCategory({ params }) {
+export default async function ViewCategory({ params , searchParams}) {
   const { category , subcategory } = await params;
+  const page = await searchParams?.page || '1';
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?subcategory=${subcategory}&page=1`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?subcategory=${subcategory}&page=${page}`, {
     next: { revalidate: 43200 }
   });
 
@@ -112,21 +123,29 @@ export default async function ViewCategory({ params }) {
       />
       <Header />
         <MainContainer>
-          <Search></Search>
+          <Search placeholder="Пошук Оголошеннь"></Search>
             <section className="flex flex-col justify-center" style={{
-              width: "100%",
-              background: "var(--background)",
-              height: "fit-content",
-              borderRadius: "1rem",
-              padding: "1rem"
-            }}>
+                width: "100%",
+                background: "var(--background)",
+                height: "fit-content",
+                borderRadius: "1rem",
+                padding: "1rem"
+              }}
+            >
               <h1>Оголошення: {getCategoryName(subcategory)} у категорії {getCategoryName(category)}</h1>
-              <BreadCrumbs baseUrl={`${category}/${subcategory}`}></BreadCrumbs>
+              
+              <div className="flex flex-row align-center justify-between">
+                <BreadCrumbs baseUrl={`${category}/${subcategory}`}></BreadCrumbs>
+                <Suspense fallback={<div>🏠 Загрузка...</div>}>
+                  <Filters />
+                </Suspense>
+              </div>
             </section>
           <GridProductsList
             baseUrl={`${category}/${subcategory}`}
-            count={data.data.count}
-            list={data.data.items}
+            currentPage={page}
+            totalCount={data.data.count}
+            list={data.data.items || []}
           />
         </MainContainer>
       <Footer />

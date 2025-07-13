@@ -3,10 +3,18 @@ import GridProductsListComponent from "./GridProductsList"
 import { Suspense } from "react";
 
 
-export function GridProductsList({count,baseUrl,list=[],showLoadMore=true}) {
+export function GridProductsList({totalCount,baseUrl,list=[],withPagination=true,showLoadMore=true,currentPage = 1,filter={course: "UAH"}}) {
     return (
         <Suspense fallback={<div style={{minHeight: "600px",width: "100%"}}>Загрузка Списку оголошеннь</div>}>
-            <GridProductsListComponent baseUrl={baseUrl} count={count} showLoadMore={showLoadMore} list={list}/>
+            <GridProductsListComponent 
+                filter={filter}
+                baseUrl={baseUrl} 
+                totalCount={totalCount} 
+                showLoadMore={showLoadMore} 
+                currentPage={currentPage} 
+                list={list}
+                withPagination={withPagination}
+            />
         </Suspense>
     )
 }

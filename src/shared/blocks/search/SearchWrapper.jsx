@@ -2,10 +2,10 @@
 import SearchComponent from "./Search"
 import { Suspense } from "react";
 
-export function Search() {
+export function Search({placeholder}) {
     return (
         <Suspense fallback={<div>Завантаження пошуку...</div>}>
-            <SearchComponent />
+            <SearchComponent placeholder={placeholder}/>
         </Suspense>
     )
 }

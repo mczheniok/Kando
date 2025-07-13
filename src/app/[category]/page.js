@@ -63,16 +63,25 @@ export async function generateMetadata({ params }) {
         },
       ],
       type: 'website'
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Доска оголошень категорії ${categoryName} | Kando`,
+      description: `Оголошення про ${categoryName} на дошці оголошеннь Kando`,
+      images: [
+        "https://kando.pp.ua/assets/og-category.webp"
+      ]
     }
   };
 }
 
 
 
-export default async function ViewCategory({ params }) {
+export default async function ViewCategory({ params , searchParams }) {
   const { category } = await params;
+  const page = await searchParams?.page || '1';
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?page=1`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?page=${page}`, {
     next: { revalidate: 86400 }
   });
 
@@ -97,12 +106,17 @@ export default async function ViewCategory({ params }) {
               padding: "1rem"
             }}>
               <h1>{`Список Оголошеннь: в категорії ${getCategoryName(category)}`}</h1>
+    
               <BreadCrumbs baseUrl={`${category}`}></BreadCrumbs>
             </section>
           <GridProductsList
+            filter={{
+              course: "UAH"
+            }}
             baseUrl={`${category}`}
-            count={data.data.count}
+            totalCount={data.data.count}
             list={data.data.items || []}
+            currentPage={parseInt(page)}
           />
         </MainContainer>
       <Footer />

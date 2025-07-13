@@ -82,3 +82,18 @@ export const toDate = date => new Date(date).toLocaleString({language: "ua",regi
 export const isClient = () => typeof window === "undefined"
 
 export const isUndefined = (e,f) => e !== undefined?f():null 
+
+
+
+export function parsePrice(price,type = "UAH") {
+  switch(type) {
+    case "UAH": return `${price} ₴`; // гривні
+
+    case "EUR": return `${Math.ceil(price / 48.85)} €`; // євро
+
+    case "DOL": return  `${Math.ceil(price / 41.77)} $`; // долар
+
+    default: return `${price} ₴`;
+  }
+
+}

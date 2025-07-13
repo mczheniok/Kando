@@ -49,6 +49,18 @@
     gap: min(4vw,1rem);
 }
 
+.PaginationButton {
+    max-width: 100px;
+}
+
+.Active{
+    border: solid var(--orange) 1px;
+}
+
+.PaginationPadding {
+    padding: .3rem 1.2rem;
+}
+
 
 @media screen and (max-width: 574px) {
     #footer {

@@ -185,7 +185,7 @@ export function CardPreview({ img, priority = false , alt = "Превью ого
               height={200}
               priority={priority}
               {...(!priority && { loading: "lazy" })}
-              quality={75}
+              quality={90}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{
                   width: '100%',

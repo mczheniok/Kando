@@ -15,7 +15,7 @@ export async function generateMetadata({params,searchParams}) {
   const Image = `${process.env.NEXT_PUBLIC_URL}/assets/background.webp`;
 
   return {
-    title: `Маркетплейс оголошень | ${name}`,
+    title: `${name} | Маркетплейс оголошень`,
     description: description,
     alternates: {
       canonical: "https://kando.pp.ua",
@@ -88,7 +88,12 @@ export default async function Home() {
               <HeadInfoBlock />
             </div>
           <LazyCategory></LazyCategory>
-          <GridProductsList showLoadMore={true} baseUrl="" list={data.data.items} />
+          <GridProductsList 
+            currentPage={1}
+            withPagination={false}
+            totalCount={data.data.count}
+            list={data.data.items || []}
+          />
         </MainContainer>
       <Footer></Footer>
     </ContainerLanguage>
