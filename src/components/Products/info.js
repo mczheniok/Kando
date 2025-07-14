@@ -12,8 +12,8 @@ export const ProductSellerInfo = ({categories = [],user,type="product",position}
           <UserHeaderInfo username={user.username}></UserHeaderInfo>
         </article>
         <article className={`${styles.InfoBlock}`} style={{overflow: "auto",padding: `${type ==="realestate"? "0rem":".6rem"}`}}>
-          {type === "realestate"?
-          <LazyMap title="Ваш Будинок" position={position}></LazyMap>
+          {type?
+          <LazyMap title="Ваш Будинок" position={position || [47,37]}></LazyMap>
           :<Categoryies list={categories}></Categoryies>}
         </article>
     </section>
@@ -71,7 +71,6 @@ export function ProductInfoSection({id,title,Price,LastPrice,categories,list,Rev
             <h4 className="small-text">⭐</h4>
             <h4 className="small-text">{4.5}</h4>
             <h4 className="small-text">{Reviews} Відгуків</h4>
-            <h4 className="small-text">10,000+ продажів</h4>
         </div>
         {<article className={`${styles.InfoBlock}`} style={{overflowY: "auto",maxHeight: 'auto',border: "none",padding: "0rem"}}>
           {type && <Categoryies list={categories}></Categoryies>}

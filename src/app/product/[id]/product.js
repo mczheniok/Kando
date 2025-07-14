@@ -1,6 +1,6 @@
   "use client"
   import usePageRender from "@/shared/hooks/usePageRender";
-  import { useRef } from "react";
+  import { useRef, useState } from "react";
   import { InfoContainer } from "@/components/Containers/container";
   import ProductNavigation from "@/components/Navigation/ProductNavigation";
   import { ProductImageSection } from "@/components/Image/Image";
@@ -16,19 +16,28 @@
     {title: "Опис",id: "#description"}
   ]
 
-  export function InfoPagination({obj}) {
-    const { image_array, name , product_info,  price , last_price , category , location  , subcategory, creator_id , id, views } = obj
+  export function InfoPagination({obj}) {    
+    const { image_array, name , product_info,  price , last_price , category , location = [] , subcategory, creator_id , id, views } = obj
     
     const infoRef = useRef(null);
     const [activePage,setPage] = usePageRender(infoRef);
-    const type = location.length === 2;
+    
+    
+    const type = JSON.parse(location).length === 2 || 0;
 
     const main = () => {
       return (
         <InfoContainer>
           <ProductImageSection list={image_array}></ProductImageSection>
             <ProductInfoSection id={id} subcategory={subcategory} categories={category} list={image_array} type={type} title={name} Price={price} LastPrice={last_price} Reviews={views} Images={image_array}></ProductInfoSection>
-          <ProductSellerInfo anoncement={{subcategory,show: false}} product_id={id} type={type} userId={creator_id} categories={category} position={location}></ProductSellerInfo>
+          <ProductSellerInfo 
+            anoncement={{subcategory,show: false}} 
+            product_id={id} 
+            type={type} 
+            userId={creator_id} 
+            categories={category} 
+            position={JSON.parse(location)}
+          ></ProductSellerInfo>
         </InfoContainer>
       );
     }

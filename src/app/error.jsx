@@ -446,12 +446,6 @@ export default function Error() {
             <p className="info-text">
               Очікуваний час відновлення: найближчим часом
             </p>
-            <p className="info-text">
-              З питань звертайтесь:
-              <a href="mailto:support@yoursite.com" className="contact-link">
-                support@yoursite.com
-              </a>
-            </p>
           </div>
           
           <button 

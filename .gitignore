@@ -54,6 +54,8 @@ coverage
 public/uploads
 public/sitemap-0.xml
 public/sitemap.xml
+public/robots.txt
+
 
 # ptional npm/yarn lock files (if using one or the other)
 # yarn.lock
