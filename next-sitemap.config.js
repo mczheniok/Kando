@@ -6,6 +6,15 @@ require('dotenv').config();
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_URL,
   generateRobotsTxt: true,
+  exclude: ["/account/*"],
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        disallow: ["/account/"],
+      },
+    ],
+  },
   async additionalPaths(config) {
     const baseUrl = process.env.NEXT_PUBLIC_URL;
 
@@ -50,15 +59,15 @@ module.exports = {
 
       const categoriesRaw = categoriesData?.data || [];
 
-      const categoryPaths = categoriesRaw.map(([category,sb],ind) => {
-        sb?.map(subcategory => ({
-            loc: `/${category}/${subcategory}`,
-            changefreq: 'weekly',
-            priority: 0.7,
-          })
-        ) 
-      }) || [];
 
+      const categoryPaths = categoriesRaw.flatMap(([category, subcategories]) =>
+        subcategories.map(subcategory => ({
+          loc: `/${category}/${subcategory}`,
+          changefreq: 'weekly',
+          priority: 0.7,
+        }))
+      );
+      
       return [...productPaths, ...categoryPaths];
     } catch (err) {
       console.error('❌ Ошибка при получении данных для sitemap:', err);
