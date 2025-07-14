@@ -31,7 +31,7 @@ export default function SearchPage() {
         <Header></Header>
           <MainContainer>
             <Search set={setData} placeholder={"Шукати товар"}></Search>
-              <GridProductsList list={data}></GridProductsList>
+              <GridProductsList currentPage={1} totalCount={data?.count} list={data}></GridProductsList>
           </MainContainer>
         <Footer></Footer>
       </ContainerLanguage>

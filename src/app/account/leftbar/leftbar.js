@@ -69,7 +69,7 @@ export const MoreButton = ({userData}) => {
 }
 
 
-export function LeftBar({ref}) {
+export function LeftBar({visible}) {
     const [_,data] = useToServer("/account/me",{
         headers: {   "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem('token') : ''}` },
         credentials: "include",
@@ -78,11 +78,10 @@ export function LeftBar({ref}) {
     const userData = data;
 
     const pathname = usePathname().split("/").filter(e => e !== "");
-    const [visible,setVisible] = useState(false);
 
     return (
         <aside className={`${styles.aside} ${visible ? styles.visible : ""} flex-col align-center`}>
-            <ul data-id={"asideList"} ref={ref} className={`${styles.asideList} flex-col justify-around align-center`} style={{marginTop: "1rem"}}>
+            <ul data-id={"asideList"}  className={`${styles.asideList} flex-col justify-around align-center`} style={{marginTop: "1rem"}}>
                 <Suspense fallback={<Loading/>}>
                     <UserAvatar src={userData?.image} width={100} height={100} />
                 </Suspense>
@@ -97,14 +96,30 @@ export function LeftBar({ref}) {
                 }
                 <div style={{padding: "0rem 1rem",width: "100%"}}>
                     <ButtonWithIcon Icon={BuyIcon} clName={"justify-around"} style="dark" title={"план"} />
-                </div>
-                <button className={`${styles.Open} circle`} onClick={e => setVisible(!visible)}>
-                    {!visible?"↩️":"↪️"}
-                </button>    
+                </div> 
             </ul>  
             <div style={{padding: "0rem 1rem"}}>
                 <MoreButton userData={userData} />
-            </div>  
+            </div>       
         </aside>
+    )
+}
+
+export function ShowLeftBar({state,set}) {
+    return (
+        <button className={`${styles.Open} circle`} onClick={e => set(!state)}>
+            {!state?"↩️":"↪️"}
+        </button>  
+    )
+}
+
+export function LeftBarContainer() {
+    const [visible,setVisible] = useState(false);
+
+    return (
+        <>
+            <LeftBar visible={visible}></LeftBar>
+            <ShowLeftBar state={visible} set={setVisible}></ShowLeftBar>
+        </>
     )
 }

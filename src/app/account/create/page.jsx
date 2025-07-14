@@ -175,7 +175,7 @@ export default function Page() {
         console.log(productImages)
     }
 
-    const handleSubmit = async  e => {
+    const handleSubmit = async e => {
             e.preventDefault(); 
             const data = new FormData();
             const {description,name,price,subcategory,info,location} = anoncement.current;

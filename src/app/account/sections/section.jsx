@@ -25,7 +25,7 @@ export function CreateNewAnnouncement({ handler, category }) {
     });
   }, []);
 
-  if (!categories) return <div style={{width: "100%",minHeight: "400px"}}>🚀 Загрузка...</div>;
+  if (!categories) return <div style={{width: "100%",minHeight: "500px"}}>🚀 Загрузка...</div>;
 
   return (
     categories[category]?.map((el, ind) => (

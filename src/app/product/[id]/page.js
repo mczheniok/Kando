@@ -111,8 +111,6 @@ export default async function Product({params}) {
     created_at,
     category
   } = info;
-
-  console.log(info)
   
   const noImage = `${process.env.NEXT_PUBLIC_URL}/assets/noimage.webp`;
 

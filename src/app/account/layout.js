@@ -1,7 +1,7 @@
 import styles from "./account.module.css"
 import Header  from "../../shared/blocks/Header";
 import Footer from  "../../shared/blocks/Footer";
-import { LeftBar } from "./leftbar/leftbar";
+import { LeftBarContainer } from "./leftbar/leftbar";
 import { NotificationContainer } from "../../components/Notifications/notification"
 import { Suspense } from "react";
 
@@ -18,7 +18,7 @@ export default function AccountLayout({ children }) {
         <div>
             <Header></Header>
                 <main className={`container ${styles.GridAccount}`}>
-                    <LeftBar />
+                    <LeftBarContainer />
                     <div className={`${styles.main} flex flex-col`}>
                         <Suspense fallback={<div style={{minHeight: "600px",width: "100%"}}>🚀 Загрузка...</div>}>
                             {children}

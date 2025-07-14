@@ -6,7 +6,7 @@ export const anoncementSchema = z.object({
     price: z.number({ message: 'Неправильний формат ціни' }).nonnegative({ message: 'Вкажіть ціну' }),
     category: z.string().nonempty({ message: 'Оберіть хоча б одну категорію' }).max(70, { message: 'Максимально 70 символів' }),
     location: z.array(z.string()).max(2).optional(),
-    categories: z.array(z.string(),{message: "Будь ласка поставте галочки"}).min(5, { message: 'Мінімально 5 категорій' }),
+    categories: z.array(z.string(),{message: "Будь ласка поставте галочки"}).min(5, { message: 'Мінімально 5 категорій'}),
     description: z.string().min(40, { message: 'Мінімум 40 символів в описі' }).max(3000, { message: 'Максимум 3000 символів в описі' }),
     subcategory: z.number({ message: 'Оберіть підкатегорію' }),
 })

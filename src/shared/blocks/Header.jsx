@@ -10,7 +10,6 @@ import UserIcon from "@/icons/user.svg"
 function Header() {
     const { language , set } = useContext(LanguageContenxt);
     
-
     const handleChangeLang = (e) => { 
         const lang = e.target.getAttribute("data-lang");
         set(lang);

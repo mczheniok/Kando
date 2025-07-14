@@ -292,6 +292,8 @@
         z-index: 101;
         padding: 1rem;
     }
+
+
  
     .visible {
         visibility: visible;
@@ -299,7 +301,7 @@
     }
 
     .asideList{
-        gap: 2rem;
+        gap: .5rem;
     }
 
     
