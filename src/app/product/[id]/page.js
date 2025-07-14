@@ -108,9 +108,11 @@ export default async function Product({params}) {
     image_array,
     price,
     description,
-    created_at
+    created_at,
+    category
   } = info;
 
+  console.log(info)
   
   const noImage = `${process.env.NEXT_PUBLIC_URL}/assets/noimage.webp`;
 
@@ -138,7 +140,7 @@ export default async function Product({params}) {
               <MainContainer>
                 <Search></Search>
                   <Info obj={info}></Info>
-                <InfoSectionBottom text={info.description}></InfoSectionBottom>
+                <InfoSectionBottom categories={category} text={info.description}></InfoSectionBottom>
               <NotificationContainer></NotificationContainer>
             </MainContainer>
           <Footer></Footer>

@@ -39,7 +39,7 @@ export default function Main() {
                 </Suspense>
             </section>
             <div style={{width: "100%"}}>
-                <section className="flex flex-row flex-wrap" style={{ width: "100%",padding: "0rem 0rem"}}>
+                <section className="flex flex-row flex-wrap" style={{ width: "100%",gap: "0rem",padding: "0rem 0rem"}}>
                     {Cardsarray.map((el) => {
                         return (
                             <CardBlock href={`/account/${el.href}`} title={el.title} Icon={el.icon} key={`${el.title}`}></CardBlock>

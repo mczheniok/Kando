@@ -86,13 +86,16 @@ export default async function ViewCategory({ params , searchParams }) {
   });
 
   const data = await res.json();
+  
+  const count = data?.data?.count || 0;
+  const items = data?.data?.items || [];
 
   return (
     <ContainerLanguage>
         <CategorySchema
-            count={data.data.count}
+            count={count}
             category={getCategoryName(category)}
-            list={data.data.items.slice(0,12)}
+            list={items.slice(0,12)}
             path={{main: "/",category}}  
         />
         <Header />
@@ -114,8 +117,8 @@ export default async function ViewCategory({ params , searchParams }) {
               course: "UAH"
             }}
             baseUrl={`${category}`}
-            totalCount={data.data.count}
-            list={data.data.items || []}
+            totalCount={count}
+            list={items}
             currentPage={parseInt(page)}
           />
         </MainContainer>

@@ -20,7 +20,6 @@ import { Button } from "../../../shared/Buttons/Buttons";
 import { anoncementSchema } from "@/schemas/zod";
 import { SendNotify } from "../../../components/Notifications/notification";
 import { toServer } from "../../../features/functions/functions";
-
 import AddIcon from "@/icons/add.svg"
 
 function MapLayout ({locationRef}) {
@@ -285,20 +284,22 @@ export default function Page() {
                     </div>
                     <h4 className="tw-secondary-text"> Додайте до 24 фотографій. Перше фото буде головним у вашому оголошенні. </h4>
                 </SectionContainer>
-                <SectionContainer headerText={"Характеристики Об'єкту"}>
-                <div className="flex flex-row flex-wrap" style={{gap: "1rem 2rem",width: "100%",padding:"0rem"}}>
-                    {categoryList[category].map((el,ind) => {
-                        const { placeholder , text , name } = el;
-                        return (
-                            <InputContainer text={text}  key={`input-container-${ind}`}>
-                                {typeof placeholder === "string"?<Input handler={handleProductInfo} placeholder={placeholder} name={name}/>
-                                :<SelectList formDataRef={product_info} name={name} arr={placeholder}/>}
-                            </InputContainer>
-                        );
-                    })}
-                </div>
-                </SectionContainer>
-                <CreateNewAnnouncement handler={handleCheckBoxClick}></CreateNewAnnouncement>
+                {categoryList[category]?.length !== 0 && (
+                    <SectionContainer headerText={"Характеристики Об'єкту"}>
+                        <div className="flex flex-row flex-wrap" style={{gap: "1rem 2rem",width: "100%",padding:"0rem"}}>
+                            {categoryList[category].map((el,ind) => {
+                                const { placeholder , text , name } = el;
+                                return (
+                                    <InputContainer text={text}  key={`input-container-${ind}`}>
+                                        {typeof placeholder === "string"?<Input handler={handleProductInfo} placeholder={placeholder} name={name}/>
+                                        :<SelectList formDataRef={product_info} name={name} arr={placeholder}/>}
+                                    </InputContainer>
+                                );
+                            })}
+                        </div>
+                    </SectionContainer>
+                )}
+                <CreateNewAnnouncement category={category} handler={handleCheckBoxClick}></CreateNewAnnouncement>
                 <SectionContainer>
                     <Button disabled={load} submit={true} style={"dark"} Icon={"add"} title={"Створити Оголошення"} clName={"justify-center"}></Button>  
                 </SectionContainer>

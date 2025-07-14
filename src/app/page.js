@@ -5,7 +5,7 @@ import { GridProductsList } from "../components/ProductsList/GridListWrapper";
 import { HeadMainPage } from "@/features/products/Sections";
 import { HeadInfoBlock } from "@/features/products/headinfoblock/HeadInfoBlock";
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
-import { LazyCategory } from "@/components/lazy";
+import { HeroCategory } from "@/features/products/CategoryBlock/herocategoryblock";
 import Head from "next/head";
 import { Search } from "../shared/blocks/search/SearchWrapper";
 
@@ -87,7 +87,7 @@ export default async function Home() {
               <HeadMainPage />
               <HeadInfoBlock />
             </div>
-          <LazyCategory></LazyCategory>
+          <HeroCategory />
           <GridProductsList 
             currentPage={1}
             withPagination={false}

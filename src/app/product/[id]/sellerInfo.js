@@ -5,7 +5,6 @@ import { LazyMap } from "../../../components/lazy";
 import { UserHeaderInfo } from "@/components/Image/Image"
 import { useToServer } from "@/shared/hooks/useToServer"
 import { parseLastLogin } from "@/features/functions/functions"
-import { useState , useEffect } from "react";
 
 const Categoryies = ({list}) => {
     return (
@@ -14,7 +13,7 @@ const Categoryies = ({list}) => {
 }
   
 
-export const ProductSellerInfo = ({categories = [],userId,position = [],product_id,anoncement}) => {
+export const ProductSellerInfo = ({userId,position = [],product_id,anoncement}) => {
     const [load,user] = useToServer(`/user/${userId}`,{},false,false);
 
     return (
@@ -32,9 +31,9 @@ export const ProductSellerInfo = ({categories = [],userId,position = [],product_
             ></UserHeaderInfo>
           </article>
           <article className={`${styles.InfoBlock}`} style={{overflow: "auto",padding: `${position.length === 2? "0rem":".6rem"}`}}>
-            {position?.length === 2?
+            {position?.length === 2 && (
               <LazyMap title="Ваш Будинок" position={position}></LazyMap>
-            :<Categoryies list={categories}></Categoryies>}
+            )}
           </article>
       </section>
     )

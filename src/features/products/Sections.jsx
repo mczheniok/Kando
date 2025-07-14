@@ -2,7 +2,7 @@ import styles from "./sections.module.css";
 import { Fragment } from "react";
 import LocalFont from "next/font/local";
 import { Ref } from "@/shared/Buttons/Buttons";
-
+import { Listh4 } from "@/components/Lists/Lists"
 
 
 const pacifico =  LocalFont({
@@ -11,29 +11,42 @@ const pacifico =  LocalFont({
     weight: "400"
 })
 
-    export function InfoSectionBottom({text}) {
-        const FormatedText = ({text}) => {
-            return text.split("\n").map((line,index) => {
-                return (
-                <Fragment key={`info-line-${index}`}>
-                    {line}
-                    <br />
-                </Fragment>
-                )
-        })}
+
+const Categoryies = ({list}) => {
+  return (
+    <Listh4 s={"category"}  list={list} className={"flex flex-row flex-wrap"}></Listh4>
+  ) 
+}
+
+  
+export function InfoSectionBottom({text,categories}) {
+    const FormatedText = ({text}) => {
+        return text.split("\n").map((line,index) => {
+            return (
+            <Fragment key={`info-line-${index}`}>
+                {line}
+                <br />
+            </Fragment>
+            )
+    })}
 
     return (
-        <section className={`${styles.grid2}`} id="description">
-            <div className={`${styles.BlockIn} flex flex-col`} >
-                <h1 className="accent-text">Опис</h1>
-                <h3>
-                    <FormatedText text={text}></FormatedText>
-                </h3>
-            </div>
-            <div className={`${styles.BlockIn} flex flex-col align-center justify-center`}>
-                <span style={{margin: "2rem 0rem",transform: "rotate(360deg)",writingMode: "vertical-rl"}}>тут могла бути ваша реклама</span>
-            </div>
-        </section>
+      <section className={`${styles.grid2}`} id="description">
+          <div className={`${styles.BlockIn} flex flex-col`} >
+              <h1 className="accent-text">Опис</h1>
+              
+              <div className="flex flex-row flex-wrap" style={{width: "100%"}}>
+                <Categoryies list={categories}></Categoryies>
+              </div>
+              
+              <h3>
+                  <FormatedText text={text}></FormatedText>
+              </h3>
+          </div>
+          <div className={`${styles.BlockIn} flex flex-col align-center justify-center`}>
+              <span style={{margin: "2rem 0rem",transform: "rotate(360deg)",writingMode: "vertical-rl"}}>тут могла бути ваша реклама</span>
+          </div>
+      </section>
     )
 }
 
