@@ -75,15 +75,13 @@ export function LeftBar({visible}) {
         credentials: "include",
     },false,false);   
 
-    const userData = data;
-
     const pathname = usePathname().split("/").filter(e => e !== "");
 
     return (
         <aside className={`${styles.aside} ${visible ? styles.visible : ""} flex-col align-center`}>
             <ul data-id={"asideList"}  className={`${styles.asideList} flex-col justify-around align-center`} style={{marginTop: "1rem"}}>
                 <Suspense fallback={<Loading/>}>
-                    <UserAvatar src={`${process.env.NEXT_PUBLIC_URL}/images/${userData?.image}`} width={100} height={100} />
+                    <UserAvatar src={`${process.env.NEXT_PUBLIC_URL}/images/${data?.image}`} width={100} height={100} />
                 </Suspense>
                 {listTargets.map((el,ind) => {
                     return (
@@ -99,7 +97,7 @@ export function LeftBar({visible}) {
                 </div> 
             </ul>  
             <div style={{padding: "0rem 1rem"}}>
-                <MoreButton userData={userData} />
+                <MoreButton userData={data} />
             </div>       
         </aside>
     )
