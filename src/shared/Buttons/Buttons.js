@@ -65,15 +65,15 @@ export function ButtonMiniIcon({title,Icon,click}) {
 
 
 
-export function Ref({title,link,style}) {
+export function Ref({title,link,style,clName = ""}) {
     return (
         <Link                 
             href={link}
-            className={`${styles.button} flex flex-row align-center ${styles[style]}`} 
+            className={`${styles.button} flex flex-row ${clName} align-center ${styles[style]}`} 
             
         >
             {title && (
-                <span className={`${style?styles[style+"Text"]:''} h4-text`} style={{width: "50%",textAlign: "center"}}>{title}</span>
+                <span className={`${style?styles[style+"Text"]:''} flex-grow h4-text`} style={{width: "50%",textAlign: "center"}}>{title}</span>
             )}
         </Link>
     )

@@ -23,8 +23,7 @@ import { toServer } from "../../../features/functions/functions";
 import AddIcon from "@/icons/add.svg"
 
 function MapLayout ({locationRef}) {
-    const [location,setLocation] = useState([44.4727805,44.4755123]);
-    
+    const [location,setLocation] = useState([46.4900983,30.7400866]);
 
     const debounceHandleInput = debounce((e) => {
         const regex = /@([^,]+),([^,]+),([^z]+)/;
@@ -181,7 +180,6 @@ export default function Page() {
             const {description,name,price,subcategory,info,location} = anoncement.current;
     
             delete product_info.current;
-
 
             if(productImages.length === 0) {
                 return SendNotify("Не прікріплено жодної фотографії","warning")

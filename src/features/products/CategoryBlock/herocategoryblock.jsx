@@ -4,9 +4,10 @@ import { SubCategory , subCategoryUrl } from "@/config";
 
 export const HeroCategory = () => {
     const ukraineText = Object.entries(SubCategory);
+    
 
     return (
-        <div className="flex flex-row flex-wrap" style={{marginTop: "1rem",width: "100%",background: "var(--bg-card)",overflow: "auto",maxHeight: "450px",borderRadius: "1rem",border: "solid var(--border) 1px",minHeight: "300px",padding: "2rem 1rem",gap: "5rem"}}>
+        <div className="flex flex-row flex-wrap" style={{marginTop: "1rem",width: "100%",background: "var(--bg-card)",maxHeight: "450px",overflow: "auto",borderRadius: "1rem",border: "solid var(--border) 1px",padding: "2rem 1rem",gap: "1rem"}}>                       
             {Object.entries(subCategoryUrl).map(([category,subcategories],categoryInd) => {        
                 const UAtext = ukraineText[categoryInd];
 

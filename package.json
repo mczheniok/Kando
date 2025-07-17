@@ -27,11 +27,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/node": "^22.14.1",
-    "@types/react": "19.1.6",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
-    "knip": "^5.50.5",
-    "typescript": "^5.8.3"
+    "knip": "^5.50.5"
   }
 }

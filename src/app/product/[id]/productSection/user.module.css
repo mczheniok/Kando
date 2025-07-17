@@ -1,0 +1,52 @@
+.userContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 265px;
+}
+
+.userBlock {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-card);
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem;
+}
+
+.userHead{
+    width: 100%;
+    height: fit-content;
+    min-height: 80px;
+}
+
+
+.userInfoContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    grid-template-rows: 1fr 30%;
+}
+
+
+.mapBlock{
+    background: var(--bg-card);
+    padding: .1rem;
+}
+
+.secondaryText{
+    color: #666666;
+    line-height: 1.6rem;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 574px) {
+    .userContainer {
+        grid-template-columns: 1fr;
+        height: fit-content;
+    }
+
+    .userInfoContainer {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+}

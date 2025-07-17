@@ -8,5 +8,5 @@ export const anoncementSchema = z.object({
     location: z.array(z.string()).max(2).optional(),
     categories: z.array(z.string(),{message: "Будь ласка поставте галочки"}).min(5, { message: 'Мінімально 5 категорій'}),
     description: z.string().min(40, { message: 'Мінімум 40 символів в описі' }).max(3000, { message: 'Максимум 3000 символів в описі' }),
-    subcategory: z.number({ message: 'Оберіть підкатегорію' }),
+    subcategory: z.number({ message: 'Оберіть підкатегорію' }).nonnegative(),
 })

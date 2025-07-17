@@ -82,7 +82,7 @@ export default async function Home() {
       <FooterSeoSchema />
       <Header></Header>
         <MainContainer>
-          <Search />
+          <Search placeholder={"Наприклад: Квартира в центрі міста"} />
             <div className="flex flex-col" style={{backgroundRepeat: "no-repeat",backgroundSize: "cover",backgroundColor:"var(--orange)",backgroundPosition: "center",borderRadius: "1rem",backgroundImage: `url(/assets/background.webp)`,gap:"1rem"}}>
               <HeadMainPage />
               <HeadInfoBlock />

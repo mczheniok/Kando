@@ -26,7 +26,10 @@ export default function Search({placeholder,set=() => {}}) {
 
     const BackLightLen = (str, search) => {
         const text = str.name.split(" ");
-        const sub = str.subcategory.replace(" ","").split(" ");
+        
+        console.log(text);
+
+        const sub = str?.subcategory?.replace(" ","").split(" ");
         let target = null;
     
         // Пошук слова, яке частково збігається з пошуком
@@ -46,7 +49,7 @@ export default function Search({placeholder,set=() => {}}) {
 
         return (
             <Link href={`/product/${str.id}?search=${str.name}`} className="h3-text secondary-text flex flex-row align-baseline" style={{ gap: ".3rem" }}>
-                {sub.map((el, ind) => (
+                {sub?.map((el, ind) => (
                     <p key={`category-search-el-${ind}`} className="h3-text">{subCategoryObject[el]}:</p>
                 ))}
                 {text.map((el, ind) => (

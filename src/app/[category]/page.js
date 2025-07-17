@@ -6,6 +6,7 @@ import { GridProductsList } from "../../components/ProductsList/GridListWrapper"
 import { subCategoryUrl, subCategoryUrls } from "../../config"
 import { BreadCrumbs } from "@/shared/blocks/BreadCrumbs/BreadCrumbs";
 import { CategorySchema } from "@/SEO/SeoSchemaOrg";
+import { notFound } from "next/navigation";
 
 export const revalidate = 86400; // обновление раз в сутки
 
@@ -79,13 +80,23 @@ export async function generateMetadata({ params }) {
 
 export default async function ViewCategory({ params , searchParams }) {
   const { category } = await params;
-  const page = await searchParams?.page || '1';
+  const p = await searchParams
+  const page = p?.page || '1';
+  
+  let res;
+  let data;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?page=${page}`, {
-    next: { revalidate: 86400 }
-  });
 
-  const data = await res.json();
+  try { 
+    res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?page=${page}`, {
+      next: { revalidate: 86400 }
+    });
+  } catch(err) {
+    return notFound();
+  }
+
+  
+  data = await res.json();
   
   const count = data?.data?.count || 0;
   const items = data?.data?.items || [];

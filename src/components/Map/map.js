@@ -39,7 +39,7 @@ const MapComponent = memo(({ title, height = "240px", position = []}) => {
   }
 
   return (
-    <div style={{ height: height, flexGrow: '1', zIndex: "100" }}>
+    <div style={{ height: height, flexGrow: '1', zIndex: "100" ,borderRadius: ".5rem"}}>
       <MapContainer 
         center={coordinates} // используйте coordinates
         zoomControl={false}

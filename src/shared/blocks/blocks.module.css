@@ -22,6 +22,20 @@
 #footer{
     border-top: solid var(--border) 1px;
     height: fit-content;
+    width: 100%;
+    background: #333;
+    color: var(--background);
+}
+
+#footer nav {
+    display: grid;
+    grid-template-columns: 30% repeat(3,1fr);
+    gap: 30px;
+    padding: 1rem;
+}
+
+#footer * > h3 {
+    color: var(--background);
 }
 
 .PaginationPages{
@@ -67,8 +81,8 @@
         padding: 0rem 1rem;
     }
     
-    #footer div nav {
-        flex-direction: column;
-        align-items: start;
+    #footer nav {
+        grid-template-columns: 1fr;
     }
+
 }

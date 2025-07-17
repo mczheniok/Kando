@@ -1,0 +1,36 @@
+.ProductDescription {
+    padding: 1rem;
+    gap: 1.5rem;
+}
+
+.ProductPrice{
+    width: 100%;
+}
+
+.ProductPrice h2{
+    font-size: 2rem;
+}
+
+
+.ProductGrade {
+    width: 100%;
+}
+
+.detailItem {
+    width: fit-content;
+    border-bottom: solid var(--border) 1px;
+    padding: .5rem 0rem;
+    min-width: 32%;
+}
+
+.descriptionItem{
+    color: #666666;
+    line-height: 1.6rem;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 574px) {
+    .detailItem {
+        width: 100%;
+    }
+}

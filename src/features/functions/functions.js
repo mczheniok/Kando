@@ -68,7 +68,7 @@ export function parseLastLogin(lastLogin) {
   } else if (diffMinutes < 60) {
     displayTime = `${diffMinutes} хв. назад`;
   } else if (diffHours < 24) {
-    displayTime = `${diffHours} годин назад`;
+    displayTime = `${diffHours} години назад`;
   } else {
     displayTime = `${diffDays} днів назад`;
   }
@@ -95,5 +95,26 @@ export function parsePrice(price,type = "UAH") {
 
     default: return `${price} ₴`;
   }
+}
 
+export function parseGrade(length ) {
+  return "⭐".repeat(parseFloat(length));
+}
+
+
+export function parsePhoneNumber(number) {
+  // Удалим всё, кроме цифр и плюса
+  if(!number) {
+    return "";
+  }
+
+  number = number.replace(/[^\d+]/g, '');
+
+  const match = number.match(/^\+?(\d{1,3})(\d{2})(\d{3})(\d{2})(\d{2})$/);
+
+  if (!match) return number; // если номер не подходит — вернуть как есть
+
+  const [, country, operator, part1, part2, part3] = match;
+
+  return `+${country} (${operator}) ${part1}-${part2}-${part3}`;
 }
