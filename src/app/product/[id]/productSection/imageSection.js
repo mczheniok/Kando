@@ -25,14 +25,14 @@ export function ProductImageSection({list,id}) {
     <div className="flex flex-col" style={{width: '100%'}}>
       <section className={`flex flex-col justify-center align-center ${styles.ProductImage}`} style={{minHeight: "300px"}}>
         <div className={`${styles.imageProductContainer} flex flex-row align-center justify-center`}>
-          <Image src={`${process.env.NEXT_PUBLIC_URL}/images${ImageSrc}`} className="flex-grow" onClick={handleClickImage} priority={true} alt="Product Image" fill style={{objectFit: "contain"}} />
+          <Image src={`${process.env.NEXT_PUBLIC_URL}/uploads${ImageSrc}`} className="flex-grow" onClick={handleClickImage} priority={true} alt="Product Image" fill style={{objectFit: "contain"}} />
         </div>
       </section>
       <div className={`${styles.galleryContainer} flex flex-row align-start justify-start`}>
         {list.map((el,ind) => {
           return (
             <div key={`image-gallery-${ind}`} className={`${styles.imageGalleryContainer} flex flex-col align-center justify-center`}>
-              <Image alt={`image in gallery ${ind}`} onClick={() => handleGalleryClick(ind)} width={35} height={35} style={{borderRadius: ".3rem",width: "35px",height: "35px"}} src={`${process.env.NEXT_PUBLIC_URL}/images${el}`}/>
+              <Image alt={`image in gallery ${ind}`} onClick={() => handleGalleryClick(ind)} width={35} height={35} style={{borderRadius: ".3rem",width: "35px",height: "35px"}} src={`${process.env.NEXT_PUBLIC_URL}/uploads${el}`}/>
             </div>
           )
         })}
