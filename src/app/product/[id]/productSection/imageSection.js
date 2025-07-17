@@ -61,7 +61,7 @@ export function ProductImageSection({list,id}) {
             <SwiperSlide key={index}>
               <div className="flex flex-col align-center justify-center" style={{width: "100%", height: "100vh"}}>
                 <Image 
-                  src={`/assets/${image}`}
+                  src={`${process.env.NEXT_PUBLIC_URL}/uploads${ImageSrc}`}
                   alt={`Product Image ${index + 1}`}
                   fill
                   style={{objectFit: "contain"}}

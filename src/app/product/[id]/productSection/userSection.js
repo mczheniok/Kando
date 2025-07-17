@@ -25,7 +25,7 @@ function UserBlock({userData}) {
     return (
         <div className={`${styles.userInfoContainer}`} style={{height: "100%"}}>
             <div className="flex flex-col align-center justify-center" style={{width: "100%",height: "100%"}}>
-                <UserAvatar image={"/assets/crying.png"} width={120} height={120}></UserAvatar>
+                <UserAvatar image={`${process.env.NEXT_PUBLIC_URL}/images${image}`} width={120} height={120}></UserAvatar>
             </div>
             <div className="flex flex-col" style={{width: "100%",height: "100%"}}>
                 <span className="flex flex-row align-center" style={{width: "100%"}}>
@@ -37,7 +37,7 @@ function UserBlock({userData}) {
                     )}
                 </span>
                 <p className="h2-text" style={{fontWeight: "300",color: "green"}}>🟢 онлайн {parseLastLogin(last_login)}</p>
-                <p className={`${styles.secondaryText} h3-text`}>телефон: {parsePhoneNumber(phone)}</p>
+                <p className={`${styles.secondaryText} h3-text`}>телефон: {parsePhoneNumber(`380${phone}`)}</p>
                 <p className={`${styles.secondaryText} h4-text`}>дата реєстрації {parseLastLogin(created_at)}</p>
             </div>
             <div className="flex flex-row align-center" style={{marginTop: "1rem",gridColumn: "1 / -1  "}}>
