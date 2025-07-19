@@ -10,12 +10,12 @@ import { Search } from "../shared/blocks/search/SearchWrapper";
 import { LinkMenu } from "@/shared/blocks/LinkMenu/linkmenu";
 
 export async function generateMetadata({params,searchParams}) {
-  const name = "Kando";
-  const description = "Kando — маркетплейс оголошень в Україні: купівля, оренда, продаж товарів і послуг.";
+  const name = "Kando Одеса | Купити та продати в Одесі | Дошка оголошень Одеса";
+  const description = "Kando – ваш онлайн маркетплейс в Одесі. Швидко та безкоштовно розміщуйте оголошення про продаж товарів, послуг, нерухомості та авто. Знайдіть найкращі пропозиції в Одесі!";
   const Image = `${process.env.NEXT_PUBLIC_URL}/assets/background.webp`;
 
   return {
-    title: `${name} | Маркетплейс оголошень`,
+    title: name,
     description: description,
     alternates: {
       canonical: "https://kando.pp.ua",
@@ -34,10 +34,10 @@ export async function generateMetadata({params,searchParams}) {
       },
     },
     openGraph: {
-      title: `${name}`,
+      title: name,
       description: description,
       url: `${process.env.NEXT_PUBLIC_URL}`,
-      siteName: "Kando",
+      siteName: "kando.pp.ua",
       images: [
         {
           url: Image,
@@ -51,7 +51,7 @@ export async function generateMetadata({params,searchParams}) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${name}`,
+      title: name,
       description: description,
       images: [
         Image

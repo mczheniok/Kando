@@ -78,16 +78,7 @@ export const HeadMainPage = () => {
         >
           <div className="flex flex-col flex-wrap">
             <h1 className={styles.HeroTitle}>
-              Створюй разом з {" "}
-              <span
-                className={pacifico.className}
-                style={{
-                  color: "var(--orange)",
-                  fontWeight: 400
-                }}
-              >
-                Kando
-              </span>
+              Знайдіть все необхідне та продайте легко в Одесі 
             </h1>
             <p
               className={styles.HeroSecondaryText}
