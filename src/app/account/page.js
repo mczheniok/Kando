@@ -18,8 +18,6 @@ import { None } from "@/shared/information/none";
 
 const UserHeaderInfo = lazy(() => import("@/features/account/userInfo/userInfoHead.js").then(module => ({ default: module.userHeadAccount })));   
 
-  
-
 
 const Cardsarray = [ 
     {title: "Повідомлення",icon: MessagesIcon,href: "/messages"},

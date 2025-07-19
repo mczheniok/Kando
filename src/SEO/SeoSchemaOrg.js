@@ -21,7 +21,7 @@ export function HomeSeoSchema() {
           "areaServed": "UA",
           "availableLanguage": ["Ukrainian","Russian"]
         },
-        "foundingDate": "2025-05-08"
+        "foundingDate": "2025-06-05"
     };
 
     return (

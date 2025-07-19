@@ -57,6 +57,10 @@ public/sitemap.xml
 public/robots.txt
 
 
+# Google API credentials
+credentials.json
+
+
 # ptional npm/yarn lock files (if using one or the other)
 # yarn.lock
 # package-lock.json

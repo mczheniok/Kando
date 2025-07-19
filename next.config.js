@@ -35,7 +35,7 @@ const nextConfig = {
         pathname: '/uploads/**',
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "h3.googleusercontent.com",
         pathname: "/**"
       }
