@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button,  RefWithImg } from "@/shared/Buttons/Buttons";
 import Logo from "@/shared/blocks/Logo";
 import { useRouter , useSearchParams } from "next/navigation";
-import Script from "next/script";
+import { TelegramLoginWidget } from "./telegram";
 
 export default function AuthWrapper() {
     const params = useSearchParams();
@@ -153,7 +153,7 @@ export default function AuthWrapper() {
                         
                         <div className="flex flex-row flex-wrap" style={{width: '100%'}}>
                             <SignButton title={"Google"} img={"google"}></SignButton>
-                            <Script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="KandoIncBot" data-auth-url="https://kando.pp.ua/api/auth/telegram/callback" data-size="large" data-request-access="write"/>
+                            <TelegramLoginWidget botName={"KandoIncBot"} authUrl={"https://kando.pp.ua/api/auth/telegram/callback"}></TelegramLoginWidget>
                         </div>
                         
                         <span className="flex flex-row align-center justify-between">
