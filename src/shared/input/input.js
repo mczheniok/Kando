@@ -72,13 +72,23 @@ export function InputContainer({type=2,children,text,require = false}) {
     )
 }
 
-export function Input({type=false,placeholder,name,handler,ref=null,required=false}) {
+export function Input({type=false,placeholder,value,name,handler,ref=null,required=false}) {
+    const [val,setValue] = useState(value);
+    
+    useEffect(() => {
+        if(value !== val) setValue(value || "");
+    },[value]);
+
     return (
         <input 
             name={name} 
             required={required}
             ref={ref}
-            onInput={handler} 
+            onChange={e => {
+                handler(e);
+                setValue(e.target.value);
+            }} 
+            value={val}
             className={`${styles.Input} h3-text`} 
             placeholder={placeholder} 
             type={type ? "text" : "text"} 
@@ -112,26 +122,45 @@ export function InputDate({name,handler=() => {},ref}) {
 }
 
 
-export function InputArea({name,handler = () => {},ref,placeholder}) {
+
+export function InputArea({ name, handler = () => {}, placeholder, value = "" }) {
+    const [val, setVal] = useState(value);
+
+    useEffect(() => {
+        setVal(value || "");
+    }, [value]); // <- следим за изменением пропса value
+
     const onPaste = (e) => {
         const TextArea = e.target;
-        
+
         setTimeout(() => {
             const prevHeight = TextArea.style.height;
-    
+
             TextArea.style.height = "auto";
             const newHeight = TextArea.scrollHeight + "px";
-    
+
             TextArea.style.height = prevHeight;
-    
+
             requestAnimationFrame(() => {
                 TextArea.style.transition = 'height 0.5s ease';
                 TextArea.style.height = newHeight;
             });
         }, 0);
-    }
+    };
 
     return (
-        <textarea onPaste={onPaste} minLength={40} maxLength={3000} name={name} placeholder={placeholder} className={styles.InputArea} onChange={handler} />
-    )
+        <textarea
+            onPaste={onPaste}
+            value={val}
+            minLength={40}
+            maxLength={3000}
+            name={name}
+            placeholder={placeholder}
+            className={styles.InputArea}
+            onChange={e => {
+                handler(e);
+                setVal(e.target.value);
+            }}
+        />
+    );
 }

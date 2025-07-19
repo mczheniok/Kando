@@ -6,13 +6,19 @@ import { ButtonWithIcon, ButtonWithList, ButtonLazyDropList } from "../../Button
 import { LanguageContenxt } from "@/components/Containers/container";
 import { useContext ,useState } from "react";
 import { debounce, toServer } from "@/features/functions/functions"
-import { subCategoryObject } from "@/config"
+import { 
+    subCategoryObject, 
+    CategoryList,
+    SubCategory
+} from "@/config"
 import SearchIcon from "@/icons/search.svg";
 import FilterIcon from "@/icons/filter.svg";
 import CategoryIcon from "@/icons/category.svg";
 import { categoryCONST, searchParams } from "../../../config";
 import { InputContainer , Input  , SelectList } from "../../input/input";
 import { useInputHandler } from "../../hooks/useInputHandler"
+import { LinkStyled } from "@/shared/link/link";
+import { LinkMenu } from "../LinkMenu/linkmenu";
 
 
 export default function Search({placeholder,set=() => {}}) {
@@ -20,21 +26,20 @@ export default function Search({placeholder,set=() => {}}) {
     const [visible,setVisible] = useState({status: false,data: [],search: ""});
     const [paramsSearchRef,handler] = useInputHandler();
     const [visibleList,setVisibleList] = useState(false);
-    const [selectedCategory,setSelectedCategory] = useState(categoryCONST.realestate);
+    const [selectedCategory,setSelectedCategory] = useState(CategoryList[0]);
     const params = new URLSearchParams();
 
 
     const BackLightLen = (str, search) => {
         const text = str.name.split(" ");
         
-        console.log(text);
-
         const sub = str?.subcategory?.replace(" ","").split(" ");
         let target = null;
     
         // Пошук слова, яке частково збігається з пошуком
         text.forEach((word,index) => {
             let matchLength = 0;
+            
             for (let i = 0; i < Math.min(word.length, search.length); i++) {
                 if (word[i].toLowerCase() === search[i].toLowerCase()) {
                     matchLength++;
@@ -42,6 +47,7 @@ export default function Search({placeholder,set=() => {}}) {
                     break; // зупини якщо символи перестали збігатись
                 }
             }
+            
             if (matchLength > 4 && target === null) {
                 target = index;
             }
@@ -74,6 +80,12 @@ export default function Search({placeholder,set=() => {}}) {
         } else setVisible(r => ({...r,status: false}));
     },600);
 
+
+    const handleCategoryClick = (ind) => {
+        setSelectedCategory(ind);
+    }
+
+
     return (
         <form className={`${styles.form} flex flex-row flex-wrap align-center`} onSubmit={(e) => {
             e.preventDefault();
@@ -95,22 +107,9 @@ export default function Search({placeholder,set=() => {}}) {
             const finalUrl = baseUrl
             window.location.pathname = finalUrl
         }}>
-            <ButtonLazyDropList name={"SubCategory"} relative={false} title={language.category} Icon={CategoryIcon}>
-                {(lazylist) => (
-                    <div className={`${styles.dropList} flex flex-row align-center justify-around flex-wrap`}>
-                        {lazylist.length !== 0 && Object.entries(lazylist).map(([key,val],ind) => {
-                            return (
-                                <ul className="flex flex-col" key={`categories-col-el-${ind}`}>
-                                    <h2 className="accent-text">{key}</h2>
-                                    {val.map((el,ind) => {
-                                        return <li key={`categoryies-el-${ind}`}><Link href={"/"}>{el}</Link></li>
-                                    })}
-                                </ul>
-                            )    
-                        })}
-                    </div>
-                )}
-            </ButtonLazyDropList>
+            <ButtonWithList name={"SubCategory"} relative={false} title={language.category} Icon={CategoryIcon}>
+                <LinkMenu />              
+            </ButtonWithList>
             <div style={{flexGrow: "1",position:"relative"}}>
                 <input type="search" name="search" onBlur={() => setVisible(prev => ({...prev,status: false}))} onChange={handleSearch} className={styles.search} placeholder={placeholder}></input>       
                 <ul className={`${styles.SearchDropList} flex flex-col`} style={{scale: visible.status?"1":"0"}}> 

@@ -7,6 +7,7 @@
     transition: .3s;
     cursor: pointer;
     border-top: solid var(--orange) 4px;
+    border-bottom: solid var(--border) 1px;
 }
 
 .Card:hover{

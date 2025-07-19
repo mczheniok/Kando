@@ -1,14 +1,16 @@
 import Link from "next/link"
 import styles from "./blocks.module.css" 
 
-import { CategoryList } from "@/config";
+import { 
+    CategoryList,
+    subCategoryUrl
+} from "@/config";
 
 import Logo from "./Logo";
 import TelegramIcon from "@/icons/telegram.svg";
 import InstagramIcon from "@/icons/instagram.svg";
 
 import PhoneIcon from "@/icons/phone.svg";
-import LetterIcon from "@/icons/letter.svg";
 
 
 function SocialLink({el}) {
@@ -32,11 +34,11 @@ export default function Footer() {
             url: "/support" , text: "Підтримка"
         },
         {
-            url: "/termofuse" , text: "Політика Користування"
+            url: "/sitemap" , text: "Карта сайту"
         },
         {
-            url: "/safety" , text: "Політика Конфідеційності"
-        }
+            url: "/termofuse" , text: "Політика Користування"
+        },
     ]
 
     const SocialLinks = [   
@@ -47,6 +49,8 @@ export default function Footer() {
             url: "/", icon: <InstagramIcon />
         }
     ]
+
+    const categoryKeys = Object.keys(subCategoryUrl)
 
     return (
         <footer id={styles.footer}>
@@ -77,10 +81,10 @@ export default function Footer() {
                     <h3>Категорії</h3>
 
                     <ul className="flex flex-col">
-                        {CategoryList.slice(0,4).map((el) => {
+                        {CategoryList.slice(0,4).map((el,ind) => {
                             return (
                                 <li key={el} itemProp="name">
-                                    <Link href={el} itemProp="url">
+                                    <Link href={categoryKeys[ind]} itemProp="url">
                                         {el}
                                     </Link>
                                 </li>

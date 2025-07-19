@@ -5,9 +5,9 @@ import { GridProductsList } from "../components/ProductsList/GridListWrapper";
 import { HeadMainPage } from "@/features/products/Sections";
 import { HeadInfoBlock } from "@/features/products/headinfoblock/HeadInfoBlock";
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
-import { HeroCategory } from "@/features/products/CategoryBlock/herocategoryblock";
 import Head from "next/head";
 import { Search } from "../shared/blocks/search/SearchWrapper";
+import { LinkMenu } from "@/shared/blocks/LinkMenu/linkmenu";
 
 export async function generateMetadata({params,searchParams}) {
   const name = "Kando";
@@ -87,7 +87,7 @@ export default async function Home() {
               <HeadMainPage />
               <HeadInfoBlock />
             </div>
-          <HeroCategory />
+          <LinkMenu style="section"/>
           <GridProductsList 
             currentPage={1}
             withPagination={false}

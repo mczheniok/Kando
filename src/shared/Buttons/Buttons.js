@@ -107,7 +107,11 @@ export function RefWithImg({title,Icon,link,style,alt,clName}) {
 export function ButtonWithList({title,Icon,relative=true,children,style,clName,click}) {
     const [status,setStatus] = useState(false)
 
-    const fun = () => setStatus(!status)
+
+    const fun = e => {
+        if(!e.target.classList.contains("ul-cont") && !e.target.classList.contains("h3-text")) setStatus(!status);
+        console.log(e.target.classList.contains("ul-cont"));
+    }
 
     return (
         <ButtonWithIcon submit={false} title={title} relative={relative} clName={clName} style={style} Icon={Icon} click={click || fun}>

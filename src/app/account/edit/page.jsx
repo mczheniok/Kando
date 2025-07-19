@@ -1,5 +1,8 @@
 "use client";
 
+import { useToServer } from "@/shared/hooks/useToServer"
+import { useSearchParams } from "next/navigation";
+
 import { 
     useRef,
     useState,
@@ -21,6 +24,7 @@ import { anoncementSchema } from "@/schemas/zod";
 import { SendNotify } from "../../../components/Notifications/notification";
 import { toServer } from "../../../features/functions/functions";
 import AddIcon from "@/icons/add.svg"
+import { ServerLoader } from "@/shared/blocks/serverLoader";
 
 function MapLayout ({locationRef}) {
     const [location,setLocation] = useState([46.4900983,30.7400866]);
@@ -63,7 +67,7 @@ function MapLayout ({locationRef}) {
 } 
 
 
-function Description ({descriptionRef}) {
+function Description ({descriptionRef,value}) {
     const [length,setLength] = useState(3000);
 
     const handleInput = useCallback((e) => {
@@ -88,37 +92,37 @@ function Description ({descriptionRef}) {
                 </div>
             </div>
             
-            <InputArea name={"description"} placeholder={"Ввести опис оголошення"} handler={handleInput}></InputArea>
+            <InputArea name={"description"} value={value} placeholder={"Ввести опис оголошення"} handler={handleInput}></InputArea>
         </>
     )
 }
 
 
-const DescriptionData = ({set,ref,state,setName}) => {
+const DescriptionData = ({set,ref,state,setName,prev,subcategory,headList}) => {
     const array = Object.keys(SubCategory);
     const [select,setSelect] = state;
 
     return (
         <div className={`${styles.DescriptionData} flex flex-row flex-wrap`} style={{marginRight: "0rem",width: "100%"}}>
             <InputContainer require={true} type={2} text={"Назва Оголошення"}>
-                <Input name={'name'} placeholder={"Назва оголошення"} handler={e => {
+                <Input value={prev?.name || ""} name={'name'} placeholder={"Назва оголошення"} handler={e => {
                     setName(e.target.value.trim());
                     set(e);
                 }}></Input>
             </InputContainer> 
             <InputContainer type={1} text={"Категорія"}>
-                <SelectList state={select} setState={setSelect} formDataRef={ref} arr={array} name={"category"}></SelectList>
+                <SelectList  state={select} setState={setSelect} formDataRef={ref} arr={array} name={"category"}></SelectList>
             </InputContainer>
             <InputContainer type={1} text={"Підкатегорія"}>
-                <SelectList formDataRef={ref} name={"subcategory"} type={true} arr={SubCategory[select]} ></SelectList>
+                <SelectList formDataRef={ref} name={"subcategory"} state={subcategory[0]} setState={subcategory[1]} type={true} arr={SubCategory[select]} ></SelectList>
             </InputContainer>  
             <InputContainer type={1} text={"Ціна"}>
-                <Input name={"price"} handler={set} placeholder={"22000"}></Input>
+                <Input value={prev?.price || ""} name={"price"} handler={set} placeholder={"22000"}></Input>
             </InputContainer>
             {HeadInputList[select].map((el,ind) => {
                 return (
                     <InputContainer key={`head-input-${ind}`} type={1} text={el.text}>
-                        <SelectList name={el.name} type={true} formDataRef={ref} arr={el.placeholder}></SelectList>
+                        <SelectList state={headList?.[el.name] || ""} name={el.name} type={true} formDataRef={ref} arr={el.placeholder}></SelectList>
                     </InputContainer>
                 )
             })}
@@ -126,7 +130,13 @@ const DescriptionData = ({set,ref,state,setName}) => {
     )
 }
 
-export default function Page() {
+
+export default function EditPage({}) {
+    const searchParams = useSearchParams();
+    const relId = searchParams.get("rel");
+
+    const [_,prevProduct] = useToServer(`/items/product/${relId}`,true,false);
+
     const anoncement = useRef({
         name: "",
         price: 0,
@@ -139,9 +149,9 @@ export default function Page() {
     const [category,setCategory] = useState("Нерухомість");
     const categories = useRef([]);
     const [product_info,handleProductInfo] = useInputHandler({})
-    const [productImages,setProductImages] = useState([]);
+    const [subcategory,setSubcategory] = useState();
     const [load,setLoad] = useState(false);
-    const fileRef = useRef(null); 
+    const [productInfo,setProductInfo] = useState({});
 
 
     const handleCheckBoxClick = (e) => {
@@ -153,26 +163,12 @@ export default function Page() {
         }
     }
 
-    const handleFileInput = e => {
-        const files = e.target.files
-        for(let i = 0; i < files.length; i++) {
-            const url = URL.createObjectURL(files[i]);
-            setProductImages(files => [...files,{
-                url: url,
-                file: e.target.files[i]
-            }]);
-        }
-    }
+
 
     const handleInput = useCallback((e) => {
         const name = e.target.name;
         anoncement.current[name] = e.target.value  
     }, []);
-
-    const handleClickImage = e => {
-        setProductImages(prev => prev.filter(f => f.url !== e.target.src));
-        console.log(productImages)
-    }
 
     const handleSubmit = async e => {
             e.preventDefault(); 
@@ -181,19 +177,10 @@ export default function Page() {
     
             delete product_info.current;
 
-            if(productImages.length === 0) {
-                return SendNotify("Не прікріплено жодної фотографії","warning")
-            }
-
-            productImages.forEach((el,_) => {
-                data.append("files",el.file);
-            });
-
             function arraysEqual(a, b) {
                 return a.length === b.length && a.every((val, i) => val === b[i]);
             }
             
-
             const result = anoncementSchema.safeParse({
                 ...anoncement.current,
                 categories: categories.current,
@@ -208,14 +195,7 @@ export default function Page() {
                 return SendNotify(err,"warning");
             }
 
-
-            if(!result.data.price) {
-                return SendNotify("Ціна не може бути пустою","warning");
-            }
-        
-
             data.set("description",description);
-
 
             if(!arraysEqual(location,[44.4727805,44.4755123])) {
                 data.set("location",JSON.stringify(location)); 
@@ -229,10 +209,11 @@ export default function Page() {
             data.set("categories",JSON.stringify(categories.current));
             data.set("type",category);
             data.set("product_info",JSON.stringify(product_info));
+            data.set("id",relId);
 
             setLoad(true);
 
-            await toServer("/account/products/create",{
+            await toServer("/account/products/edit",{
                 method: "POST",
                 body: data,
                 credentials: "include"
@@ -251,6 +232,46 @@ export default function Page() {
         });
     }, 600);
     
+
+    useEffect(() => {
+        if (prevProduct && Object.keys(prevProduct).length > 0) {
+            // Обновляем данные объявления
+            anoncement.current = {
+                name: prevProduct.name || "",
+                price: prevProduct.price || 0,
+                description: prevProduct.description || "",
+                subcategory: prevProduct.subcategory || "",
+                info: prevProduct.info || {},
+                location: prevProduct.location || []
+            };
+            
+            // Обновляем состояние
+            setName(prevProduct.name || "");
+            setCategory(prevProduct.type || "Нерухомість");
+            
+            // Если есть категории в prevProduct
+            if (prevProduct.category) {
+                categories.current = prevProduct.category;
+
+                categories.current.map(cat => {
+                    const input = document.querySelector(`input[value="${cat}"]`);
+                    if(input) input.checked = true; 
+                    console.log(input);
+                })
+            }  
+
+            if(prevProduct.subcategory) {
+                setSubcategory(prevProduct.subcategory);
+            }
+
+            if(prevProduct.product_info) {
+                setProductInfo(prevProduct.product_info);
+            }
+
+        }
+    }, [prevProduct]);
+
+
     // В компоненте:
     useEffect(() => {
         if (name) {
@@ -259,43 +280,43 @@ export default function Page() {
     }, [name]);
 
 
-
     useEffect(() => {
         anoncement.current.info = categoryList[category].reduce((acc, el) => {
             acc[el.name] = "";
             return acc;
         }, {});
     }, [category]);
-    
+
+
+    if (!prevProduct || Object.keys(prevProduct).length === 0) {
+        return <ServerLoader height="700px" />;
+    }
+
+    const prevHead = {
+        name: prevProduct.name,
+        price: prevProduct.price
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit} className="flex flex-col" style={{width: "100%",padding: '1rem',marginTop: "2rem"}}>
                 <SectionContainer require={true} headerText={"Основна Інформація"}>
-                    <DescriptionData setName={setName} state={[category,setCategory]} ref={anoncement.current} set={handleInput}></DescriptionData>
-                    <Description descriptionRef={anoncement.current}></Description>
+                    <DescriptionData headList={productInfo} subcategory={[subcategory,setSubcategory]} prev={prevHead} setName={setName} state={[category,setCategory]} ref={anoncement.current} set={handleInput}></DescriptionData>
+                    <Description value={prevProduct?.description} descriptionRef={anoncement.current}></Description>
                 </SectionContainer>
                 <MapLayout locationRef={anoncement.current}></MapLayout>
-                <SectionContainer headerText={"Фотографії"}>
-                    <div className="flex flex-row flex-wrap" style={{width: "100%"}}>
-                        {productImages.map((el,ind) => {
-                            return (
-                                <img key={`el-in-image-${ind}`} onClick={handleClickImage} className={styles.ProductImagesInput} src={el.url} width={175} height={175} alt="product image"></img>
-                            )
-                        })}
-                        <input multiple type="file" onChange={handleFileInput} ref={fileRef} style={{display:"none"}}></input>
-                        <AddIcon alt="Add Image Icon" onClick={() => fileRef.current.click()} width={33} height={33} style={{border:"dashed var(--border) 2px",width: "175px",height: "175px",borderRadius:"1rem"}} ></AddIcon>
-                    </div>
-                    <h4 className="tw-secondary-text"> Додайте до 24 фотографій. Перше фото буде головним у вашому оголошенні. </h4>
-                </SectionContainer>
                 {categoryList[category]?.length !== 0 && (
                     <SectionContainer headerText={"Характеристики Об'єкту"}>
                         <div className="flex flex-row flex-wrap" style={{gap: "1rem 2rem",width: "100%",padding:"0rem"}}>
                             {categoryList[category].map((el,ind) => {
                                 const { placeholder , text , name } = el;
+
+                                console.log(productInfo);
+
                                 return (
                                     <InputContainer text={text}  key={`input-container-${ind}`}>
-                                        {typeof placeholder === "string"?<Input handler={handleProductInfo} placeholder={placeholder} name={name}/>
-                                        :<SelectList formDataRef={product_info} name={name} arr={placeholder}/>}
+                                        {typeof placeholder === "string"?<Input value={productInfo?.[name] || ""} handler={handleProductInfo} placeholder={placeholder} name={name}/>
+                                        :<SelectList state={productInfo?.[name] || ""} formDataRef={product_info} name={name} arr={placeholder}/>}
                                     </InputContainer>
                                 );
                             })}
@@ -310,3 +331,5 @@ export default function Page() {
         </div>
     )
 }
+
+

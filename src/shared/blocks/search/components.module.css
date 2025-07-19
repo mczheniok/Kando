@@ -47,7 +47,6 @@
     cursor: pointer;
 }
 
-
 .dropList{
     text-align: start;
     position: absolute;
@@ -66,6 +65,8 @@
     margin: 0px .5rem;
     text-align: start;
 }
+
+
 
 
 .ProductInfo{

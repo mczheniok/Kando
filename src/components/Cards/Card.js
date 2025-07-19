@@ -12,6 +12,11 @@ import ViewsIcon from "@/icons/view.svg";
 import TrashIcon from "@/icons/trash.svg";
 import ArchiveIcon from "@/icons/archive.svg";
 import HistoryIcon from "@/icons/history.svg";
+import EditIcon from "@/icons/edit.svg";
+
+import { useRouter } from "next/navigation";
+
+
 import { deleteFromCache } from "../../shared/db/indexedDB";
 
 const nameLen = (name,len,size) => name?.length > len?name.slice(0,size) + "...": name;
@@ -86,8 +91,11 @@ export function CardBlockPicture({title,text,img,src}){
 
 
 export function CardRow({obj,t=false}) {
-    const {name,id,price,type,views,created_at,previewimage} = obj;
+    const {name,id,price,type,views,created_at,previewimage,verified} = obj;
     const [imgSrc,setImgSrc] = useState(previewimage || "/assets/noimage.webp");
+
+    const router = useRouter();
+
 
     const handleClickDeleteButton = async e => {
         toServer(`/${!t?"archive":"account"}/delete/${id}`,{
@@ -110,7 +118,11 @@ export function CardRow({obj,t=false}) {
                 "Contant-Type": "application/json"
             },
             credentials: "include",
-        })   
+        })
+    }
+
+    const handleChangeClick = () => {
+        router.push(`/account/edit?rel=${id}`);
     }
 
     return( 
@@ -126,7 +138,10 @@ export function CardRow({obj,t=false}) {
                 <div className="flex flex-col">
                     <h5 className={styles.CardCategoryText}>{categoryCONST[type]} </h5>
                     <div className="flex flex-row justify-between">
-                        <CardCategory src={"view"} label={"Переглядів"} text={views}></CardCategory>
+                        {verified ? (
+                             <CardCategory src={"view"} label={"Переглядів"} text={views}></CardCategory>
+                        ) : <p className="h3-text">⚠️ На модерації {verified}</p> 
+                        }
                         <h5 className="secondary-text">створенно: {new Date(created_at).toLocaleDateString()}</h5>
                     </div>
                 </div>
@@ -137,6 +152,7 @@ export function CardRow({obj,t=false}) {
                     <div className="flex flex-row align-center">
                         <ButtonCircle color="red" click={handleClickDeleteButton} Icon={TrashIcon}></ButtonCircle>
                         <ButtonCircle color="orange" title={t?"Добавити в архів":"Повернути до оголошень"} click={handleArchiveButton} Icon={t?ArchiveIcon:HistoryIcon}></ButtonCircle>
+                        <ButtonCircle color="orange" title="Змінити" click={handleChangeClick} Icon={EditIcon}/>    
                     </div>    
                 </div>
                 <span className="flex flex-row align-baseline">

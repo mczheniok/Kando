@@ -1,0 +1,30 @@
+.dropList{
+    text-align: start;
+    position: absolute;
+    top: 105%;
+    left: 0;
+    background: var(--bg-card);
+    border: var(--border);
+    width: 100%;
+    border-radius: 1rem;
+    padding: 1rem;
+    z-index: 10;
+    color: var(--foreground);
+}
+
+.dropList ul{
+    margin: 0px .5rem;
+    text-align: start;
+}
+
+.section {
+    width: 100%;
+    position: relative;   
+    background: var(--bg-card);
+    border: var(--border);
+    width: 100%;
+    border-radius: 1rem;
+    padding: 1rem;
+    z-index: 10;
+    color: var(--foreground);
+}
