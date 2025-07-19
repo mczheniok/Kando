@@ -10,6 +10,47 @@ import Link from "next/link";
 import { BreadCrumbs } from "@/shared/blocks/BreadCrumbs/BreadCrumbs";
 import { LinkStyled } from "@/shared/link/link";
 
+
+export const dynamic = "force-static";
+
+
+export const metadata = {
+    title: "Карта сайту | Kando",
+    description: "Карта сайту з усіма категоріями та сторінками на kando.pp.ua",
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: "https://kando.pp.ua/sitemap",
+    },
+    openGraph: {
+      title: "Карта сайту",
+      description: "Перегляньте всі категорії, підкатегорії та сторінки на сайті",
+      url: "https://kando.pp.ua/sitemap",
+      siteName: "Kando",
+      locale: "uk_UA",
+      type: "website",
+      images: [
+        {
+          url: "https://kando.pp.ua/assets/background.webp",
+          width: 800,
+          height: 600,
+          alt: `Карта сайту`
+        }
+      ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: `Карта сайту | Kando`,
+        description: "Карта сайту з усіма категоріями та сторінками на kando.pp.ua",
+        images: [
+            "https://kando.pp.ua/assets/background.webp"
+        ]
+    }
+  }
+
+
 export default function SiteMapPage() {
     const uaCategory = Object.entries(SubCategory)
     const srcCategory = Object.entries(subCategoryUrl);
@@ -35,7 +76,6 @@ export default function SiteMapPage() {
             <section className="container flex flex-col" style={{padding: "1rem"}}>
                 <div className="flex flex-row align-center">
                     <BreadCrumbs baseUrl={`/sitemap`}></BreadCrumbs>
-                    
                 </div>
 
                 <div className="flex flex-col" style={styles.ulStyle}>
