@@ -1,5 +1,6 @@
 import { None } from "@/shared/information/none"
-import { CardRow, Message } from "../Cards/Card"
+import { Message } from "../Cards/Card"
+import { CardRow } from "@/features/account/userInfo/cards/cardRow"
 import { ReviewRow} from "../Products/Reviews"
 import Loading from "../loader"
 

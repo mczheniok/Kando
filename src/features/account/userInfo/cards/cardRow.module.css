@@ -1,0 +1,60 @@
+.CardRow{
+    height: 150px;
+    gap: 0rem;
+    width: 100%;
+    border-radius: 1rem;
+    border: solid var(--border) 1px;
+    background: var(--bg-glass);
+}
+
+.CardRowImage{
+    width: 20%;
+    border-radius: 1rem 1rem 0rem 0rem;
+}
+
+.CardRowDescription{
+    width: 50%;
+    padding: .5rem;
+}
+
+.CardRowPrice{
+    width: 30%;
+    padding: .5rem;
+}
+
+@media screen and (max-width: 574px) {
+    .CardRow{
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+    }
+
+
+    .CardRowImage{
+        width:100%;
+    }
+
+    .CardRowImage img{
+        width: 100%;
+    }
+
+    .CardRowDescription{
+        width: 100%;
+        flex-direction: column;
+        gap:.5rem;
+        border:none;
+        border-right: solid var(--border) 3px;
+        border-left: solid var(--border) 3px;
+    }
+
+
+    .CardRowPrice{
+        width: 100%;
+        flex-direction: row-reverse;
+        border: none;
+        border-radius: 0rem 0rem 1rem 1rem;
+        border-bottom: solid var(--border) 3px;
+        border-right: solid var(--border) 3px;
+        border-left: solid var(--border) 3px;   
+    }
+}

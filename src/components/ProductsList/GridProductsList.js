@@ -1,29 +1,19 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
 import styles from "./products.module.css";
-import { Card } from "../Cards/Card";
+import { Card } from "@/shared/Cards/card";
 import { Pagination } from "@/shared/blocks/pagination"; // Исправлен путь импорта
+import { Suspense } from "react";
 
 export default function GridProductsList({ 
     list = [], 
     withPagination = true,
     itemsPerPage = 12,
     totalCount = 0,
-    filter = {
-      course: "UAH"
-    }
+    currentPage = 1,
+    course = "UAH"
   }) 
   {
   
-  const searchParams = useSearchParams();
-  const currentPage = parseInt(searchParams.get('page')) || 1;
-  
   const totalPages = Math.ceil(totalCount / itemsPerPage);
-  
-  const displayedItems = list;
-
-  const course = searchParams.get("currency") || "UAH";
   
   return (
     <div style={{
@@ -34,7 +24,7 @@ export default function GridProductsList({
     }}>
 
       <section className={styles.GridProductsList}>
-        {displayedItems.map((el, ind) => {  
+        {list.map((el, ind) => {  
           return (
             <Card 
               course={course}
@@ -47,13 +37,16 @@ export default function GridProductsList({
         })}
       </section>
 
+      
       {totalPages > 1 && withPagination && (
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          totalItems={totalCount}
-          itemsPerPage={itemsPerPage}
-        />
+        <Suspense fallback={<div style={{minHeight: "100px",width: "100%"}}>Загрузка...</div>}>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            totalItems={totalCount}
+            itemsPerPage={itemsPerPage}
+          />
+        </Suspense>  
       )}
 
     </div>

@@ -169,30 +169,25 @@ export const CircleImage = ({width,height,src}) => {
 export const CardImage = ({width,height,src}) => <Image src={src} className={styles.ProductImage} alt={"Product Image"} width={width} height={height}></Image>
 
 
-export function CardPreview({ img, priority = false , alt = "Превью оголошення"}) {
-  const [imageSrc,setImgSrc] = useState(`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${img}`);
-
-  return (
-      <div className={styles.imageContainer}>
-          <Image
-              src={imageSrc || '/assets/noimage.webp'}
-              alt={alt}
-              width={300}
-              onError={(e) => {
-                setImgSrc("/assets/noimage.webp");
-              }}
-              fetchPriority={priority ? "high" : "low"} // ✅ Дополнительный hint
-              height={200}
-              priority={priority}
-              {...(!priority && { loading: "lazy" })}
-              quality={90}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{
-                  width: '100%',
-                  objectFit: 'cover',
-                  maxHeight: "240px"
-              }}
-          />
-      </div>
-  )
-}
+// export function CardPreview({ img, priority = false , alt = "Превью оголошення"}) {
+//   return (
+//       <div className={styles.imageContainer}>
+//           <Image
+//               src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${img}` || '/assets/noimage.webp'}
+//               alt={alt}
+//               width={300}
+//               fetchPriority={priority ? "high" : "low"} // ✅ Дополнительный hint
+//               height={200}
+//               priority={priority}
+//               {...(!priority && { loading: "lazy" })}
+//               quality={90}
+//               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+//               style={{
+//                   width: '100%',
+//                   objectFit: 'cover',
+//                   maxHeight: "240px"
+//               }}
+//           />
+//       </div>
+//   )
+// }

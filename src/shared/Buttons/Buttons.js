@@ -19,35 +19,35 @@ export function ButtonWithIcon({
             id,
             disabled = false,
         }) {       
-        return (
-            <button 
-                    id={id} 
-                    type={submit ? "submit" : "button"} 
-                    style={{position: relative?"relative":''}} 
-                    disabled={disabled}
-                    aria-label={ariaLabel || title} 
-                    aria-describedby={ariaDescribedBy}
-                    aria-disabled={disabled}
-                    className={`${styles.ButtonWithIcon} true flex flex-row align-center ${clName || ""} ${disabled ? styles.disabled : ''}  ${style?styles[style]:''}`} 
-                    onClick={e =>  click && click(e)}
+    return (
+        <button 
+                id={id} 
+                type={submit ? "submit" : "button"} 
+                style={{position: relative?"relative":''}} 
+                disabled={disabled}
+                aria-label={ariaLabel || title} 
+                aria-describedby={ariaDescribedBy}
+                aria-disabled={disabled}
+                className={`${styles.ButtonWithIcon} true flex flex-row align-center ${clName || ""} ${disabled ? styles.disabled : ''}  ${style?styles[style]:''}`} 
+                onClick={e =>  click && click(e)}
+            >
+            {Icon && ( 
+                <Icon aria-hidden="true" focusable="false" width={33} height={33} />
+            )}
+            {title && (
+                <span 
+                    className={`${style?styles[style+"Text"]:''} h4-text`} 
+                    style={{width: "50%",
+                    textAlign: "center"}}
+                    aria-hidden={ariaLabel ? "true" : "false"}
                 >
-                {Icon && ( 
-                    <Icon aria-hidden="true" focusable="false" width={33} height={33} />
-                )}
-                {title && (
-                    <span 
-                        className={`${style?styles[style+"Text"]:''} h4-text`} 
-                        style={{width: "50%",
-                        textAlign: "center"}}
-                        aria-hidden={ariaLabel ? "true" : "false"}
-                    >
-                        {title}
-                    </span>
-                )}
-                {children}
-            </button>
-        )
-    }
+                    {title}
+                </span>
+            )}
+            {children}
+        </button>
+    )
+}
 
 export function ButtonMiniIcon({title,Icon,click}) {
     return (

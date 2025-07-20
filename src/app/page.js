@@ -1,7 +1,7 @@
 import Header from "@/shared/blocks/Header"
 import Footer from "@/shared/blocks/Footer";
 import { HomeSeoSchema , FooterSeoSchema } from "@/SEO/SeoSchemaOrg";
-import { GridProductsList } from "../components/ProductsList/GridListWrapper";
+import GridProductsList from "../components/ProductsList/GridProductsList";
 import { HeadMainPage } from "@/features/products/Sections";
 import { HeadInfoBlock } from "@/features/products/headinfoblock/HeadInfoBlock";
 import { ContainerLanguage , MainContainer } from "@/components/Containers/container";
@@ -61,7 +61,7 @@ export async function generateMetadata({params,searchParams}) {
 } 
 
 
-export default async function Home() {
+export default async function Home({searchParams}) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/`,{
     next: {revalidate: 86400}
   })
@@ -69,6 +69,8 @@ export default async function Home() {
   if(!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
   }
+  const params = await searchParams;
+
 
   const data = await res.json();
 
@@ -90,6 +92,7 @@ export default async function Home() {
           <LinkMenu style="section"/>
           <GridProductsList 
             currentPage={1}
+            course={params.currency || "UAH"}
             withPagination={false}
             totalCount={data.data.count}
             list={data.data.items || []}

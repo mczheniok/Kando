@@ -44,15 +44,6 @@ export function Pagination({
   const searchParams = useSearchParams();
   const containerRef = useRef(null);
 
-  // Добавляем отладочную информацию
-  console.log('Pagination props:', {
-    totalPages,
-    currentPage,
-    totalItems,
-    itemsPerPage,
-    baseUrl
-  });
-
   // Вычисляем видимые страницы
   const visiblePages = useMemo(() => {
     if (totalPages <= maxVisiblePages) {

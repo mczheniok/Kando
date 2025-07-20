@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import styles from "./product.module.css"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { ButtonShare } from "@/features/client/client";
+import { Button } from "@/shared/Buttons/Buttons";
 
 
 
@@ -72,6 +74,14 @@ export function ProductImageSection({list,id}) {
           ))}
         </Swiper>
       </section>
+      <Suspense>
+        <div className={`${styles.galleryContainer} flex flex-row justify-between`}>
+            <ButtonShare id={id}/>
+            <Button clName={"flex-grow justify-center"} click={() => {
+              typeof window !== "undefined" ? localStorage.setItem("likes",JSON.stringify([id])) : null 
+            }} title={"В обрані"} style="dark" />
+        </div>
+      </Suspense>
     </div>
   );
 }

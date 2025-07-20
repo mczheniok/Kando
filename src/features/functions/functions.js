@@ -118,3 +118,8 @@ export function parsePhoneNumber(number) {
 
   return `+${country} (${operator}) ${part1}-${part2}-${part3}`;
 }
+
+
+export function sliceText(text,len) { 
+  return text.length > len ? text.slice(0,len) + "...": text
+}

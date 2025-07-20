@@ -1,29 +1,18 @@
 "use client"
 import { Input, InputContainer } from "@/shared/input/input";
 import styles from "./login.module.css"
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button,  RefWithImg } from "@/shared/Buttons/Buttons";
 import Logo from "@/shared/blocks/Logo";
-import { useRouter , useSearchParams } from "next/navigation";
-import { TelegramLoginWidget } from "./telegram";
+import { useRouter } from "next/navigation";
 
 export default function AuthWrapper() {
-    const params = useSearchParams();
     const formBody = useRef({});
     const form = useRef({});
     const [formStyle,setFormStyle] = useState(false);
     const router = useRouter();
 
     const [status,setStatus] = useState(false);
-
-
-    useEffect(() => {
-        const redirect = params.get("redirect");
-        
-        if(redirect) {
-            router.push("/account");
-        }
-    },[params])
 
     const handlerInput = e => {
         const i = e.target
@@ -48,11 +37,11 @@ export default function AuthWrapper() {
                 setTimeout(() => {
                     router.push('/account');
                 },1000);
+                setStatus("Пенаправляємо");
+                return 
+            } else {
+                setStatus(data.status);
             }
-
-            setStatus(data.status);
-
-            console.log(data.status);
         })
         .catch(err => {
             console.log(err);
@@ -153,7 +142,6 @@ export default function AuthWrapper() {
                         
                         <div className="flex flex-row flex-wrap" style={{width: '100%'}}>
                             <SignButton title={"Google"} img={"google"}></SignButton>
-                            <TelegramLoginWidget botName={"KandoIncBot"} authUrl={"https://kando.pp.ua/api/auth/telegram/callback"}></TelegramLoginWidget>
                         </div>
                         
                         <span className="flex flex-row align-center justify-between">
