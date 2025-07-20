@@ -2,7 +2,7 @@ import Header from "@/shared/blocks/Header"
 import Footer from "@/shared/blocks/Footer"
 import { ContainerLanguage, MainContainer } from "@/components/Containers/container"
 import { Search } from "../../../shared/blocks/search/SearchWrapper";
-import { GridProductsList } from "../../../components/ProductsList/GridListWrapper";
+import GridProductsList from "../../../components/ProductsList/GridProductsList";
 import { subCategoryUrl, subCategoryUrls } from "../../../config"
 import { CategorySchema } from "../../../SEO/SeoSchemaOrg"
 import { BreadCrumbs } from "@/shared/blocks/BreadCrumbs/BreadCrumbs";
@@ -134,7 +134,7 @@ export default async function ViewCategory({ params , searchParams}) {
             >
               <h1>Оголошення: {getCategoryName(subcategory)} у категорії {getCategoryName(category)}</h1>
               
-              <div className="flex flex-row align-center justify-between">
+              <div className="flex flex-row align-center justify-between flex-wrap">
                 <BreadCrumbs baseUrl={`${category}/${subcategory}`}></BreadCrumbs>
                 <Suspense fallback={<div>🏠 Загрузка...</div>}>
                   <Filters />
@@ -146,6 +146,7 @@ export default async function ViewCategory({ params , searchParams}) {
             currentPage={page}
             totalCount={data?.data?.count || 0}
             list={data?.data?.items || []}
+            course={searchParams?.currency || "UAH"}
           />
         </MainContainer>
       <Footer />

@@ -2,7 +2,7 @@ import Header from "@/shared/blocks/Header"
 import Footer from "@/shared/blocks/Footer"
 import { ContainerLanguage, MainContainer } from "@/components/Containers/container"
 import { Search } from "../../shared/blocks/search/SearchWrapper";
-import { GridProductsList } from "../../components/ProductsList/GridListWrapper";
+import  GridProductsList from "../../components/ProductsList/GridProductsList";
 import { subCategoryUrl, subCategoryUrls } from "../../config"
 import { BreadCrumbs } from "@/shared/blocks/BreadCrumbs/BreadCrumbs";
 import { CategorySchema } from "@/SEO/SeoSchemaOrg";
@@ -124,13 +124,11 @@ export default async function ViewCategory({ params , searchParams }) {
               <BreadCrumbs baseUrl={`${category}`}></BreadCrumbs>
             </section>
           <GridProductsList
-            filter={{
-              course: "UAH"
-            }}
             baseUrl={`${category}`}
             totalCount={count}
             list={items}
             currentPage={parseInt(page)}
+            course={p?.currency || "UAH"}
           />
         </MainContainer>
       <Footer />
