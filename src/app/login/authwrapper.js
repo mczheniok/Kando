@@ -33,15 +33,14 @@ export default function AuthWrapper() {
         })
         .then(res => res.json())
         .then(data => {
-            if(data.status === "ok" || window.location.search.redirect) {
+            if(data.status === "ok") {
                 setTimeout(() => {
                     router.push('/account');
                 },1000);
                 setStatus("Пенаправляємо");
                 return 
-            } else {
-                setStatus(data.status);
             }
+            setStatus(data.status);    
         })
         .catch(err => {
             console.log(err);

@@ -21,7 +21,7 @@ const listTargets = [
     {title: "Я",url: "/",prefetch: true},
     {title: "Архів",url: "/archive",prefetch: false},
     {title: "Оголошення",url: "/ogoloshennia",prefetch: false},
-    {title: "Повідомлення",url: "/messages",prefetch: false},
+    {title: "Повідомлення",url: "/chats",prefetch: false},
     {title: "Історія",url: "/history",prefetch: false},
     {title: "Створити",url: "/create",prefetch: true},
     {title: "Безпека",url: "/safety",prefetch: false}

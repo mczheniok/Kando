@@ -1,7 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./cards.module.css"
-
+import { parseData } from "@/features/functions/functions";
 
 
 export function CardBlock({Icon,title,click,href}){
@@ -31,36 +32,54 @@ export function CardBlock({Icon,title,click,href}){
 // }
 
 
-export function Message({obj,set}) {
-    const { chat_name  , time , sender_name , chat_image ,  receiver_id , product_id , id} = obj; 
-    const [imgSrc,setImgSrc] = useState(chat_image);
+export function Chat({obj,click}) {
+    const {
+        id,
+        is_active,
+        chat_type,
+        display_name,
+        unread_count,
+    }  = obj
 
-    const handleMessageClick = () => {
-        localStorage.setItem("chat",JSON.stringify({
-            chat_id: product_id,
-            to_id: receiver_id, 
-        }));
+    let last_message = {}
 
-        localStorage.setItem("current_chat",JSON.stringify({
-            current_chat: id,
-            image: imgSrc,
-            name: chat_name
-        }))
-        set(6);
+    if(typeof last_message !== "undefined" && last_message !== null) {
+        last_message = obj.last_message
     }
 
+
+
+    const previewEmoji = chat_type => {
+        switch (chat_type) {
+            case "direct": return "👨";
+            case "bot": return "🤖";
+        }
+    }
+
+
     return (
-        <article onClick={handleMessageClick} className={`${styles.CardRow} flex flex-row`} style={{borderBottom: "solid var(--border) 2px",height: "120px",padding: "1rem",gap: "1rem",borderRadius: "0rem"}}>
-            <section className={`flex flex-col align-center justify-center`} style={{width: "150px",padding: "0rem"}}>
-                <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={100} height={100}  style={{objectFit:"cover",borderRadius: "1rem",aspectRatio: '1',width: "100%",height: "100%"}}></Image>
+        <article onClick={() => click(id,chat_type)} className={styles.ChatItem}>
+            <div className={`flex flex-col align-center justify-center`} style={{position: "relative"}}>
+                {/* <Image src={`${process.env.NEXT_PUBLIC_SOCKET_URL}/uploads${imgSrc}`} onErrorCapture={e => setImgSrc("/assets/noimage.webp")} alt="Auto" width={100} height={100}  style={{objectFit:"cover",borderRadius: "1rem",aspectRatio: '1',width: "100%",height: "100%"}}></Image> */}
+                <p className={`${styles.ChatImage} h1-text circle flex justify-center align-center`}>
+                    {previewEmoji(chat_type)}
+                </p>
+                <div className={`${styles.OnlineIndicator} circle`}></div>
+            </div>
+            
+            <section className={`flex flex-col justify-around`} >
+                <h1 className="h1-text">{display_name}</h1>
+                <h3 className={styles.LastMessage}>{last_message?.text || last_message?.bot_response || ""}</h3>
             </section>
-            <section style={{width:"80%"}} className={`${styles.CardCategoryText} flex flex-col align-start`} >
-                <h3>{chat_name}</h3>
-                <h4 className="small-text">{sender_name}</h4>
-                <h5>{""}</h5>
-            </section>
-            <section className={`${styles.CardRowPrice} flex flex-col align-center justify-center`} style={{border: "none"}}>
-                {time}
+            <section className={`flex flex-col align-end justify-between`}>
+                {last_message?.sent_at && (
+                    <p className={`${styles.ChatTime} h3-text`}>{parseData(last_message?.sent_at)}</p>
+                )}
+                {unread_count > 0 && (
+                    <p className={`${styles.UnreadBadge} h3-text circle flex justify-center align-center`}>
+                        {unread_count} 
+                    </p>
+                )}
             </section>
         </article>
     )

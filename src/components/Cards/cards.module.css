@@ -42,6 +42,64 @@
 }
 
 
+.ChatItem {
+    display: grid;
+    grid-template-columns: auto 1fr 80px;   
+    border-bottom: solid var(--border) 1px;
+    height: 130px;
+    padding: 1.5rem 1.5rem 1.5rem 1.2rem;
+    padding-top: 1.5rem;
+    gap: 1rem;
+    border-radius: 0rem;
+    background: var(--background);
+}
+
+
+.ChatImage {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+}
+
+.OnlineIndicator {
+    position: absolute;
+    right: -7px;
+    bottom: 7px;
+    width: 21px;
+    height: 21px;
+    background: #10b981;
+    border: 2px solid #fff;
+}
+
+.ChatName{
+    font-weight: 500;
+    color: #111827;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.ChatTime {
+    color: #6b7280;
+}
+
+.UnreadBadge {
+    padding: .3rem;
+    background-color: #3b82f6;    
+    color: #fff;
+}
+
+.LastMessage{
+    color: #6b7280;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
 @media (max-width: 564px) {
     .Product{
         max-width: 100%;

@@ -11,8 +11,8 @@ import { Ref } from "@/shared/Buttons/Buttons";
 import VerifySVG from "@/icons/verify.svg";
 
 
-function UserBlock({userData}) {
-    const { 
+function UserBlock({userData,id}) {
+    const {
         image,
         phone,
         username,
@@ -37,12 +37,12 @@ function UserBlock({userData}) {
                     )}
                 </span>
                 <p className="h2-text" style={{fontWeight: "300",color: "green"}}>🟢 онлайн {parseLastLogin(last_login)}</p>
-                <p className={`${styles.secondaryText} h3-text`}>телефон: {parsePhoneNumber(`380${phone}`)}</p>
+                <p className={`${styles.secondaryText} h3-text`}>телефон: {parsePhoneNumber(`38${phone}`)}</p>
                 <p className={`${styles.secondaryText} h4-text`}>дата реєстрації {parseLastLogin(created_at)}</p>
             </div>
             <div className="flex flex-row align-center" style={{marginTop: "1rem",gridColumn: "1 / -1  "}}>
-                <Ref link={`tel:+${phone}`} style={"orange"} clName="flex-grow" title={"📞 Зателефонувати"}></Ref>
-                <Ref link={`/account/message/chat`} style={"orange"} clName="flex-grow" title={"💬 Зателефонувати"}></Ref>
+                <Ref link={`tel:+38${phone}`} style={"orange"} clName="flex-grow" title={"📞 Зателефонувати"}></Ref>
+                <Ref link={`/account/chats/new/${id}?type=direct`} style={"orange"} clName="flex-grow" title={"💬 Написати"}></Ref>
             </div>
         </div>
     )
@@ -59,7 +59,7 @@ export function UserInfo({location,userId}) {
             <div className={styles.userBlock} style={{gridColumn: !location?"span 2":"1"}}>
                 {!userData ? <ServerLoader height={"300px"} />
                 :
-                    <UserBlock userData={userData}/>
+                    <UserBlock id={userId} userData={userData}/>
                 }
             </div>
             <div className={styles.mapBlock}>

@@ -76,6 +76,7 @@ export function parseLastLogin(lastLogin) {
   return displayTime;
 }
 
+export const parseData = date => new Date(date).toTimeString().slice(0,5);
 
 export const toDate = date => new Date(date).toLocaleString({language: "ua",region: "UA"});
 
@@ -123,3 +124,4 @@ export function parsePhoneNumber(number) {
 export function sliceText(text,len) { 
   return text.length > len ? text.slice(0,len) + "...": text
 }
+

@@ -72,7 +72,7 @@ export function InputContainer({type=2,children,text,require = false}) {
     )
 }
 
-export function Input({type=false,placeholder,value,name,handler,ref=null,required=false}) {
+export function Input({type=false,placeholder,value,name,handler,ref=null,required=false,clName}) {
     const [val,setValue] = useState(value);
     
     useEffect(() => {
@@ -89,7 +89,7 @@ export function Input({type=false,placeholder,value,name,handler,ref=null,requir
                 setValue(e.target.value);
             }} 
             value={val}
-            className={`${styles.Input} h3-text`} 
+            className={`${styles.Input} h3-text ${clName}`} 
             placeholder={placeholder} 
             type={type ? "text" : "text"} 
         />

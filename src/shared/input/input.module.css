@@ -1,10 +1,9 @@
 .Input{
     border: solid var(--border) 1px;
-    border-radius: .5rem;
+    border-radius: .7rem;
     height: 100%;
-    padding: 1rem 1rem;
+    padding: 1rem 1.5rem;
     font-size: var(--font-md);
-    background: var(--secondary);
     color: var(--secondary-text);
 }
 

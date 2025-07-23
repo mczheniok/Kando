@@ -1,8 +1,11 @@
+"use client";
 import { None } from "@/shared/information/none"
-import { Message } from "../Cards/Card"
+import { Chat } from "../Cards/Card"
 import { CardRow } from "@/features/account/userInfo/cards/cardRow"
 import { ReviewRow} from "../Products/Reviews"
 import Loading from "../loader"
+
+import { useRouter } from "next/navigation";
 
 export function Column({load, list = [], type = false}) {
     const renderContent = () => {
@@ -55,12 +58,18 @@ export function ColumnReviews({list,img = null}) {
 }
 
 
-export function ColumnMessages({load,list,set=() => {}}) {
+export function ColumnMessages({load,list}) {
+    const router = useRouter();
+
+    const handleClick = (id,chat_type) => {
+        router.push(`/account/chats/${id}?type=${chat_type}`)
+    }
+
     return (
-        <section className="flex flex-col" style={{width: "100%",padding: "1rem",height: "fit-content",background: "var(--background)",gap: "0rem",marginBottom: "5rem"}}>
+        <section className="flex flex-col" style={{width: "100%",minHeight: "55svh",height: "100%",gap: "0rem",marginBottom: "5rem"}}>
             {load?<Loading time={200}/>:list?.length === 0 && !load?<None />:list?.map((el,ind) => {
                 return (
-                    <Message set={set} obj={el} key={`message-el-${ind}`}></Message>
+                    <Chat obj={el} click={handleClick} key={`message-el-${ind}`} />
                 )
             })}
         </section>

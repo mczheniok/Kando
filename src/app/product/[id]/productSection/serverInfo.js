@@ -12,7 +12,7 @@ export function ServerInfo({images,data,category}) {
             style={{background: "var(--bg-card)"}}
         >
             <ImageSection images={images} id={data.id}></ImageSection>
-            <ProductDescription  data={data}></ProductDescription>
+            <ProductDescription data={data}></ProductDescription>
         </section>    
     )    
 }

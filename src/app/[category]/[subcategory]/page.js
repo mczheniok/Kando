@@ -104,13 +104,15 @@ export async function generateMetadata({ params }) {
 
 export default async function ViewCategory({ params , searchParams}) {
   const { category , subcategory } = await params;
-  const page = await searchParams?.page || '1';
+  const searchP = await searchParams
+  const page = searchP?.page || '1';
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_URL}/items/items/${category}?subcategory=${subcategory}&page=${page}`, {
     next: { revalidate: 43200 }
   });
 
   const data = await res.json();
+  const course = searchP?.currency || "UAH";
 
   return (
     <ContainerLanguage>
@@ -146,7 +148,7 @@ export default async function ViewCategory({ params , searchParams}) {
             currentPage={page}
             totalCount={data?.data?.count || 0}
             list={data?.data?.items || []}
-            course={searchParams?.currency || "UAH"}
+            course={course}
           />
         </MainContainer>
       <Footer />

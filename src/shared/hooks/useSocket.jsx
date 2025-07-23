@@ -13,10 +13,12 @@ export function useSocket() {
 
         const onConnect = () => {
             setStatus(true);
+            console.log("connect")
         };
 
         const onDisconnect = () => {
             setStatus(false);
+            console.log("disconnect")
         };
 
         // Устанавливаем начальный статус

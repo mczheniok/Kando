@@ -45,6 +45,21 @@
     transition: all 0.3s ease;
 }
 
+.purple {
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    color: var(--background);
+    border-radius: 0.7rem;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.purple:hover{
+    border: none;
+    
+}
+
 .orange{
     background: linear-gradient(135deg, #ff7a00, #ff5500);
     border: solid var(--orange) 2px;
