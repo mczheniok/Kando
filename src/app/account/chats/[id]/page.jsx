@@ -199,10 +199,12 @@ export function Chat({myId,chatId,chatType = "direct"}) {
       })
 
       socket.on("chat_details",(details) => {
+        console.log(details);
+        
         setChatInfo(prev => ({
           ...prev,
-          name: "Техпдітримка Kando",
-          description: "Онлайн 24 / 7"
+          name: details?.name,
+          description: details?.description || "Без опису"
         }))
       })
 

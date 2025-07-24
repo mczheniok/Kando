@@ -4,6 +4,7 @@
 import { ServerLoader } from "@/shared/blocks/serverLoader";
 import { useToServer } from "@/shared/hooks/useToServer";
 import { useSearchParams , useParams , useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 
 export default function Page() {
@@ -17,16 +18,18 @@ export default function Page() {
 
     const [load,data] = useToServer(`/chats/${chat_type}/${name}`);
 
-    if(data) {
-        if(chat_type === "direct") {
-            setTimeout(() => router.push(`/account/chats/${data}?type=${chat_type}`),300);
-            return 
+    useEffect(() => {
+        if(data) {
+            if(chat_type === "direct") {
+                setTimeout(() => router.push(`/account/chats/${data}?type=${chat_type}`),300);
+                return 
+            }
+            if(chat_type === "bot") {
+                router.push(`/account/chats/${data}?type=${chat_type}`);
+                return 
+            }
         }
-        if(chat_type === "bot") {
-            router.push(`/account/chats/${data}?type=${chat_type}`);
-            return 
-        }
-    }
+    },[load])
 
     return (
         <div style={{height: "100%",minHeight:"100svh"}} className="flex flex-row align-center justify-center">
