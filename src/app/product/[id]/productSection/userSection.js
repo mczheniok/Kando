@@ -54,6 +54,17 @@ export function UserInfo({location,userId}) {
     
     const LazyMap = dynamic(() => import("@/components/Map/map").then(mod => ({default: mod.default})));
 
+    const locationParsed = (location) => {
+        try {
+            const parsed = JSON.parse(location);
+            return parsed.location;
+        } catch(err) {
+            console.log("parsed error");
+            return [];
+        }
+    }
+
+
     return (
         <section className={`${styles.userContainer} flex flex-col`}>
             <div className={styles.userBlock} style={{gridColumn: !location?"span 2":"1"}}>
@@ -65,7 +76,7 @@ export function UserInfo({location,userId}) {
             <div className={styles.mapBlock}>
                 {location && (
                     <Suspense fallback={<ServerLoader />}>
-                        {typeof window !== "undefined" && JSON.parse(location)? <LazyMap title="ваш дім" position={[4,38]} height={"100%"}></LazyMap> : ""}
+                        {typeof window !== "undefined" && locationParsed(location) ? <LazyMap title="ваш дім" position={locationParsed(location)} height={"100%"}></LazyMap> : ""}
                     </Suspense>
                 )}
             </div>
