@@ -199,8 +199,6 @@ export function Chat({myId,chatId,chatType = "direct"}) {
       })
 
       socket.on("chat_details",(details) => {
-        console.log(details);
-        
         setChatInfo(prev => ({
           ...prev,
           name: details?.name,
@@ -298,7 +296,7 @@ export function Chat({myId,chatId,chatType = "direct"}) {
 
     const bot = message_type === "bot_response"; 
 
-    if(l) {
+    if(sender_id !== me) {
       setTimeout(() => {
         readHandler(id);
       },50); 
@@ -328,7 +326,7 @@ export function Chat({myId,chatId,chatType = "direct"}) {
             {is_edited && (
               <h4 className="small-text h4-text">змінено</h4>
             )}
-            <h4 className="h5-text small-text" data-message-id={id}>не прочитано</h4>
+            {sender_id === me && <h4 className="h5-text small-text" data-message-id={id}>не прочитано</h4>}
           </div>
         </div>
       </div>
